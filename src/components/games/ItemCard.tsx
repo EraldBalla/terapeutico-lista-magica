@@ -16,6 +16,7 @@ interface ItemCardProps {
   item: ShoppingItem;
   isCollected: boolean;
   isShaking: boolean;
+  isWiggling?: boolean;
   isComplete: boolean;
   ttsEnabled?: boolean;
   onSelect: (item: ShoppingItem) => void;
@@ -25,6 +26,7 @@ const ItemCard = ({
   item,
   isCollected,
   isShaking,
+  isWiggling = false,
   isComplete,
   ttsEnabled = true,
   onSelect,
@@ -66,7 +68,8 @@ const ItemCard = ({
         isCollected
           ? "bg-game-card-selected opacity-50 cursor-not-allowed scale-95"
           : "bg-game-card hover:bg-game-card-hover hover:scale-105 hover:shadow-lg cursor-pointer",
-        isShaking && "animate-shake bg-game-card-error"
+        isShaking && "animate-shake bg-game-card-error",
+        isWiggling && "animate-wiggle"
       )}
     >
       {/* Pulsante Audio TTS */}

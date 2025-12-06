@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { ShoppingListScene } from "@/data/shoppingListScenes";
 import ShoppingListGame from "@/components/games/ShoppingListGame";
 import SceneSelector from "@/components/games/SceneSelector";
@@ -11,6 +11,10 @@ const Index = () => {
   const [gameState, setGameState] = useState<GameState>("home");
   const [currentScene, setCurrentScene] = useState<ShoppingListScene | null>(null);
   const [completedScenes, setCompletedScenes] = useState<string[]>([]);
+  
+  // Contatore esercizi completati per minigioco premio
+  // Si resetta quando si esce dalla selezione scene (torna alla home)
+  const [exercisesCompleted, setExercisesCompleted] = useState(0);
 
   const handleSelectScene = (scene: ShoppingListScene) => {
     setCurrentScene(scene);
@@ -25,9 +29,19 @@ const Index = () => {
     setGameState("selecting");
   };
 
+  const handleExerciseComplete = useCallback(() => {
+    setExercisesCompleted((prev) => prev + 1);
+  }, []);
+
   const handleExit = () => {
     setCurrentScene(null);
     setGameState("selecting");
+  };
+
+  const handleBackToHome = () => {
+    // Reset contatore quando si torna alla home
+    setExercisesCompleted(0);
+    setGameState("home");
   };
 
   if (gameState === "playing" && currentScene) {
@@ -36,6 +50,8 @@ const Index = () => {
         scene={currentScene}
         onComplete={handleCompleteScene}
         onExit={handleExit}
+        completedCount={exercisesCompleted}
+        onExerciseComplete={handleExerciseComplete}
       />
     );
   }
@@ -44,7 +60,7 @@ const Index = () => {
     return (
       <SceneSelector
         onSelectScene={handleSelectScene}
-        onBack={() => setGameState("home")}
+        onBack={handleBackToHome}
       />
     );
   }
