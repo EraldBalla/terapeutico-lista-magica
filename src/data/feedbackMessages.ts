@@ -1,7 +1,8 @@
 /**
- * Frasi di feedback per il gioco "La lista della spesa".
+ * Frasi di feedback per il gioco "Viaggio nel mondo degli oggetti".
  * 
  * Tono: positivo, non giudicante, giocoso, adatto a bambini 4-9 anni.
+ * NO frasi tipo "hai fatto centro", "colpo perfetto", metafore da tiro/guerra.
  */
 
 /**
@@ -9,44 +10,47 @@
  * Vengono scelte casualmente ad ogni errore.
  */
 export const ERROR_ENCOURAGEMENT_MESSAGES: string[] = [
-  "Quasi! Riproviamo insieme! 💪",
-  "Non fa niente, guarda meglio e ritenta!",
-  "Bravo che ci provi! Prova un'altra volta!",
-  "Ops, questo non era nella lista… ma ci stiamo avvicinando!",
+  "Quasi! Riproviamo insieme.",
+  "Non fa niente, prova a guardare ancora.",
+  "Bravo che ci provi! Scegli un altro oggetto.",
+  "Ops, questo non è nella lista, ma ci stiamo avvicinando!",
   "Gli errori ci aiutano a imparare, riproviamo!",
-  "Sei sulla strada giusta, guarda ancora!",
+  "Sei sulla strada giusta, guardiamo meglio.",
   "Capita a tutti di sbagliare, ci riproviamo!",
-  "Hmm, non quello… ma sei bravissimo! Riprova!",
-  "Oops! Niente paura, riprova con calma!",
-  "Ci sei quasi! Guarda bene la lista!",
+  "Hmm, non quello... ma sei bravissimo! Riprova.",
+  "Oops! Niente paura, riprova con calma.",
+  "Ci sei quasi! Guarda bene la lista.",
 ];
 
 /**
- * Frasi divertenti per i successi.
+ * Frasi positive per i successi (singolo oggetto corretto).
  * Vengono scelte casualmente ad ogni risposta corretta.
  */
 export const SUCCESS_FUN_MESSAGES: string[] = [
-  "Fantastico, colpo da vero chef! 🎉",
-  "Carrello perfetto, missione compiuta!",
-  "Wow, che spesa ordinata!",
-  "Hai una memoria da supereroe! 🦸",
-  "La cassiera è super felice di te!",
-  "Bravissimo! Hai fatto centro! 🎯",
-  "Ottimo lavoro, continua così!",
-  "Sei un campione della spesa! 🏆",
-  "Giusto! Che occhio di falco! 👀",
-  "Perfetto! Il carrello ti ringrazia!",
+  "Bravo, hai scelto proprio bene!",
+  "Ottimo lavoro!",
+  "Fantastico, stai diventando un esperto!",
+  "Super, che attenzione!",
+  "Che occhi attenti!",
+  "Bravissimo, continua così!",
+  "Giusto! Sei proprio bravo!",
+  "Perfetto, vai avanti così!",
+  "Benissimo!",
+  "Esatto, proprio quello!",
 ];
 
 /**
  * Frasi per il completamento di una scena.
  */
 export const COMPLETION_MESSAGES: string[] = [
-  "Fantastico! Hai completato la spesa! 🛒",
-  "Evviva! Missione spesa completata! 🎊",
-  "Sei un vero esperto della spesa! 🌟",
-  "Bravo! Il carrello è pieno! 🛍️",
-  "Complimenti! Spesa perfetta! ✨",
+  "Fantastico! Hai trovato tutto!",
+  "Evviva! Missione completata!",
+  "Sei un vero esperto!",
+  "Bravo! Hai fatto un ottimo lavoro!",
+  "Complimenti! Tutto giusto!",
+  "Benissimo, siamo pronti per il prossimo gioco!",
+  "Che bel lavoro hai fatto!",
+  "Super! Hai completato tutto!",
 ];
 
 /**

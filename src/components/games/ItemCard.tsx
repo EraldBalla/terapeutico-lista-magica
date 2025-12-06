@@ -1,9 +1,10 @@
 /**
- * Card singolo oggetto per il gioco "La lista della spesa".
+ * Card singolo oggetto per il gioco "Viaggio nel mondo degli oggetti".
  * Include:
  * - Immagine + nome dell'oggetto
  * - Pulsante audio per pronunciare il nome (TTS)
  * - Stati: normale, selezionato, errore
+ * - Colori più vivaci e adatti ai bambini
  */
 
 import { useState } from "react";
@@ -19,8 +20,23 @@ interface ItemCardProps {
   isWiggling?: boolean;
   isComplete: boolean;
   ttsEnabled?: boolean;
+  tema?: string;
   onSelect: (item: ShoppingItem) => void;
 }
+
+// Colori di sfondo per tema
+const temaBackgrounds: Record<string, string> = {
+  frutta: "bg-item-frutta hover:bg-orange-100",
+  verdure: "bg-item-verdure hover:bg-green-100",
+  bevande: "bg-item-bevande hover:bg-blue-100",
+  scuola: "bg-item-scuola hover:bg-indigo-100",
+  bagno: "bg-item-bagno hover:bg-cyan-100",
+  cucina: "bg-item-cucina hover:bg-amber-100",
+  vestiti: "bg-item-vestiti hover:bg-pink-100",
+  festa: "bg-item-festa hover:bg-rose-100",
+  colazione: "bg-item-colazione hover:bg-yellow-100",
+  cibo_generico: "bg-game-card hover:bg-game-card-hover",
+};
 
 const ItemCard = ({
   item,
@@ -29,10 +45,13 @@ const ItemCard = ({
   isWiggling = false,
   isComplete,
   ttsEnabled = true,
+  tema = "cibo_generico",
   onSelect,
 }: ItemCardProps) => {
   const { speakWord, isSpeaking } = useSpeech({ lang: "it-IT" });
   const [isAudioActive, setIsAudioActive] = useState(false);
+
+  const bgClass = temaBackgrounds[tema] || temaBackgrounds.cibo_generico;
 
   /**
    * Gestisce il click sul pulsante audio.
@@ -62,13 +81,13 @@ const ItemCard = ({
       onClick={handleCardClick}
       disabled={isCollected || isComplete}
       className={cn(
-        "relative flex flex-col items-center justify-center gap-2 p-4 md:p-6 rounded-2xl",
-        "transition-all duration-200 shadow-md",
+        "relative flex flex-col items-center justify-center gap-2 p-4 md:p-6 rounded-3xl",
+        "transition-all duration-200 shadow-md border-2 border-transparent",
         "focus:outline-none focus:ring-4 focus:ring-primary/30",
         isCollected
-          ? "bg-game-card-selected opacity-50 cursor-not-allowed scale-95"
-          : "bg-game-card hover:bg-game-card-hover hover:scale-105 hover:shadow-lg cursor-pointer",
-        isShaking && "animate-shake bg-game-card-error",
+          ? "bg-game-card-selected border-success/30 opacity-60 cursor-not-allowed scale-95"
+          : cn(bgClass, "hover:scale-105 hover:shadow-lg hover:border-primary/20 cursor-pointer"),
+        isShaking && "animate-shake bg-game-card-error border-destructive/30",
         isWiggling && "animate-wiggle"
       )}
     >
@@ -79,7 +98,7 @@ const ItemCard = ({
           className={cn(
             "absolute top-2 right-2 p-2 rounded-full",
             "transition-all duration-200",
-            "bg-muted/80 hover:bg-primary/20 hover:scale-110",
+            "bg-white/80 hover:bg-primary/20 hover:scale-110 shadow-sm",
             "focus:outline-none focus:ring-2 focus:ring-primary/50",
             (isSpeaking || isAudioActive) && "bg-primary/30 animate-pulse"
           )}
@@ -98,19 +117,24 @@ const ItemCard = ({
       )}
 
       {/* Immagine oggetto */}
-      <span className={cn("text-4xl md:text-5xl", isCollected && "animate-bounce-in")}>
+      <span className={cn(
+        "text-5xl md:text-6xl drop-shadow-sm", 
+        isCollected && "animate-gentle-bounce"
+      )}>
         {item.immagine}
       </span>
 
       {/* Nome oggetto */}
-      <span className="text-xs md:text-sm font-bold text-foreground text-center">
+      <span className="text-sm md:text-base font-bold text-foreground text-center leading-tight">
         {item.nome}
       </span>
 
       {/* Overlay oggetto selezionato */}
       {isCollected && (
-        <div className="absolute inset-0 flex items-center justify-center bg-success/20 rounded-2xl">
-          <Check className="w-10 h-10 text-success animate-bounce-in" />
+        <div className="absolute inset-0 flex items-center justify-center bg-success/20 rounded-3xl">
+          <div className="bg-success rounded-full p-2 shadow-lg animate-bounce-in">
+            <Check className="w-8 h-8 text-white" />
+          </div>
         </div>
       )}
     </button>

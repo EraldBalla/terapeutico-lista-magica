@@ -67,6 +67,28 @@ export default {
           "list-bg": "hsl(var(--game-list-bg))",
           "cart-bg": "hsl(var(--game-cart-bg))",
         },
+        scene: {
+          lista: "hsl(var(--scene-lista))",
+          "lista-border": "hsl(var(--scene-lista-border))",
+          indovinello: "hsl(var(--scene-indovinello))",
+          "indovinello-border": "hsl(var(--scene-indovinello-border))",
+          memoria: "hsl(var(--scene-memoria))",
+          "memoria-border": "hsl(var(--scene-memoria-border))",
+          easy: "hsl(var(--scene-easy))",
+          medium: "hsl(var(--scene-medium))",
+          hard: "hsl(var(--scene-hard))",
+        },
+        item: {
+          frutta: "hsl(var(--item-frutta))",
+          verdure: "hsl(var(--item-verdure))",
+          bevande: "hsl(var(--item-bevande))",
+          scuola: "hsl(var(--item-scuola))",
+          bagno: "hsl(var(--item-bagno))",
+          cucina: "hsl(var(--item-cucina))",
+          vestiti: "hsl(var(--item-vestiti))",
+          festa: "hsl(var(--item-festa))",
+          colazione: "hsl(var(--item-colazione))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -84,6 +106,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
         xl: "calc(var(--radius) + 4px)",
         "2xl": "calc(var(--radius) + 8px)",
+        "3xl": "calc(var(--radius) + 12px)",
       },
       keyframes: {
         "accordion-down": {
