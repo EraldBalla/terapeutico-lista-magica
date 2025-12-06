@@ -14,8 +14,8 @@ export interface UseSpeechOptions {
 }
 
 export const useSpeech = (options: UseSpeechOptions = {}) => {
-  // rate = 0.7 per lettura più lenta e chiara per i bambini
-  const { lang = "it-IT", rate = 0.7, pitch = 1 } = options;
+  // rate = 0.5 per lettura molto lenta e chiara per i bambini
+  const { lang = "it-IT", rate = 0.5, pitch = 1 } = options;
   const [isSpeaking, setIsSpeaking] = useState(false);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
 
