@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { ShoppingListScene, ShoppingItem } from "@/data/shoppingListScenes";
-import { AgeBand, getMemoryDisplayTime, DEFAULT_AGE_BAND } from "@/data/gameSettings";
+import { getMemoryDisplayTime } from "@/data/gameSettings";
 import ItemCard from "./ItemCard";
 import { ShoppingCart, Check, X, ArrowRight, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,12 +8,11 @@ import { cn } from "@/lib/utils";
 
 interface ShoppingListGameProps {
   scene: ShoppingListScene;
-  ageBand?: AgeBand;
   onComplete: () => void;
   onExit: () => void;
 }
 
-const ShoppingListGame = ({ scene, ageBand, onComplete, onExit }: ShoppingListGameProps) => {
+const ShoppingListGame = ({ scene, onComplete, onExit }: ShoppingListGameProps) => {
   const [collectedItems, setCollectedItems] = useState<string[]>([]);
   const [currentRiddleIndex, setCurrentRiddleIndex] = useState(0);
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
@@ -22,15 +21,14 @@ const ShoppingListGame = ({ scene, ageBand, onComplete, onExit }: ShoppingListGa
   const [showList, setShowList] = useState(true);
   const [memoryPhase, setMemoryPhase] = useState<"viewing" | "playing">("viewing");
   
-  // Calcola il tempo di memorizzazione in base a difficulty_tier e ageBand
-  const memoryTimeMs = getMemoryDisplayTime(scene.difficulty_tier, ageBand || DEFAULT_AGE_BAND);
+  // Calcola il tempo di memorizzazione in base SOLO a difficulty_tier
+  const memoryTimeMs = getMemoryDisplayTime(scene.difficulty_tier);
   const memoryTimeSeconds = Math.ceil(memoryTimeMs / 1000);
   const [memoryTimer, setMemoryTimer] = useState(memoryTimeSeconds);
 
   const isComplete = collectedItems.length === scene.lista_della_spesa.length;
 
   // Modalità memoria: timer per nascondere la lista
-  // Usa i tempi dalla mappa MEMORY_DISPLAY_TIME_MS in base a ageBand e difficulty_tier
   useEffect(() => {
     if (scene.modalita === "memoria" && memoryPhase === "viewing") {
       if (memoryTimer > 0) {
@@ -117,11 +115,6 @@ const ShoppingListGame = ({ scene, ageBand, onComplete, onExit }: ShoppingListGa
         <div>
           <h1 className="text-2xl md:text-3xl font-extrabold text-foreground">{scene.title}</h1>
           <p className="text-sm text-muted-foreground mt-1">{scene.instructions}</p>
-          {ageBand && (
-            <span className="text-xs text-muted-foreground mt-1 inline-block">
-              Fascia: {ageBand} anni
-            </span>
-          )}
         </div>
         <Button variant="outline" onClick={onExit} className="text-muted-foreground">
           Esci

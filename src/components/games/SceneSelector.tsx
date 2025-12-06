@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { ShoppingListScene, getScenesByDifficulty, getScenesByDifficultyAndAge } from "@/data/shoppingListScenes";
-import { AgeBand, DEFAULT_AGE_BAND } from "@/data/gameSettings";
+import { ShoppingListScene, getScenesByDifficulty } from "@/data/shoppingListScenes";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Star, ShoppingCart, ArrowLeft, Users } from "lucide-react";
+import { Star, ShoppingCart, ArrowLeft } from "lucide-react";
 
 interface SceneSelectorProps {
-  onSelectScene: (scene: ShoppingListScene, ageBand: AgeBand) => void;
+  onSelectScene: (scene: ShoppingListScene) => void;
   onBack: () => void;
 }
 
@@ -16,18 +15,11 @@ const difficultyLabels = {
   3: { label: "Difficile", color: "bg-destructive", stars: 3 },
 };
 
-const ageBandLabels: Record<AgeBand, { label: string; description: string }> = {
-  "4-5": { label: "4-5 anni", description: "Tempi più lunghi, esercizi più semplici" },
-  "6-8": { label: "6-8 anni", description: "Tempi più corti, esercizi più sfidanti" },
-};
-
 const SceneSelector = ({ onSelectScene, onBack }: SceneSelectorProps) => {
   const [selectedDifficulty, setSelectedDifficulty] = useState<1 | 2 | 3 | null>(null);
-  const [selectedAgeBand, setSelectedAgeBand] = useState<AgeBand>(DEFAULT_AGE_BAND);
 
-  // Usa la funzione con filtro per fascia d'età
   const scenes = selectedDifficulty 
-    ? getScenesByDifficultyAndAge(selectedDifficulty, selectedAgeBand) 
+    ? getScenesByDifficulty(selectedDifficulty) 
     : [];
 
   return (
@@ -46,48 +38,11 @@ const SceneSelector = ({ onSelectScene, onBack }: SceneSelectorProps) => {
               La lista della spesa
             </h1>
             <p className="text-muted-foreground mt-1">
-              Scegli fascia d'età e livello, poi inizia a giocare!
+              Scegli il livello e inizia a giocare!
             </p>
           </div>
         </div>
       </header>
-
-      {/* Selezione fascia d'età - sempre visibile prima della scelta difficoltà */}
-      {!selectedDifficulty && (
-        <div className="max-w-4xl mx-auto mb-8">
-          <div className="flex items-center gap-2 mb-4">
-            <Users className="w-5 h-5 text-primary" />
-            <h2 className="text-lg font-bold text-foreground">Fascia d'età del bambino</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {(["4-5", "6-8"] as const).map((band) => {
-              const info = ageBandLabels[band];
-              const isSelected = selectedAgeBand === band;
-              return (
-                <button
-                  key={band}
-                  onClick={() => setSelectedAgeBand(band)}
-                  className={cn(
-                    "p-4 rounded-2xl transition-all text-left",
-                    "focus:outline-none focus:ring-4 focus:ring-primary/30",
-                    isSelected
-                      ? "bg-primary text-primary-foreground shadow-lg scale-[1.02]"
-                      : "bg-card hover:bg-muted shadow-md hover:scale-[1.01]"
-                  )}
-                >
-                  <div className="font-bold text-lg">{info.label}</div>
-                  <div className={cn(
-                    "text-sm mt-1",
-                    isSelected ? "text-primary-foreground/80" : "text-muted-foreground"
-                  )}>
-                    {info.description}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      )}
 
       {/* Selezione difficoltà */}
       {!selectedDifficulty && (
@@ -146,16 +101,13 @@ const SceneSelector = ({ onSelectScene, onBack }: SceneSelectorProps) => {
             )}>
               {difficultyLabels[selectedDifficulty].label}
             </div>
-            <div className="px-3 py-1 rounded-full bg-muted text-sm font-medium text-muted-foreground">
-              Fascia: {ageBandLabels[selectedAgeBand].label}
-            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {scenes.map((scene) => (
               <button
                 key={scene.id}
-                onClick={() => onSelectScene(scene, selectedAgeBand)}
+                onClick={() => onSelectScene(scene)}
                 className={cn(
                   "p-6 rounded-2xl bg-card shadow-md hover:shadow-lg transition-all",
                   "hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-primary/30",
@@ -178,11 +130,6 @@ const SceneSelector = ({ onSelectScene, onBack }: SceneSelectorProps) => {
                       <span className="text-xs text-muted-foreground">
                         {scene.lista_della_spesa.length} oggetti
                       </span>
-                      {scene.ageBand && (
-                        <span className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-medium">
-                          {scene.ageBand} anni
-                        </span>
-                      )}
                     </div>
                   </div>
                 </div>
@@ -193,7 +140,7 @@ const SceneSelector = ({ onSelectScene, onBack }: SceneSelectorProps) => {
           {scenes.length === 0 && (
             <div className="text-center py-12">
               <p className="text-muted-foreground">
-                Nessuna scena disponibile per questa combinazione di difficoltà e fascia d'età.
+                Nessuna scena disponibile per questa difficoltà.
               </p>
             </div>
           )}
