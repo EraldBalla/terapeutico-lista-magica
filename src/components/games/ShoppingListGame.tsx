@@ -1,16 +1,19 @@
 import { useState, useEffect, useCallback } from "react";
 import { ShoppingListScene, ShoppingItem } from "@/data/shoppingListScenes";
-import { ShoppingCart, Check, X, ArrowRight, Eye, EyeOff } from "lucide-react";
+import { AgeBand, getMemoryDisplayTime, DEFAULT_AGE_BAND } from "@/data/gameSettings";
+import ItemCard from "./ItemCard";
+import { ShoppingCart, Check, X, ArrowRight, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface ShoppingListGameProps {
   scene: ShoppingListScene;
+  ageBand?: AgeBand;
   onComplete: () => void;
   onExit: () => void;
 }
 
-const ShoppingListGame = ({ scene, onComplete, onExit }: ShoppingListGameProps) => {
+const ShoppingListGame = ({ scene, ageBand, onComplete, onExit }: ShoppingListGameProps) => {
   const [collectedItems, setCollectedItems] = useState<string[]>([]);
   const [currentRiddleIndex, setCurrentRiddleIndex] = useState(0);
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
@@ -18,11 +21,16 @@ const ShoppingListGame = ({ scene, onComplete, onExit }: ShoppingListGameProps) 
   const [cartBounce, setCartBounce] = useState(false);
   const [showList, setShowList] = useState(true);
   const [memoryPhase, setMemoryPhase] = useState<"viewing" | "playing">("viewing");
-  const [memoryTimer, setMemoryTimer] = useState(5);
+  
+  // Calcola il tempo di memorizzazione in base a difficulty_tier e ageBand
+  const memoryTimeMs = getMemoryDisplayTime(scene.difficulty_tier, ageBand || DEFAULT_AGE_BAND);
+  const memoryTimeSeconds = Math.ceil(memoryTimeMs / 1000);
+  const [memoryTimer, setMemoryTimer] = useState(memoryTimeSeconds);
 
   const isComplete = collectedItems.length === scene.lista_della_spesa.length;
 
   // Modalità memoria: timer per nascondere la lista
+  // Usa i tempi dalla mappa MEMORY_DISPLAY_TIME_MS in base a ageBand e difficulty_tier
   useEffect(() => {
     if (scene.modalita === "memoria" && memoryPhase === "viewing") {
       if (memoryTimer > 0) {
@@ -34,6 +42,15 @@ const ShoppingListGame = ({ scene, onComplete, onExit }: ShoppingListGameProps) 
       }
     }
   }, [scene.modalita, memoryPhase, memoryTimer]);
+
+  // Reset timer quando cambia scena
+  useEffect(() => {
+    setMemoryTimer(memoryTimeSeconds);
+    setMemoryPhase("viewing");
+    setShowList(true);
+    setCollectedItems([]);
+    setCurrentRiddleIndex(0);
+  }, [scene.id, memoryTimeSeconds]);
 
   // Shuffle oggetti disponibili
   const shuffledItems = useCallback(() => {
@@ -100,6 +117,11 @@ const ShoppingListGame = ({ scene, onComplete, onExit }: ShoppingListGameProps) 
         <div>
           <h1 className="text-2xl md:text-3xl font-extrabold text-foreground">{scene.title}</h1>
           <p className="text-sm text-muted-foreground mt-1">{scene.instructions}</p>
+          {ageBand && (
+            <span className="text-xs text-muted-foreground mt-1 inline-block">
+              Fascia: {ageBand} anni
+            </span>
+          )}
         </div>
         <Button variant="outline" onClick={onExit} className="text-muted-foreground">
           Esci
@@ -135,13 +157,10 @@ const ShoppingListGame = ({ scene, onComplete, onExit }: ShoppingListGameProps) 
               <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
                 📝 {scene.modalita === "indovinello" ? "Indovinello" : "Lista"}
               </h2>
-              {scene.modalita === "memoria" && (
-                <button
-                  onClick={() => setShowList(!showList)}
-                  className="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
-                >
-                  {showList ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
+              {scene.modalita === "memoria" && memoryPhase === "playing" && (
+                <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full">
+                  🧠 Ricorda!
+                </span>
               )}
             </div>
 
@@ -203,42 +222,20 @@ const ShoppingListGame = ({ scene, onComplete, onExit }: ShoppingListGameProps) 
           </div>
         </aside>
 
-        {/* Griglia oggetti */}
+        {/* Griglia oggetti - ora usa ItemCard con TTS */}
         <main className="lg:col-span-2 order-1 lg:order-2">
           <div className="grid grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
-            {displayItems.map((item) => {
-              const isCollected = collectedItems.includes(item.id);
-              const isShaking = shakeItemId === item.id;
-
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => handleItemClick(item)}
-                  disabled={isCollected || isComplete}
-                  className={cn(
-                    "relative flex flex-col items-center justify-center gap-2 p-4 md:p-6 rounded-2xl",
-                    "transition-all duration-200 shadow-md",
-                    "focus:outline-none focus:ring-4 focus:ring-primary/30",
-                    isCollected
-                      ? "bg-game-card-selected opacity-50 cursor-not-allowed scale-95"
-                      : "bg-game-card hover:bg-game-card-hover hover:scale-105 hover:shadow-lg cursor-pointer",
-                    isShaking && "animate-shake bg-game-card-error"
-                  )}
-                >
-                  <span className={cn("text-4xl md:text-5xl", isCollected && "animate-bounce-in")}>
-                    {item.immagine}
-                  </span>
-                  <span className="text-xs md:text-sm font-bold text-foreground text-center">
-                    {item.nome}
-                  </span>
-                  {isCollected && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-success/20 rounded-2xl">
-                      <Check className="w-10 h-10 text-success animate-bounce-in" />
-                    </div>
-                  )}
-                </button>
-              );
-            })}
+            {displayItems.map((item) => (
+              <ItemCard
+                key={item.id}
+                item={item}
+                isCollected={collectedItems.includes(item.id)}
+                isShaking={shakeItemId === item.id}
+                isComplete={isComplete}
+                ttsEnabled={true}
+                onSelect={handleItemClick}
+              />
+            ))}
           </div>
         </main>
 

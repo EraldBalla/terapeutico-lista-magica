@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ShoppingListScene } from "@/data/shoppingListScenes";
+import { AgeBand, DEFAULT_AGE_BAND } from "@/data/gameSettings";
 import ShoppingListGame from "@/components/games/ShoppingListGame";
 import SceneSelector from "@/components/games/SceneSelector";
 import { Button } from "@/components/ui/button";
@@ -10,10 +11,12 @@ type GameState = "home" | "selecting" | "playing";
 const Index = () => {
   const [gameState, setGameState] = useState<GameState>("home");
   const [currentScene, setCurrentScene] = useState<ShoppingListScene | null>(null);
+  const [currentAgeBand, setCurrentAgeBand] = useState<AgeBand>(DEFAULT_AGE_BAND);
   const [completedScenes, setCompletedScenes] = useState<string[]>([]);
 
-  const handleSelectScene = (scene: ShoppingListScene) => {
+  const handleSelectScene = (scene: ShoppingListScene, ageBand: AgeBand) => {
     setCurrentScene(scene);
+    setCurrentAgeBand(ageBand);
     setGameState("playing");
   };
 
@@ -34,6 +37,7 @@ const Index = () => {
     return (
       <ShoppingListGame
         scene={currentScene}
+        ageBand={currentAgeBand}
         onComplete={handleCompleteScene}
         onExit={handleExit}
       />

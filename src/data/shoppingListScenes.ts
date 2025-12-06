@@ -1,3 +1,5 @@
+import { AgeBand } from "./gameSettings";
+
 export interface ShoppingItem {
   id: string;
   nome: string;
@@ -17,6 +19,15 @@ export interface ShoppingListScene {
   oggetti_disponibili: ShoppingItem[];
   success_message: string;
   error_message: string;
+  /**
+   * Fascia d'età per cui questa scena è pensata (opzionale).
+   * Se assente, la scena è considerata generica (adatta a entrambe le fasce).
+   * 
+   * Questo campo permette di creare scene specifiche:
+   * - "4-5": scene più semplici con meno oggetti
+   * - "6-8": scene più complesse con più sfide
+   */
+  ageBand?: AgeBand;
 }
 
 // Tier 1 - Facile: 2-4 oggetti, richieste dirette, pochi distrattori
@@ -288,8 +299,42 @@ export const allShoppingScenes: ShoppingListScene[] = [
   ...tier3Scenes,
 ];
 
+/**
+ * Filtra le scene per livello di difficoltà.
+ */
 export const getScenesByDifficulty = (tier: 1 | 2 | 3): ShoppingListScene[] => {
   return allShoppingScenes.filter((scene) => scene.difficulty_tier === tier);
+};
+
+/**
+ * Filtra le scene per livello di difficoltà e fascia d'età.
+ * 
+ * Logica di selezione:
+ * 1. Filtra prima per difficulty_tier
+ * 2. Se specificata ageBand, privilegia le scene con quella fascia d'età
+ * 3. Include sempre le scene senza ageBand (generiche) come fallback
+ * 
+ * @param tier - Livello di difficoltà (1, 2, 3)
+ * @param ageBand - Fascia d'età del paziente (opzionale)
+ * @returns Scene ordinate per rilevanza (specifiche prima, generiche dopo)
+ */
+export const getScenesByDifficultyAndAge = (
+  tier: 1 | 2 | 3,
+  ageBand?: AgeBand
+): ShoppingListScene[] => {
+  const tierScenes = allShoppingScenes.filter((scene) => scene.difficulty_tier === tier);
+  
+  if (!ageBand) {
+    return tierScenes;
+  }
+  
+  // Separa scene specifiche per la fascia d'età richiesta e scene generiche
+  const specificScenes = tierScenes.filter((scene) => scene.ageBand === ageBand);
+  const genericScenes = tierScenes.filter((scene) => !scene.ageBand);
+  
+  // Restituisce prima le scene specifiche, poi le generiche
+  // Se non ci sono scene specifiche, restituisce solo quelle generiche
+  return [...specificScenes, ...genericScenes];
 };
 
 export const getSceneById = (id: string): ShoppingListScene | undefined => {
