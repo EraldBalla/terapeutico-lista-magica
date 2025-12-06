@@ -51,6 +51,30 @@
     --game-list-bg: 200 60% 95%;
     --game-cart-bg: 25 80% 92%;
 
+    /* Scene card colors by modalita */
+    --scene-lista: 45 100% 94%;
+    --scene-lista-border: 45 80% 75%;
+    --scene-indovinello: 270 60% 95%;
+    --scene-indovinello-border: 270 50% 80%;
+    --scene-memoria: 165 60% 92%;
+    --scene-memoria-border: 165 50% 70%;
+
+    /* Difficulty colors */
+    --scene-easy: 145 70% 45%;
+    --scene-medium: 45 100% 50%;
+    --scene-hard: 0 70% 55%;
+
+    /* Item card colors by theme */
+    --item-frutta: 35 100% 95%;
+    --item-verdure: 140 60% 92%;
+    --item-bevande: 200 70% 94%;
+    --item-scuola: 250 60% 94%;
+    --item-bagno: 190 70% 95%;
+    --item-cucina: 30 70% 93%;
+    --item-vestiti: 320 60% 94%;
+    --item-festa: 350 70% 95%;
+    --item-colazione: 40 80% 94%;
+
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -103,6 +127,30 @@
     --game-card-error: 0 40% 25%;
     --game-list-bg: 200 40% 20%;
     --game-cart-bg: 25 40% 20%;
+
+    /* Scene card colors by modalita (dark mode) */
+    --scene-lista: 45 40% 20%;
+    --scene-lista-border: 45 40% 35%;
+    --scene-indovinello: 270 30% 22%;
+    --scene-indovinello-border: 270 30% 40%;
+    --scene-memoria: 165 30% 20%;
+    --scene-memoria-border: 165 30% 35%;
+
+    /* Difficulty colors (same in dark mode) */
+    --scene-easy: 145 70% 40%;
+    --scene-medium: 45 90% 45%;
+    --scene-hard: 0 60% 50%;
+
+    /* Item card colors by theme (dark mode) */
+    --item-frutta: 35 40% 22%;
+    --item-verdure: 140 30% 20%;
+    --item-bevande: 200 35% 22%;
+    --item-scuola: 250 30% 22%;
+    --item-bagno: 190 35% 22%;
+    --item-cucina: 30 35% 20%;
+    --item-vestiti: 320 30% 22%;
+    --item-festa: 350 35% 22%;
+    --item-colazione: 40 40% 20%;
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -183,6 +231,11 @@
   75% { transform: rotate(5deg); }
 }
 
+@keyframes gentle-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
 .animate-bounce-in {
   animation: bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
@@ -217,4 +270,8 @@
 
 .animate-cart-bounce {
   animation: cart-bounce 0.4s ease-in-out;
+}
+
+.animate-gentle-bounce {
+  animation: gentle-bounce 0.4s ease-in-out;
 }

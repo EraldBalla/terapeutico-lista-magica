@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { ShoppingListScene, ShoppingItem } from "@/data/shoppingListScenes";
+import { ShoppingListScene, ShoppingItem, GAME_TITLE } from "@/data/shoppingListScenes";
 import { getMemoryDisplayTime } from "@/data/gameSettings";
 import { getRandomErrorMessage, getRandomSuccessMessage, getRandomCompletionMessage } from "@/data/feedbackMessages";
 import ItemCard from "./ItemCard";
@@ -326,6 +326,7 @@ const ShoppingListGame = ({
                 isWiggling={wiggleItemId === item.id}
                 isComplete={isComplete}
                 ttsEnabled={true}
+                tema={scene.tema}
                 onSelect={handleItemClick}
               />
             ))}
