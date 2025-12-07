@@ -36,6 +36,9 @@ const temaBackgrounds: Record<string, string> = {
   festa: "bg-gradient-to-br from-rose-100 to-fuchsia-100 hover:from-rose-200 hover:to-fuchsia-200 border-rose-200",
   colazione: "bg-gradient-to-br from-yellow-100 to-amber-100 hover:from-yellow-200 hover:to-amber-200 border-yellow-200",
   cibo_generico: "bg-gradient-to-br from-slate-50 to-gray-100 hover:from-slate-100 hover:to-gray-200 border-slate-200",
+  animali: "bg-gradient-to-br from-lime-100 to-green-100 hover:from-lime-200 hover:to-green-200 border-lime-200",
+  sport: "bg-gradient-to-br from-sky-100 to-blue-100 hover:from-sky-200 hover:to-blue-200 border-sky-200",
+  musica: "bg-gradient-to-br from-purple-100 to-violet-100 hover:from-purple-200 hover:to-violet-200 border-purple-200",
 };
 
 const ItemCard = ({
