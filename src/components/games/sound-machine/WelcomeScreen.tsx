@@ -1,12 +1,21 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Play, Mic, Volume2, Eye, Users, Heart } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Play, Mic, Volume2, Eye, Users, Heart, Archive } from "lucide-react";
 
 interface WelcomeScreenProps {
-  onStart: () => void;
+  onStart: (childName: string) => void;
   onBack: () => void;
+  onOpenArchive: () => void;
 }
 
-const WelcomeScreen = ({ onStart, onBack }: WelcomeScreenProps) => {
+const WelcomeScreen = ({ onStart, onBack, onOpenArchive }: WelcomeScreenProps) => {
+  const [childName, setChildName] = useState("");
+
+  const handleStart = () => {
+    onStart(childName.trim());
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 via-pink-50 to-orange-50">
       {/* Decorative background */}
@@ -16,14 +25,24 @@ const WelcomeScreen = ({ onStart, onBack }: WelcomeScreenProps) => {
       </div>
 
       <div className="relative container mx-auto px-4 py-8 md:py-12">
-        {/* Back button */}
-        <Button
-          variant="ghost"
-          onClick={onBack}
-          className="mb-6 text-muted-foreground hover:text-foreground"
-        >
-          ← Torna alla scelta giochi
-        </Button>
+        {/* Back button and archive button */}
+        <div className="flex items-center justify-between mb-6">
+          <Button
+            variant="ghost"
+            onClick={onBack}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            ← Torna alla scelta giochi
+          </Button>
+          <Button
+            variant="outline"
+            onClick={onOpenArchive}
+            className="text-purple-600 border-purple-200 hover:bg-purple-50"
+          >
+            <Archive className="w-4 h-4 mr-2" />
+            Archivio
+          </Button>
+        </div>
 
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-10">
@@ -113,10 +132,30 @@ const WelcomeScreen = ({ onStart, onBack }: WelcomeScreenProps) => {
           </div>
         </div>
 
+        {/* Child name input */}
+        <div className="max-w-md mx-auto mb-8">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border-2 border-purple-100">
+            <label htmlFor="childName" className="block text-sm font-medium text-muted-foreground mb-2">
+              Nome del bambino (opzionale)
+            </label>
+            <Input
+              id="childName"
+              type="text"
+              placeholder="Es: Marco"
+              value={childName}
+              onChange={(e) => setChildName(e.target.value)}
+              className="text-lg py-6 rounded-xl border-2 border-purple-100 focus:border-purple-300"
+            />
+            <p className="text-xs text-muted-foreground mt-2">
+              Serve per identificare le sessioni nell'archivio
+            </p>
+          </div>
+        </div>
+
         {/* Start button */}
         <div className="text-center">
           <Button
-            onClick={onStart}
+            onClick={handleStart}
             size="lg"
             className="gap-3 text-xl px-12 py-8 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all hover:scale-105 bg-gradient-to-r from-purple-500 to-pink-500"
           >

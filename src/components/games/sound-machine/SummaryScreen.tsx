@@ -1,20 +1,36 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { SoundItem } from "@/data/sounds";
 import { Recording } from "./SoundGameScreen";
-import { Play, Download, RotateCcw, Home, Pause } from "lucide-react";
+import { Play, Download, RotateCcw, Home, Pause, Archive } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
 
 interface SummaryScreenProps {
   sounds: SoundItem[];
   recordings: Recording[];
+  sessionId: string | null;
   onReplay: () => void;
   onHome: () => void;
+  onOpenArchive: () => void;
 }
 
-const SummaryScreen = ({ sounds, recordings, onReplay, onHome }: SummaryScreenProps) => {
+const SummaryScreen = ({ sounds, recordings, sessionId, onReplay, onHome, onOpenArchive }: SummaryScreenProps) => {
   const [playingId, setPlayingId] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Update session with total sounds count when component mounts
+  useEffect(() => {
+    const updateSessionTotal = async () => {
+      if (sessionId) {
+        await supabase
+          .from("sound_machine_sessions")
+          .update({ total_sounds: sounds.length })
+          .eq("id", sessionId);
+      }
+    };
+    updateSessionTotal();
+  }, [sessionId, sounds.length]);
 
   const handlePlay = (recording: Recording) => {
     if (playingId === recording.soundId) {
@@ -55,6 +71,8 @@ const SummaryScreen = ({ sounds, recordings, onReplay, onHome }: SummaryScreenPr
     return recordings.find((r) => r.soundId === soundId);
   };
 
+  const savedCount = recordings.filter(r => r.saved).length;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 via-pink-50 to-orange-50 p-4 md:p-6">
       {/* Confetti effect */}
@@ -84,6 +102,11 @@ const SummaryScreen = ({ sounds, recordings, onReplay, onHome }: SummaryScreenPr
           <p className="text-lg text-muted-foreground">
             Hai giocato con <span className="font-bold text-primary">{sounds.length}</span> suoni!
           </p>
+          {sessionId && savedCount > 0 && (
+            <p className="text-sm text-green-600 mt-2">
+              ✓ {savedCount} registrazioni salvate nell'archivio
+            </p>
+          )}
         </div>
 
         {/* Recordings list */}
@@ -110,6 +133,9 @@ const SummaryScreen = ({ sounds, recordings, onReplay, onHome }: SummaryScreenPr
                   <div className="flex-1">
                     <p className="font-bold text-foreground">{sound.label}</p>
                     <p className="text-sm text-muted-foreground italic">"{sound.modelText}"</p>
+                    {recording?.saved && (
+                      <span className="text-xs text-green-600">✓ Salvata</span>
+                    )}
                   </div>
 
                   {recording ? (
@@ -158,6 +184,16 @@ const SummaryScreen = ({ sounds, recordings, onReplay, onHome }: SummaryScreenPr
           >
             <RotateCcw className="w-6 h-6 mr-3" />
             Rigioca con nuovi suoni
+          </Button>
+
+          <Button
+            onClick={onOpenArchive}
+            size="lg"
+            variant="outline"
+            className="w-full py-7 text-lg font-bold rounded-2xl bg-white/80 hover:bg-white border-2 border-purple-200"
+          >
+            <Archive className="w-6 h-6 mr-3" />
+            Vai all'archivio
           </Button>
 
           <Button

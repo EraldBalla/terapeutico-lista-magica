@@ -1,6 +1,6 @@
 /**
  * Catalogo suoni per "La macchina dei suoni"
- * Ogni suono ha: id, label, categoria, immagine (emoji), modelText (testo da pronunciare)
+ * Ogni suono ha: id, label, categoria, immagine (emoji), modelText (testo mostrato), speechText (testo per TTS)
  */
 
 export type SoundCategory = "animali" | "mezzi" | "suoni_bocca" | "oggetti";
@@ -10,41 +10,42 @@ export interface SoundItem {
   label: string;
   category: SoundCategory;
   image: string;
-  modelText: string;
+  modelText: string;    // Testo mostrato all'utente
+  speechText: string;   // Testo pronunciato dal TTS (più naturale)
 }
 
 export const SOUND_ITEMS: SoundItem[] = [
   // Animali
-  { id: "mucca", label: "Mucca", category: "animali", image: "🐄", modelText: "muuuuu" },
-  { id: "cane", label: "Cane", category: "animali", image: "🐶", modelText: "bau bau" },
-  { id: "gatto", label: "Gatto", category: "animali", image: "🐱", modelText: "miao miao" },
-  { id: "papera", label: "Papera", category: "animali", image: "🦆", modelText: "qua qua" },
-  { id: "cavallo", label: "Cavallo", category: "animali", image: "🐴", modelText: "iihaaa" },
-  { id: "pecora", label: "Pecora", category: "animali", image: "🐑", modelText: "beeee" },
-  { id: "maiale", label: "Maiale", category: "animali", image: "🐷", modelText: "oink oink" },
-  { id: "gallo", label: "Gallo", category: "animali", image: "🐓", modelText: "chicchirichì" },
+  { id: "mucca", label: "Mucca", category: "animali", image: "🐄", modelText: "muuuuu", speechText: "Muuuu, come fa la mucca!" },
+  { id: "cane", label: "Cane", category: "animali", image: "🐶", modelText: "bau bau", speechText: "Bau bau, come fa il cane!" },
+  { id: "gatto", label: "Gatto", category: "animali", image: "🐱", modelText: "miao miao", speechText: "Miao miao, come fa il gatto!" },
+  { id: "papera", label: "Papera", category: "animali", image: "🦆", modelText: "qua qua", speechText: "Qua qua, come fa la papera!" },
+  { id: "cavallo", label: "Cavallo", category: "animali", image: "🐴", modelText: "iihaaa", speechText: "Iiihaaaa, come fa il cavallo!" },
+  { id: "pecora", label: "Pecora", category: "animali", image: "🐑", modelText: "beeee", speechText: "Beeee, come fa la pecora!" },
+  { id: "maiale", label: "Maiale", category: "animali", image: "🐷", modelText: "oink oink", speechText: "Oink oink, come fa il maiale!" },
+  { id: "gallo", label: "Gallo", category: "animali", image: "🐓", modelText: "chicchirichì", speechText: "Chicchirichì, come fa il gallo!" },
   
   // Mezzi
-  { id: "treno", label: "Treno", category: "mezzi", image: "🚂", modelText: "ciuf ciuf" },
-  { id: "auto", label: "Auto", category: "mezzi", image: "🚗", modelText: "vrrrrr" },
-  { id: "ambulanza", label: "Ambulanza", category: "mezzi", image: "🚑", modelText: "nino nino nino" },
-  { id: "clacson", label: "Clacson", category: "mezzi", image: "📯", modelText: "biip biip" },
-  { id: "aereo", label: "Aereo", category: "mezzi", image: "✈️", modelText: "vroooom" },
-  { id: "moto", label: "Moto", category: "mezzi", image: "🏍️", modelText: "brum brum" },
+  { id: "treno", label: "Treno", category: "mezzi", image: "🚂", modelText: "ciuf ciuf", speechText: "Ciuf ciuf, come fa il treno!" },
+  { id: "auto", label: "Auto", category: "mezzi", image: "🚗", modelText: "vrrrrr", speechText: "Vruum vruum, come fa l'auto!" },
+  { id: "ambulanza", label: "Ambulanza", category: "mezzi", image: "🚑", modelText: "nino nino nino", speechText: "Nino nino nino, come fa l'ambulanza!" },
+  { id: "clacson", label: "Clacson", category: "mezzi", image: "📯", modelText: "biip biip", speechText: "Biip biip, come fa il clacson!" },
+  { id: "aereo", label: "Aereo", category: "mezzi", image: "✈️", modelText: "vroooom", speechText: "Vroooom, come fa l'aereo che vola!" },
+  { id: "moto", label: "Moto", category: "mezzi", image: "🏍️", modelText: "brum brum", speechText: "Brum brum, come fa la moto!" },
   
   // Suoni della bocca
-  { id: "suono_a", label: "Suono A", category: "suoni_bocca", image: "😮", modelText: "aaaaaa" },
-  { id: "suono_o", label: "Suono O", category: "suoni_bocca", image: "😯", modelText: "oooooo" },
-  { id: "suono_s", label: "Suono S", category: "suoni_bocca", image: "🤫", modelText: "ssssss" },
-  { id: "suono_sh", label: "Suono SH", category: "suoni_bocca", image: "🫢", modelText: "shhhhhh" },
-  { id: "suono_m", label: "Suono M", category: "suoni_bocca", image: "😊", modelText: "mmmmmm" },
-  { id: "suono_r", label: "Suono R", category: "suoni_bocca", image: "😝", modelText: "rrrrr" },
+  { id: "suono_a", label: "Suono A", category: "suoni_bocca", image: "😮", modelText: "aaaaaa", speechText: "Aaaaaa, un bel suono lungo con la bocca aperta!" },
+  { id: "suono_o", label: "Suono O", category: "suoni_bocca", image: "😯", modelText: "oooooo", speechText: "Oooooo, un suono rotondo con le labbra a cerchio!" },
+  { id: "suono_s", label: "Suono S", category: "suoni_bocca", image: "🤫", modelText: "ssssss", speechText: "Sssss, un sibilo lungo come un serpente!" },
+  { id: "suono_sh", label: "Suono SH", category: "suoni_bocca", image: "🫢", modelText: "shhhhhh", speechText: "Shhhhh, silenzio come quando dormiamo!" },
+  { id: "suono_m", label: "Suono M", category: "suoni_bocca", image: "😊", modelText: "mmmmmm", speechText: "Mmmm, come quando qualcosa è buono!" },
+  { id: "suono_r", label: "Suono R", category: "suoni_bocca", image: "😝", modelText: "rrrrr", speechText: "Rrrrr, come il ruggito di un leone!" },
   
   // Oggetti
-  { id: "campanello", label: "Campanello", category: "oggetti", image: "🔔", modelText: "din don" },
-  { id: "orologio", label: "Orologio", category: "oggetti", image: "⏰", modelText: "tic tac tic tac" },
-  { id: "acqua", label: "Acqua", category: "oggetti", image: "💧", modelText: "splash splash" },
-  { id: "telefono", label: "Telefono", category: "oggetti", image: "📱", modelText: "drin drin" },
+  { id: "campanello", label: "Campanello", category: "oggetti", image: "🔔", modelText: "din don", speechText: "Din don, come fa il campanello!" },
+  { id: "orologio", label: "Orologio", category: "oggetti", image: "⏰", modelText: "tic tac tic tac", speechText: "Tic tac tic tac, come fa l'orologio!" },
+  { id: "acqua", label: "Acqua", category: "oggetti", image: "💧", modelText: "splash splash", speechText: "Splash splash, come fa l'acqua!" },
+  { id: "telefono", label: "Telefono", category: "oggetti", image: "📱", modelText: "drin drin", speechText: "Drin drin, come fa il telefono!" },
 ];
 
 // Frasi di feedback positivo dopo la registrazione
