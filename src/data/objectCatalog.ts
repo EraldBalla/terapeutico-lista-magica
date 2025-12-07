@@ -16,12 +16,12 @@ export interface ObjectDefinition {
 // CATEGORIA: BAGNO
 // ============================================================
 const bagnoObjects: ObjectDefinition[] = [
-  { id: "asciugamano", nome: "asciugamano", immagine: "🧺", categoria: "bagno" }, // Cestino biancheria - rappresenta tessile bagno
+  { id: "asciugamano", nome: "asciugamano", immagine: "🛀", categoria: "bagno" }, // Persona nel bagno con asciugamano
   { id: "spazzolino", nome: "spazzolino", immagine: "🪥", categoria: "bagno" },
-  { id: "dentifricio", nome: "dentifricio", immagine: "🦷", categoria: "bagno" }, // Dente per distinguerlo da shampoo
+  { id: "dentifricio", nome: "dentifricio", immagine: "🦷", categoria: "bagno" },
   { id: "sapone", nome: "sapone", immagine: "🧼", categoria: "bagno" },
-  { id: "shampoo", nome: "shampoo", immagine: "🧴", categoria: "bagno" }, // Flacone
-  { id: "pettine", nome: "pettine", immagine: "〰️", categoria: "bagno" }, // Linea ondulata = denti del pettine
+  { id: "shampoo", nome: "shampoo", immagine: "🧴", categoria: "bagno" },
+  { id: "pettine", nome: "pettine", immagine: "🪮", categoria: "bagno" }, // Emoji pettine afro
   { id: "specchio", nome: "specchio", immagine: "🪞", categoria: "bagno" },
   { id: "doccia", nome: "doccia", immagine: "🚿", categoria: "bagno" },
   { id: "vasca", nome: "vasca", immagine: "🛁", categoria: "bagno" },
