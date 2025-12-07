@@ -166,7 +166,7 @@ const festaObjects: ObjectDefinition[] = [
   { id: "festoni", nome: "festoni", immagine: "🎊", categoria: "festa" },
   { id: "candeline", nome: "candeline", immagine: "🕯️", categoria: "festa" },
   { id: "cappellino", nome: "cappellino", immagine: "🎉", categoria: "festa" },
-  { id: "coriandoli", nome: "coriandoli", immagine: "🎊", categoria: "festa" },
+  { id: "coriandoli", nome: "coriandoli", immagine: "🎇", categoria: "festa" },
   { id: "stelle-filanti", nome: "stelle filanti", immagine: "✨", categoria: "festa" },
   { id: "musica", nome: "musica", immagine: "🎵", categoria: "festa" },
   { id: "caramelle", nome: "caramelle", immagine: "🍬", categoria: "festa" },
