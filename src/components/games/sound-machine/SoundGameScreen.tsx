@@ -1,18 +1,23 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { SoundItem, getRandomPositiveFeedback } from "@/data/sounds";
+import { useFriendlySpeech } from "@/hooks/use-friendly-speech";
 import { Volume2, Mic, Play, ArrowRight, Square, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
 
 export interface Recording {
   soundId: string;
   blob: Blob;
   url: string;
+  durationMs?: number;
+  saved?: boolean;
 }
 
 interface SoundGameScreenProps {
   sounds: SoundItem[];
   recordings: Recording[];
+  sessionId: string | null;
   onRecordingComplete: (recording: Recording) => void;
   onComplete: () => void;
   onBack: () => void;
@@ -21,22 +26,28 @@ interface SoundGameScreenProps {
 const SoundGameScreen = ({
   sounds,
   recordings,
+  sessionId,
   onRecordingComplete,
   onComplete,
   onBack,
 }: SoundGameScreenProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
   const [micError, setMicError] = useState<string | null>(null);
   const [recordingTime, setRecordingTime] = useState(0);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
   
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const startTimeRef = useRef<number>(0);
+
+  // Use friendly speech hook with slow rate
+  const { speak, isSpeaking } = useFriendlySpeech({ rate: 0.4, pitch: 1.0 });
 
   const currentSound = sounds[currentIndex];
   const hasRecording = recordings.some((r) => r.soundId === currentSound.id);
@@ -53,32 +64,64 @@ const SoundGameScreen = ({
     };
   }, [isRecording]);
 
-  // Play model sound using Web Speech API
+  // Play model sound using Web Speech API with friendly voice
   const handlePlayModel = useCallback(() => {
     if (isSpeaking) return;
-    
-    if (!("speechSynthesis" in window)) {
-      console.warn("Web Speech API non supportata");
-      return;
-    }
+    speak(currentSound.speechText);
+  }, [currentSound.speechText, isSpeaking, speak]);
 
-    window.speechSynthesis.cancel();
-    
-    const utterance = new SpeechSynthesisUtterance(currentSound.modelText);
-    utterance.lang = "it-IT";
-    utterance.rate = 0.8;
-    utterance.pitch = 1;
-    
-    utterance.onstart = () => setIsSpeaking(true);
-    utterance.onend = () => setIsSpeaking(false);
-    utterance.onerror = () => setIsSpeaking(false);
-    
-    window.speechSynthesis.speak(utterance);
-  }, [currentSound.modelText, isSpeaking]);
+  // Upload recording to Supabase storage
+  const uploadRecording = async (blob: Blob, soundId: string, durationMs: number): Promise<string | null> => {
+    if (!sessionId) return null;
+
+    try {
+      const fileName = `${sessionId}/${soundId}/${Date.now()}.webm`;
+      
+      const { data: storageData, error: storageError } = await supabase.storage
+        .from("sound_machine_recordings")
+        .upload(fileName, blob, {
+          contentType: "audio/webm",
+        });
+
+      if (storageError) {
+        console.error("Storage upload error:", storageError);
+        return null;
+      }
+
+      const { data: publicUrlData } = supabase.storage
+        .from("sound_machine_recordings")
+        .getPublicUrl(fileName);
+
+      const audioUrl = publicUrlData?.publicUrl;
+
+      if (!audioUrl) return null;
+
+      // Insert record in database
+      const { error: insertError } = await supabase
+        .from("sound_machine_recordings")
+        .insert({
+          session_id: sessionId,
+          sound_id: soundId,
+          audio_url: audioUrl,
+          duration_ms: durationMs,
+        });
+
+      if (insertError) {
+        console.error("Database insert error:", insertError);
+        return null;
+      }
+
+      return audioUrl;
+    } catch (error) {
+      console.error("Upload error:", error);
+      return null;
+    }
+  };
 
   // Start recording
   const handleStartRecording = async () => {
     setMicError(null);
+    setSaveError(null);
     
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -89,6 +132,7 @@ const SoundGameScreen = ({
       
       mediaRecorderRef.current = mediaRecorder;
       chunksRef.current = [];
+      startTimeRef.current = Date.now();
       
       mediaRecorder.ondataavailable = (e) => {
         if (e.data.size > 0) {
@@ -96,15 +140,21 @@ const SoundGameScreen = ({
         }
       };
       
-      mediaRecorder.onstop = () => {
+      mediaRecorder.onstop = async () => {
+        const durationMs = Date.now() - startTimeRef.current;
         const blob = new Blob(chunksRef.current, { type: mediaRecorder.mimeType });
         const url = URL.createObjectURL(blob);
         
-        onRecordingComplete({
+        // Create local recording first
+        const recording: Recording = {
           soundId: currentSound.id,
           blob,
           url,
-        });
+          durationMs,
+          saved: false,
+        };
+        
+        onRecordingComplete(recording);
         
         // Show positive feedback
         setFeedback(getRandomPositiveFeedback());
@@ -116,6 +166,21 @@ const SoundGameScreen = ({
         setIsRecording(false);
         setRecordingTime(0);
         if (timerRef.current) clearInterval(timerRef.current);
+
+        // Try to upload to Supabase (async, don't block UI)
+        if (sessionId) {
+          setIsSaving(true);
+          const uploadedUrl = await uploadRecording(blob, currentSound.id, durationMs);
+          setIsSaving(false);
+          
+          if (uploadedUrl) {
+            // Update recording as saved
+            onRecordingComplete({ ...recording, saved: true });
+          } else {
+            setSaveError("Registrazione non salvata nell'archivio, ma puoi comunque riascoltarla ora.");
+            setTimeout(() => setSaveError(null), 4000);
+          }
+        }
       };
       
       mediaRecorder.start();
@@ -248,6 +313,7 @@ const SoundGameScreen = ({
           {/* Record button */}
           <Button
             onClick={isRecording ? handleStopRecording : handleStartRecording}
+            disabled={isSaving}
             size="lg"
             className={cn(
               "w-full py-8 text-xl font-bold rounded-2xl transition-all",
@@ -261,6 +327,11 @@ const SoundGameScreen = ({
                 <Square className="w-7 h-7 mr-3 fill-current" />
                 Ferma ({10 - recordingTime}s)
               </>
+            ) : isSaving ? (
+              <>
+                <Loader2 className="w-7 h-7 mr-3 animate-spin" />
+                Salvo...
+              </>
             ) : (
               <>
                 <Mic className="w-7 h-7 mr-3" />
@@ -273,6 +344,13 @@ const SoundGameScreen = ({
           {micError && (
             <div className="bg-orange-100 border-2 border-orange-200 rounded-xl p-4 text-center">
               <p className="text-orange-700 text-sm">{micError}</p>
+            </div>
+          )}
+
+          {/* Save error message */}
+          {saveError && (
+            <div className="bg-yellow-100 border-2 border-yellow-200 rounded-xl p-4 text-center">
+              <p className="text-yellow-700 text-sm">{saveError}</p>
             </div>
           )}
 

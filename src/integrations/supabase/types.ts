@@ -14,7 +14,68 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      sound_machine_recordings: {
+        Row: {
+          audio_url: string
+          created_at: string
+          duration_ms: number | null
+          id: string
+          session_id: string
+          sound_id: string
+        }
+        Insert: {
+          audio_url: string
+          created_at?: string
+          duration_ms?: number | null
+          id?: string
+          session_id: string
+          sound_id: string
+        }
+        Update: {
+          audio_url?: string
+          created_at?: string
+          duration_ms?: number | null
+          id?: string
+          session_id?: string
+          sound_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sound_machine_recordings_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "sound_machine_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sound_machine_sessions: {
+        Row: {
+          child_name: string | null
+          created_at: string
+          id: string
+          notes: string | null
+          total_sounds: number | null
+          updated_at: string
+        }
+        Insert: {
+          child_name?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          total_sounds?: number | null
+          updated_at?: string
+        }
+        Update: {
+          child_name?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          total_sounds?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

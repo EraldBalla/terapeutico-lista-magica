@@ -1,14 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { Play, Sparkles, Mic, Volume2, Eye, MessageCircle } from "lucide-react";
+import { Play, Sparkles, Mic, Volume2, Eye, MessageCircle, Archive } from "lucide-react";
 
 interface HomeSelezioneGiochiProps {
   onSelectMondoOggetti: () => void;
   onSelectMacchinaSuoni: () => void;
+  onOpenSoundArchive: () => void;
 }
 
 const HomeSelezioneGiochi = ({
   onSelectMondoOggetti,
   onSelectMacchinaSuoni,
+  onOpenSoundArchive,
 }: HomeSelezioneGiochiProps) => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-pink-50">
@@ -127,6 +129,16 @@ const HomeSelezioneGiochi = ({
             >
               <Play className="w-6 h-6 fill-current" />
               Gioca
+            </Button>
+
+            {/* Archive link */}
+            <Button
+              onClick={onOpenSoundArchive}
+              variant="ghost"
+              className="w-full mt-3 text-purple-600 hover:text-purple-700 hover:bg-purple-50"
+            >
+              <Archive className="w-4 h-4 mr-2" />
+              Archivio registrazioni
             </Button>
           </div>
         </div>
