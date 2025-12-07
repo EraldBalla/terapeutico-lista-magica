@@ -212,12 +212,12 @@ const tier1Scenes: ShoppingListScene[] = [
     lista_della_spesa: [
       { id: "spazzolino", nome: "spazzolino", immagine: "🪥" },
       { id: "sapone", nome: "sapone", immagine: "🧼" },
-      { id: "asciugamano", nome: "asciugamano", immagine: "🛀" },
+      { id: "asciugamano", nome: "asciugamano", immagine: "🧺" },
     ],
     oggetti_disponibili: [
       { id: "spazzolino", nome: "spazzolino", immagine: "🪥" },
       { id: "sapone", nome: "sapone", immagine: "🧼" },
-      { id: "asciugamano", nome: "asciugamano", immagine: "🛀" },
+      { id: "asciugamano", nome: "asciugamano", immagine: "🧺" },
       { id: "pettine", nome: "pettine", immagine: "🪮" },
       { id: "shampoo", nome: "shampoo", immagine: "🧴" },
     ],
@@ -750,7 +750,7 @@ const tier2Scenes: ShoppingListScene[] = [
       { id: "sapone", nome: "sapone", immagine: "🧼" },
       { id: "shampoo", nome: "shampoo", immagine: "🧴" },
       { id: "pettine", nome: "pettine", immagine: "🪮" },
-      { id: "asciugamano", nome: "asciugamano", immagine: "🛀" },
+      { id: "asciugamano", nome: "asciugamano", immagine: "🧺" },
       { id: "specchio", nome: "specchio", immagine: "🪞" },
       { id: "doccia", nome: "doccia", immagine: "🚿" },
       { id: "dentifricio", nome: "dentifricio", immagine: "🦷" },

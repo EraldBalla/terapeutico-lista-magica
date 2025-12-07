@@ -16,7 +16,7 @@ export interface ObjectDefinition {
 // CATEGORIA: BAGNO
 // ============================================================
 const bagnoObjects: ObjectDefinition[] = [
-  { id: "asciugamano", nome: "asciugamano", immagine: "🛀", categoria: "bagno" }, // Persona nel bagno con asciugamano
+  { id: "asciugamano", nome: "asciugamano", immagine: "🧺", categoria: "bagno" },
   { id: "spazzolino", nome: "spazzolino", immagine: "🪥", categoria: "bagno" },
   { id: "dentifricio", nome: "dentifricio", immagine: "🦷", categoria: "bagno" },
   { id: "sapone", nome: "sapone", immagine: "🧼", categoria: "bagno" },
