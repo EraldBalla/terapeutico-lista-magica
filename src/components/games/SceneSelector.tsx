@@ -47,6 +47,9 @@ const temaIcons: Record<string, string> = {
   vestiti: "👕",
   festa: "🎉",
   cibo_generico: "🍽️",
+  animali: "🦁",
+  sport: "⚽",
+  musica: "🎸",
 };
 
 const SceneSelector = ({ onSelectScene, onBack }: SceneSelectorProps) => {
