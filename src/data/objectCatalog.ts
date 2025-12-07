@@ -16,7 +16,7 @@ export interface ObjectDefinition {
 // CATEGORIA: BAGNO
 // ============================================================
 const bagnoObjects: ObjectDefinition[] = [
-  { id: "asciugamano", nome: "asciugamano", immagine: "🧻", categoria: "bagno" }, // Rotolo/salvietta - non vasca!
+  { id: "asciugamano", nome: "asciugamano", immagine: "🛏️", categoria: "bagno" }, // Rotolo/salvietta - non vasca!
   { id: "spazzolino", nome: "spazzolino", immagine: "🪥", categoria: "bagno" },
   { id: "dentifricio", nome: "dentifricio", immagine: "🦷", categoria: "bagno" }, // Dente per distinguerlo da shampoo
   { id: "sapone", nome: "sapone", immagine: "🧼", categoria: "bagno" },
