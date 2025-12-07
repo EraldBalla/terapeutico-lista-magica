@@ -163,7 +163,7 @@ const festaObjects: ObjectDefinition[] = [
   { id: "palloncino", nome: "palloncino", immagine: "🎈", categoria: "festa" },
   { id: "torta", nome: "torta", immagine: "🎂", categoria: "festa" },
   { id: "regalo", nome: "regalo", immagine: "🎁", categoria: "festa" },
-  { id: "festoni", nome: "festoni", immagine: "🎊", categoria: "festa" },
+  { id: "fuochi-artificiali", nome: "fuochi artificiali", immagine: "🎆", categoria: "festa" },
   { id: "candeline", nome: "candeline", immagine: "🕯️", categoria: "festa" },
   { id: "cappellino", nome: "cappellino", immagine: "🎉", categoria: "festa" },
   { id: "coriandoli", nome: "coriandoli", immagine: "🎇", categoria: "festa" },
