@@ -1,51 +1,224 @@
 /**
  * Catalogo suoni per "La macchina dei suoni"
- * Ogni suono ha: id, label, categoria, immagine (emoji), modelText (testo mostrato), speechText (testo per TTS)
+ * Ogni suono ha: id, label, categoria, immagine (emoji), modelText (testo mostrato), modelAudioUrl (audio pre-registrato)
+ * 
+ * NOTA: Gli audio pre-registrati devono essere file con voce dolce e amichevole o suoni reali.
+ * Attualmente i modelAudioUrl puntano a placeholder - vanno sostituiti con file reali.
  */
 
-export type SoundCategory = "animali" | "mezzi" | "suoni_bocca" | "oggetti";
+export type SoundCategory = "animali" | "mezzi" | "oggetti";
 
 export interface SoundItem {
   id: string;
   label: string;
   category: SoundCategory;
   image: string;
-  modelText: string;    // Testo mostrato all'utente
-  speechText: string;   // Testo pronunciato dal TTS (più naturale)
+  modelText: string;       // Testo onomatopeico mostrato all'utente
+  modelAudioUrl: string;   // URL del file audio pre-registrato (voce dolce o suono reale)
 }
 
+// Base URL per i file audio modello (da configurare con il bucket Supabase o CDN)
+// Per ora usiamo placeholder - questi andranno sostituiti con file audio reali
+const AUDIO_BASE_URL = "";
+
 export const SOUND_ITEMS: SoundItem[] = [
-  // Animali
-  { id: "mucca", label: "Mucca", category: "animali", image: "🐄", modelText: "muuuuu", speechText: "Muuuu, come fa la mucca!" },
-  { id: "cane", label: "Cane", category: "animali", image: "🐶", modelText: "bau bau", speechText: "Bau bau, come fa il cane!" },
-  { id: "gatto", label: "Gatto", category: "animali", image: "🐱", modelText: "miao miao", speechText: "Miao miao, come fa il gatto!" },
-  { id: "papera", label: "Papera", category: "animali", image: "🦆", modelText: "qua qua", speechText: "Qua qua, come fa la papera!" },
-  { id: "cavallo", label: "Cavallo", category: "animali", image: "🐴", modelText: "iihaaa", speechText: "Iiihaaaa, come fa il cavallo!" },
-  { id: "pecora", label: "Pecora", category: "animali", image: "🐑", modelText: "beeee", speechText: "Beeee, come fa la pecora!" },
-  { id: "maiale", label: "Maiale", category: "animali", image: "🐷", modelText: "oink oink", speechText: "Oink oink, come fa il maiale!" },
-  { id: "gallo", label: "Gallo", category: "animali", image: "🐓", modelText: "chicchirichì", speechText: "Chicchirichì, come fa il gallo!" },
-  
-  // Mezzi
-  { id: "treno", label: "Treno", category: "mezzi", image: "🚂", modelText: "ciuf ciuf", speechText: "Ciuf ciuf, come fa il treno!" },
-  { id: "auto", label: "Auto", category: "mezzi", image: "🚗", modelText: "vrrrrr", speechText: "Vruum vruum, come fa l'auto!" },
-  { id: "ambulanza", label: "Ambulanza", category: "mezzi", image: "🚑", modelText: "nino nino nino", speechText: "Nino nino nino, come fa l'ambulanza!" },
-  { id: "clacson", label: "Clacson", category: "mezzi", image: "📯", modelText: "biip biip", speechText: "Biip biip, come fa il clacson!" },
-  { id: "aereo", label: "Aereo", category: "mezzi", image: "✈️", modelText: "vroooom", speechText: "Vroooom, come fa l'aereo che vola!" },
-  { id: "moto", label: "Moto", category: "mezzi", image: "🏍️", modelText: "brum brum", speechText: "Brum brum, come fa la moto!" },
-  
-  // Suoni della bocca
-  { id: "suono_a", label: "Suono A", category: "suoni_bocca", image: "😮", modelText: "aaaaaa", speechText: "Aaaaaa, un bel suono lungo con la bocca aperta!" },
-  { id: "suono_o", label: "Suono O", category: "suoni_bocca", image: "😯", modelText: "oooooo", speechText: "Oooooo, un suono rotondo con le labbra a cerchio!" },
-  { id: "suono_s", label: "Suono S", category: "suoni_bocca", image: "🤫", modelText: "ssssss", speechText: "Sssss, un sibilo lungo come un serpente!" },
-  { id: "suono_sh", label: "Suono SH", category: "suoni_bocca", image: "🫢", modelText: "shhhhhh", speechText: "Shhhhh, silenzio come quando dormiamo!" },
-  { id: "suono_m", label: "Suono M", category: "suoni_bocca", image: "😊", modelText: "mmmmmm", speechText: "Mmmm, come quando qualcosa è buono!" },
-  { id: "suono_r", label: "Suono R", category: "suoni_bocca", image: "😝", modelText: "rrrrr", speechText: "Rrrrr, come il ruggito di un leone!" },
-  
-  // Oggetti
-  { id: "campanello", label: "Campanello", category: "oggetti", image: "🔔", modelText: "din don", speechText: "Din don, come fa il campanello!" },
-  { id: "orologio", label: "Orologio", category: "oggetti", image: "⏰", modelText: "tic tac tic tac", speechText: "Tic tac tic tac, come fa l'orologio!" },
-  { id: "acqua", label: "Acqua", category: "oggetti", image: "💧", modelText: "splash splash", speechText: "Splash splash, come fa l'acqua!" },
-  { id: "telefono", label: "Telefono", category: "oggetti", image: "📱", modelText: "drin drin", speechText: "Drin drin, come fa il telefono!" },
+  // ============ ANIMALI ============
+  { 
+    id: "mucca", 
+    label: "Mucca", 
+    category: "animali", 
+    image: "🐄", 
+    modelText: "muuuuu",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/mucca.mp3`
+  },
+  { 
+    id: "cane", 
+    label: "Cane", 
+    category: "animali", 
+    image: "🐶", 
+    modelText: "bau bau",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/cane.mp3`
+  },
+  { 
+    id: "gatto", 
+    label: "Gatto", 
+    category: "animali", 
+    image: "🐱", 
+    modelText: "miao miao",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/gatto.mp3`
+  },
+  { 
+    id: "papera", 
+    label: "Papera", 
+    category: "animali", 
+    image: "🦆", 
+    modelText: "qua qua",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/papera.mp3`
+  },
+  { 
+    id: "cavallo", 
+    label: "Cavallo", 
+    category: "animali", 
+    image: "🐴", 
+    modelText: "iihaaa",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/cavallo.mp3`
+  },
+  { 
+    id: "pecora", 
+    label: "Pecora", 
+    category: "animali", 
+    image: "🐑", 
+    modelText: "beeee",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/pecora.mp3`
+  },
+  { 
+    id: "maiale", 
+    label: "Maiale", 
+    category: "animali", 
+    image: "🐷", 
+    modelText: "oink oink",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/maiale.mp3`
+  },
+  { 
+    id: "gallo", 
+    label: "Gallo", 
+    category: "animali", 
+    image: "🐓", 
+    modelText: "chicchirichì",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/gallo.mp3`
+  },
+  { 
+    id: "leone", 
+    label: "Leone", 
+    category: "animali", 
+    image: "🦁", 
+    modelText: "roar",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/leone.mp3`
+  },
+  { 
+    id: "uccellino", 
+    label: "Uccellino", 
+    category: "animali", 
+    image: "🐦", 
+    modelText: "cip cip",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/uccellino.mp3`
+  },
+  { 
+    id: "rana", 
+    label: "Rana", 
+    category: "animali", 
+    image: "🐸", 
+    modelText: "cra cra",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/rana.mp3`
+  },
+  { 
+    id: "ape", 
+    label: "Ape", 
+    category: "animali", 
+    image: "🐝", 
+    modelText: "bzzz bzzz",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/ape.mp3`
+  },
+
+  // ============ MEZZI ============
+  { 
+    id: "treno", 
+    label: "Treno", 
+    category: "mezzi", 
+    image: "🚂", 
+    modelText: "ciuf ciuf",
+    modelAudioUrl: `${AUDIO_BASE_URL}/mezzi/treno.mp3`
+  },
+  { 
+    id: "auto", 
+    label: "Auto", 
+    category: "mezzi", 
+    image: "🚗", 
+    modelText: "vroom vroom",
+    modelAudioUrl: `${AUDIO_BASE_URL}/mezzi/auto.mp3`
+  },
+  { 
+    id: "ambulanza", 
+    label: "Ambulanza", 
+    category: "mezzi", 
+    image: "🚑", 
+    modelText: "nino nino",
+    modelAudioUrl: `${AUDIO_BASE_URL}/mezzi/ambulanza.mp3`
+  },
+  { 
+    id: "clacson", 
+    label: "Clacson", 
+    category: "mezzi", 
+    image: "📯", 
+    modelText: "biip biip",
+    modelAudioUrl: `${AUDIO_BASE_URL}/mezzi/clacson.mp3`
+  },
+  { 
+    id: "aereo", 
+    label: "Aereo", 
+    category: "mezzi", 
+    image: "✈️", 
+    modelText: "vroooom",
+    modelAudioUrl: `${AUDIO_BASE_URL}/mezzi/aereo.mp3`
+  },
+  { 
+    id: "moto", 
+    label: "Moto", 
+    category: "mezzi", 
+    image: "🏍️", 
+    modelText: "brum brum",
+    modelAudioUrl: `${AUDIO_BASE_URL}/mezzi/moto.mp3`
+  },
+
+  // ============ OGGETTI ============
+  { 
+    id: "campanello", 
+    label: "Campanello", 
+    category: "oggetti", 
+    image: "🔔", 
+    modelText: "din don",
+    modelAudioUrl: `${AUDIO_BASE_URL}/oggetti/campanello.mp3`
+  },
+  { 
+    id: "orologio", 
+    label: "Orologio", 
+    category: "oggetti", 
+    image: "⏰", 
+    modelText: "tic tac",
+    modelAudioUrl: `${AUDIO_BASE_URL}/oggetti/orologio.mp3`
+  },
+  { 
+    id: "acqua", 
+    label: "Acqua", 
+    category: "oggetti", 
+    image: "💧", 
+    modelText: "splash",
+    modelAudioUrl: `${AUDIO_BASE_URL}/oggetti/acqua.mp3`
+  },
+  { 
+    id: "telefono", 
+    label: "Telefono", 
+    category: "oggetti", 
+    image: "📱", 
+    modelText: "drin drin",
+    modelAudioUrl: `${AUDIO_BASE_URL}/oggetti/telefono.mp3`
+  },
+  { 
+    id: "fischietto", 
+    label: "Fischietto", 
+    category: "oggetti", 
+    image: "🎵", 
+    modelText: "fiiiii",
+    modelAudioUrl: `${AUDIO_BASE_URL}/oggetti/fischietto.mp3`
+  },
+  { 
+    id: "tamburo", 
+    label: "Tamburo", 
+    category: "oggetti", 
+    image: "🥁", 
+    modelText: "tum tum",
+    modelAudioUrl: `${AUDIO_BASE_URL}/oggetti/tamburo.mp3`
+  },
 ];
 
 // Frasi di feedback positivo dopo la registrazione

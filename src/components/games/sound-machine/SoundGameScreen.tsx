@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { SoundItem, getRandomPositiveFeedback } from "@/data/sounds";
-import { useFriendlySpeech } from "@/hooks/use-friendly-speech";
 import { Volume2, Mic, Play, ArrowRight, Square, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
@@ -33,21 +32,21 @@ const SoundGameScreen = ({
 }: SoundGameScreenProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlayingModel, setIsPlayingModel] = useState(false);
+  const [isPlayingRecording, setIsPlayingRecording] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
   const [micError, setMicError] = useState<string | null>(null);
   const [recordingTime, setRecordingTime] = useState(0);
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [audioError, setAudioError] = useState<string | null>(null);
   
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const modelAudioRef = useRef<HTMLAudioElement | null>(null);
+  const recordingAudioRef = useRef<HTMLAudioElement | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const startTimeRef = useRef<number>(0);
-
-  // Use friendly speech hook with slow rate
-  const { speak, isSpeaking } = useFriendlySpeech({ rate: 0.4, pitch: 1.0 });
 
   const currentSound = sounds[currentIndex];
   const hasRecording = recordings.some((r) => r.soundId === currentSound.id);
@@ -61,14 +60,55 @@ const SoundGameScreen = ({
       if (mediaRecorderRef.current && isRecording) {
         mediaRecorderRef.current.stop();
       }
+      if (modelAudioRef.current) {
+        modelAudioRef.current.pause();
+      }
+      if (recordingAudioRef.current) {
+        recordingAudioRef.current.pause();
+      }
     };
   }, [isRecording]);
 
-  // Play model sound using Web Speech API with friendly voice
+  // Play model sound using pre-recorded audio file
   const handlePlayModel = useCallback(() => {
-    if (isSpeaking) return;
-    speak(currentSound.speechText);
-  }, [currentSound.speechText, isSpeaking, speak]);
+    if (isPlayingModel) return;
+    
+    setAudioError(null);
+    
+    // Stop any currently playing model audio
+    if (modelAudioRef.current) {
+      modelAudioRef.current.pause();
+      modelAudioRef.current = null;
+    }
+
+    // Check if audio URL is valid
+    if (!currentSound.modelAudioUrl || currentSound.modelAudioUrl === "/animali/" + currentSound.id + ".mp3") {
+      setAudioError("Audio modello non ancora disponibile per questo suono.");
+      setTimeout(() => setAudioError(null), 3000);
+      return;
+    }
+
+    const audio = new Audio(currentSound.modelAudioUrl);
+    modelAudioRef.current = audio;
+    
+    audio.onplay = () => setIsPlayingModel(true);
+    audio.onended = () => {
+      setIsPlayingModel(false);
+      modelAudioRef.current = null;
+    };
+    audio.onerror = () => {
+      setIsPlayingModel(false);
+      setAudioError("Audio modello non disponibile. Riprova più tardi.");
+      setTimeout(() => setAudioError(null), 3000);
+      modelAudioRef.current = null;
+    };
+    
+    audio.play().catch(() => {
+      setIsPlayingModel(false);
+      setAudioError("Impossibile riprodurre l'audio modello.");
+      setTimeout(() => setAudioError(null), 3000);
+    });
+  }, [currentSound.modelAudioUrl, currentSound.id, isPlayingModel]);
 
   // Upload recording to Supabase storage
   const uploadRecording = async (blob: Blob, soundId: string, durationMs: number): Promise<string | null> => {
@@ -213,18 +253,24 @@ const SoundGameScreen = ({
 
   // Play recording
   const handlePlayRecording = () => {
-    if (!currentRecording || isPlaying) return;
+    if (!currentRecording || isPlayingRecording) return;
     
-    if (audioRef.current) {
-      audioRef.current.pause();
+    if (recordingAudioRef.current) {
+      recordingAudioRef.current.pause();
     }
     
     const audio = new Audio(currentRecording.url);
-    audioRef.current = audio;
+    recordingAudioRef.current = audio;
     
-    audio.onplay = () => setIsPlaying(true);
-    audio.onended = () => setIsPlaying(false);
-    audio.onerror = () => setIsPlaying(false);
+    audio.onplay = () => setIsPlayingRecording(true);
+    audio.onended = () => {
+      setIsPlayingRecording(false);
+      recordingAudioRef.current = null;
+    };
+    audio.onerror = () => {
+      setIsPlayingRecording(false);
+      recordingAudioRef.current = null;
+    };
     
     audio.play();
   };
@@ -232,6 +278,18 @@ const SoundGameScreen = ({
   // Go to next sound
   const handleNext = () => {
     if (!hasRecording) return;
+    
+    // Stop any playing audio
+    if (modelAudioRef.current) {
+      modelAudioRef.current.pause();
+      modelAudioRef.current = null;
+      setIsPlayingModel(false);
+    }
+    if (recordingAudioRef.current) {
+      recordingAudioRef.current.pause();
+      recordingAudioRef.current = null;
+      setIsPlayingRecording(false);
+    }
     
     if (currentIndex < sounds.length - 1) {
       setCurrentIndex(currentIndex + 1);
@@ -247,8 +305,6 @@ const SoundGameScreen = ({
         return "from-green-100 to-emerald-50";
       case "mezzi":
         return "from-blue-100 to-cyan-50";
-      case "suoni_bocca":
-        return "from-pink-100 to-rose-50";
       case "oggetti":
         return "from-amber-100 to-yellow-50";
       default:
@@ -301,14 +357,21 @@ const SoundGameScreen = ({
           {/* Listen button */}
           <Button
             onClick={handlePlayModel}
-            disabled={isSpeaking}
+            disabled={isPlayingModel}
             size="lg"
             variant="outline"
             className="w-full py-6 text-lg font-bold rounded-2xl bg-white/80 hover:bg-white border-2 border-blue-200 hover:border-blue-300 transition-all"
           >
-            <Volume2 className={cn("w-6 h-6 mr-3", isSpeaking && "animate-pulse text-blue-500")} />
-            {isSpeaking ? "Sto parlando..." : "Ascolta il suono"}
+            <Volume2 className={cn("w-6 h-6 mr-3", isPlayingModel && "animate-pulse text-blue-500")} />
+            {isPlayingModel ? "Sto riproducendo..." : "Ascolta il suono"}
           </Button>
+
+          {/* Audio error message */}
+          {audioError && (
+            <div className="bg-orange-100 border-2 border-orange-200 rounded-xl p-4 text-center">
+              <p className="text-orange-700 text-sm">{audioError}</p>
+            </div>
+          )}
 
           {/* Record button */}
           <Button
@@ -357,7 +420,7 @@ const SoundGameScreen = ({
           {/* Play recording button */}
           <Button
             onClick={handlePlayRecording}
-            disabled={!hasRecording || isPlaying}
+            disabled={!hasRecording || isPlayingRecording}
             size="lg"
             variant="outline"
             className={cn(
@@ -367,8 +430,8 @@ const SoundGameScreen = ({
                 : "opacity-50 cursor-not-allowed"
             )}
           >
-            <Play className={cn("w-6 h-6 mr-3", isPlaying && "animate-pulse text-green-500")} />
-            {isPlaying ? "Sto riproducendo..." : hasRecording ? "Riascolta" : "Registra prima!"}
+            <Play className={cn("w-6 h-6 mr-3", isPlayingRecording && "animate-pulse text-green-500")} />
+            {isPlayingRecording ? "Sto riproducendo..." : hasRecording ? "Riascolta" : "Registra prima!"}
           </Button>
         </div>
 
