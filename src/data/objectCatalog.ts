@@ -35,7 +35,7 @@ const scuolaObjects: ObjectDefinition[] = [
   { id: "quaderno", nome: "quaderno", immagine: "📓", categoria: "scuola" },
   { id: "matita", nome: "matita", immagine: "✏️", categoria: "scuola" },
   { id: "penna", nome: "penna", immagine: "🖊️", categoria: "scuola" },
-  { id: "gomma", nome: "gomma", immagine: "🧹", categoria: "scuola" }, // Scopa = cancella - meglio che spugna
+  { id: "gomma", nome: "gomma", immagine: "🧼", categoria: "scuola" },
   { id: "righello", nome: "righello", immagine: "📏", categoria: "scuola" },
   { id: "forbici", nome: "forbici", immagine: "✂️", categoria: "scuola" },
   { id: "colla", nome: "colla", immagine: "🩹", categoria: "scuola" }, // Cerotto = incolla - diverso da shampoo
