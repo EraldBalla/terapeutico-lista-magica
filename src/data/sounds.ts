@@ -22,7 +22,7 @@ export interface SoundItem {
 const AUDIO_BASE_URL = "";
 
 export const SOUND_ITEMS: SoundItem[] = [
-  // ============ ANIMALI ============
+  // ============ ANIMALI (18) ============
   { 
     id: "mucca", 
     label: "Mucca", 
@@ -119,8 +119,56 @@ export const SOUND_ITEMS: SoundItem[] = [
     modelText: "bzzz bzzz",
     modelAudioUrl: `${AUDIO_BASE_URL}/animali/ape.mp3`
   },
+  { 
+    id: "elefante", 
+    label: "Elefante", 
+    category: "animali", 
+    image: "🐘", 
+    modelText: "prrrr",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/elefante.mp3`
+  },
+  { 
+    id: "serpente", 
+    label: "Serpente", 
+    category: "animali", 
+    image: "🐍", 
+    modelText: "sssss",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/serpente.mp3`
+  },
+  { 
+    id: "gufo", 
+    label: "Gufo", 
+    category: "animali", 
+    image: "🦉", 
+    modelText: "uh uh",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/gufo.mp3`
+  },
+  { 
+    id: "lupo", 
+    label: "Lupo", 
+    category: "animali", 
+    image: "🐺", 
+    modelText: "auuuu",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/lupo.mp3`
+  },
+  { 
+    id: "topo", 
+    label: "Topo", 
+    category: "animali", 
+    image: "🐭", 
+    modelText: "squit squit",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/topo.mp3`
+  },
+  { 
+    id: "asino", 
+    label: "Asino", 
+    category: "animali", 
+    image: "🫏", 
+    modelText: "iho iho",
+    modelAudioUrl: `${AUDIO_BASE_URL}/animali/asino.mp3`
+  },
 
-  // ============ MEZZI ============
+  // ============ MEZZI (12) ============
   { 
     id: "treno", 
     label: "Treno", 
@@ -169,8 +217,56 @@ export const SOUND_ITEMS: SoundItem[] = [
     modelText: "brum brum",
     modelAudioUrl: `${AUDIO_BASE_URL}/mezzi/moto.mp3`
   },
+  { 
+    id: "pompieri", 
+    label: "Pompieri", 
+    category: "mezzi", 
+    image: "🚒", 
+    modelText: "tatu tatu",
+    modelAudioUrl: `${AUDIO_BASE_URL}/mezzi/pompieri.mp3`
+  },
+  { 
+    id: "elicottero", 
+    label: "Elicottero", 
+    category: "mezzi", 
+    image: "🚁", 
+    modelText: "flapflap",
+    modelAudioUrl: `${AUDIO_BASE_URL}/mezzi/elicottero.mp3`
+  },
+  { 
+    id: "nave", 
+    label: "Nave", 
+    category: "mezzi", 
+    image: "🚢", 
+    modelText: "tuuu tuuu",
+    modelAudioUrl: `${AUDIO_BASE_URL}/mezzi/nave.mp3`
+  },
+  { 
+    id: "bicicletta", 
+    label: "Bicicletta", 
+    category: "mezzi", 
+    image: "🚲", 
+    modelText: "drin drin",
+    modelAudioUrl: `${AUDIO_BASE_URL}/mezzi/bicicletta.mp3`
+  },
+  { 
+    id: "trattore", 
+    label: "Trattore", 
+    category: "mezzi", 
+    image: "🚜", 
+    modelText: "tuff tuff",
+    modelAudioUrl: `${AUDIO_BASE_URL}/mezzi/trattore.mp3`
+  },
+  { 
+    id: "razzo", 
+    label: "Razzo", 
+    category: "mezzi", 
+    image: "🚀", 
+    modelText: "swoosh",
+    modelAudioUrl: `${AUDIO_BASE_URL}/mezzi/razzo.mp3`
+  },
 
-  // ============ OGGETTI ============
+  // ============ OGGETTI (12) ============
   { 
     id: "campanello", 
     label: "Campanello", 
@@ -218,6 +314,54 @@ export const SOUND_ITEMS: SoundItem[] = [
     image: "🥁", 
     modelText: "tum tum",
     modelAudioUrl: `${AUDIO_BASE_URL}/oggetti/tamburo.mp3`
+  },
+  { 
+    id: "porta", 
+    label: "Porta", 
+    category: "oggetti", 
+    image: "🚪", 
+    modelText: "toc toc",
+    modelAudioUrl: `${AUDIO_BASE_URL}/oggetti/porta.mp3`
+  },
+  { 
+    id: "forbici", 
+    label: "Forbici", 
+    category: "oggetti", 
+    image: "✂️", 
+    modelText: "cric cric",
+    modelAudioUrl: `${AUDIO_BASE_URL}/oggetti/forbici.mp3`
+  },
+  { 
+    id: "martello", 
+    label: "Martello", 
+    category: "oggetti", 
+    image: "🔨", 
+    modelText: "bam bam",
+    modelAudioUrl: `${AUDIO_BASE_URL}/oggetti/martello.mp3`
+  },
+  { 
+    id: "campana", 
+    label: "Campana", 
+    category: "oggetti", 
+    image: "🔔", 
+    modelText: "dong dong",
+    modelAudioUrl: `${AUDIO_BASE_URL}/oggetti/campana.mp3`
+  },
+  { 
+    id: "vento", 
+    label: "Vento", 
+    category: "oggetti", 
+    image: "💨", 
+    modelText: "ffff",
+    modelAudioUrl: `${AUDIO_BASE_URL}/oggetti/vento.mp3`
+  },
+  { 
+    id: "pioggia", 
+    label: "Pioggia", 
+    category: "oggetti", 
+    image: "🌧️", 
+    modelText: "plic ploc",
+    modelAudioUrl: `${AUDIO_BASE_URL}/oggetti/pioggia.mp3`
   },
 ];
 
