@@ -94,26 +94,30 @@ const ItemCard = ({
         isWiggling && "animate-wiggle"
       )}
     >
-      {/* Pulsante Audio TTS */}
+      {/* Pulsante Audio TTS - Area clic grande e facile da toccare */}
       {ttsEnabled && !isCollected && (
         <button
+          type="button"
           onClick={handleAudioClick}
           className={cn(
-            "absolute top-2 right-2 p-2 rounded-full",
+            "absolute -top-1 -right-1 z-10",
+            "min-w-[44px] min-h-[44px] p-3 rounded-full",
+            "cursor-pointer pointer-events-auto",
             "transition-all duration-200",
-            "bg-white/80 hover:bg-primary/20 hover:scale-110 shadow-sm",
-            "focus:outline-none focus:ring-2 focus:ring-primary/50",
-            (isSpeaking || isAudioActive) && "bg-primary/30 animate-pulse"
+            "bg-white shadow-md border-2 border-primary/30",
+            "hover:bg-primary/20 hover:scale-110 hover:shadow-lg",
+            "active:scale-95 active:bg-primary/30",
+            "focus:outline-none focus:ring-4 focus:ring-primary/40",
+            (isSpeaking || isAudioActive) && "bg-primary/30 animate-pulse border-primary"
           )}
-          title="Ascolta la parola"
-          aria-label={`Pronuncia: ${item.nome}`}
+          aria-label={`Ascolta la parola "${item.nome}"`}
         >
           <Volume2
             className={cn(
-              "w-4 h-4 md:w-5 md:h-5",
+              "w-5 h-5 md:w-6 md:h-6",
               (isSpeaking || isAudioActive)
                 ? "text-primary"
-                : "text-muted-foreground"
+                : "text-primary/70"
             )}
           />
         </button>
