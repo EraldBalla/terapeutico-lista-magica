@@ -24,18 +24,18 @@ interface ItemCardProps {
   onSelect: (item: ShoppingItem) => void;
 }
 
-// Colori di sfondo per tema
+// Colori di sfondo più vivaci per tema
 const temaBackgrounds: Record<string, string> = {
-  frutta: "bg-item-frutta hover:bg-orange-100",
-  verdure: "bg-item-verdure hover:bg-green-100",
-  bevande: "bg-item-bevande hover:bg-blue-100",
-  scuola: "bg-item-scuola hover:bg-indigo-100",
-  bagno: "bg-item-bagno hover:bg-cyan-100",
-  cucina: "bg-item-cucina hover:bg-amber-100",
-  vestiti: "bg-item-vestiti hover:bg-pink-100",
-  festa: "bg-item-festa hover:bg-rose-100",
-  colazione: "bg-item-colazione hover:bg-yellow-100",
-  cibo_generico: "bg-game-card hover:bg-game-card-hover",
+  frutta: "bg-gradient-to-br from-orange-100 to-yellow-100 hover:from-orange-200 hover:to-yellow-200 border-orange-200",
+  verdure: "bg-gradient-to-br from-green-100 to-emerald-100 hover:from-green-200 hover:to-emerald-200 border-green-200",
+  bevande: "bg-gradient-to-br from-blue-100 to-cyan-100 hover:from-blue-200 hover:to-cyan-200 border-blue-200",
+  scuola: "bg-gradient-to-br from-indigo-100 to-violet-100 hover:from-indigo-200 hover:to-violet-200 border-indigo-200",
+  bagno: "bg-gradient-to-br from-cyan-100 to-sky-100 hover:from-cyan-200 hover:to-sky-200 border-cyan-200",
+  cucina: "bg-gradient-to-br from-amber-100 to-orange-100 hover:from-amber-200 hover:to-orange-200 border-amber-200",
+  vestiti: "bg-gradient-to-br from-pink-100 to-rose-100 hover:from-pink-200 hover:to-rose-200 border-pink-200",
+  festa: "bg-gradient-to-br from-rose-100 to-fuchsia-100 hover:from-rose-200 hover:to-fuchsia-200 border-rose-200",
+  colazione: "bg-gradient-to-br from-yellow-100 to-amber-100 hover:from-yellow-200 hover:to-amber-200 border-yellow-200",
+  cibo_generico: "bg-gradient-to-br from-slate-50 to-gray-100 hover:from-slate-100 hover:to-gray-200 border-slate-200",
 };
 
 const ItemCard = ({
@@ -81,13 +81,13 @@ const ItemCard = ({
       onClick={handleCardClick}
       disabled={isCollected || isComplete}
       className={cn(
-        "relative flex flex-col items-center justify-center gap-2 p-4 md:p-6 rounded-3xl",
-        "transition-all duration-200 shadow-md border-2 border-transparent",
-        "focus:outline-none focus:ring-4 focus:ring-primary/30",
+        "relative flex flex-col items-center justify-center gap-3 p-5 md:p-7 rounded-[2rem]",
+        "transition-all duration-300 shadow-lg border-2",
+        "focus:outline-none focus:ring-4 focus:ring-primary/40",
         isCollected
-          ? "bg-game-card-selected border-success/30 opacity-60 cursor-not-allowed scale-95"
-          : cn(bgClass, "hover:scale-105 hover:shadow-lg hover:border-primary/20 cursor-pointer"),
-        isShaking && "animate-shake bg-game-card-error border-destructive/30",
+          ? "bg-gradient-to-br from-success/30 to-emerald-200 border-success/50 opacity-70 cursor-not-allowed scale-95"
+          : cn(bgClass, "hover:scale-110 hover:shadow-xl hover:-translate-y-1 cursor-pointer active:scale-95"),
+        isShaking && "animate-shake !bg-gradient-to-br !from-red-100 !to-rose-200 !border-red-300",
         isWiggling && "animate-wiggle"
       )}
     >
@@ -116,16 +116,17 @@ const ItemCard = ({
         </button>
       )}
 
-      {/* Immagine oggetto */}
+      {/* Immagine oggetto - più grande */}
       <span className={cn(
-        "text-5xl md:text-6xl drop-shadow-sm", 
-        isCollected && "animate-gentle-bounce"
+        "text-6xl md:text-7xl drop-shadow-md transition-transform duration-300", 
+        isCollected && "animate-gentle-bounce",
+        !isCollected && !isComplete && "group-hover:scale-110"
       )}>
         {item.immagine}
       </span>
 
-      {/* Nome oggetto */}
-      <span className="text-sm md:text-base font-bold text-foreground text-center leading-tight">
+      {/* Nome oggetto - più visibile */}
+      <span className="text-base md:text-lg font-extrabold text-foreground text-center leading-tight drop-shadow-sm">
         {item.nome}
       </span>
 

@@ -5,7 +5,8 @@ import { getRandomErrorMessage, getRandomSuccessMessage, getRandomCompletionMess
 import ItemCard from "./ItemCard";
 import FruitSliceGame from "./FruitSliceGame";
 import RewardUnlockedModal from "./RewardUnlockedModal";
-import { ShoppingCart, Check, X, ArrowRight, Eye, Frown } from "lucide-react";
+import FeedbackAvatar from "./FeedbackAvatar";
+import { ShoppingCart, Check, ArrowRight, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -129,14 +130,20 @@ const ShoppingListGame = ({
     setCollectedItems((prev) => [...prev, item.id]);
     setCartBounce(true);
     
-    // Messaggio positivo casuale
+    // Messaggio positivo casuale - emoji casuali più simpatici
+    const successEmojis = ["🎉", "🌟", "🎊", "✨", "🥳", "💫"];
     const message = getRandomSuccessMessage();
-    setFeedback({ type: "success", message, emoji: "🎉" });
+    setFeedback({ 
+      type: "success", 
+      message, 
+      emoji: successEmojis[Math.floor(Math.random() * successEmojis.length)] 
+    });
     
+    // Durata feedback: 4 secondi
     setTimeout(() => {
       setFeedback(null);
       setCartBounce(false);
-    }, 1500);
+    }, 4000);
   };
 
   const handleWrongItem = (item: ShoppingItem) => {
@@ -144,15 +151,21 @@ const ShoppingListGame = ({
     setShakeItemId(item.id);
     setWiggleItemId(item.id);
     
-    // Messaggio di incoraggiamento casuale
+    // Messaggio di incoraggiamento casuale - emoji simpatici
+    const errorEmojis = ["💪", "🤗", "🌈", "👀", "🐣", "🦋"];
     const message = getRandomErrorMessage();
-    setFeedback({ type: "error", message, emoji: "🤔" });
+    setFeedback({ 
+      type: "error", 
+      message, 
+      emoji: errorEmojis[Math.floor(Math.random() * errorEmojis.length)]
+    });
     
+    // Durata feedback: 4 secondi
     setTimeout(() => {
       setShakeItemId(null);
       setWiggleItemId(null);
       setFeedback(null);
-    }, 1500);
+    }, 4000);
   };
 
   const getCurrentRiddle = (): string | null => {
@@ -365,24 +378,13 @@ const ShoppingListGame = ({
         </aside>
       </div>
 
-      {/* Feedback popup migliorato */}
+      {/* Feedback con Avatar Mascotte */}
       {feedback && (
-        <div
-          className={cn(
-            "fixed bottom-6 left-1/2 -translate-x-1/2 px-6 py-4 rounded-2xl shadow-xl",
-            "flex items-center gap-3 animate-bounce-in z-50 max-w-md",
-            feedback.type === "success"
-              ? "bg-success text-success-foreground"
-              : "bg-card border-2 border-warning text-foreground"
-          )}
-        >
-          {feedback.type === "success" ? (
-            <Check className="w-6 h-6 flex-shrink-0" />
-          ) : (
-            <span className="text-2xl flex-shrink-0">{feedback.emoji || "🤔"}</span>
-          )}
-          <span className="font-bold text-center">{feedback.message}</span>
-        </div>
+        <FeedbackAvatar 
+          type={feedback.type} 
+          message={feedback.message}
+          emoji={feedback.emoji}
+        />
       )}
 
       {/* Modale premio sbloccato */}

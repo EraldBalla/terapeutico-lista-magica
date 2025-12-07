@@ -151,7 +151,7 @@ const tier1Scenes: ShoppingListScene[] = [
     error_message: "Questo non serve a scuola!",
   },
 
-  // --- MODALITÀ INDOVINELLO (2 scene) ---
+  // --- MODALITÀ INDOVINELLO (3 scene) ---
   {
     id: "t1-indovinelli-facili-1",
     scene_type: "shopping_list_scene",
@@ -200,8 +200,31 @@ const tier1Scenes: ShoppingListScene[] = [
     success_message: "Sei bravissimo a indovinare!",
     error_message: "Prova ancora, ascolta bene!",
   },
+  {
+    id: "t1-indovinelli-colazione",
+    scene_type: "shopping_list_scene",
+    difficulty_tier: 1,
+    target_phonemes: ["comprensione"],
+    title: "Cosa mangio a colazione?",
+    modalita: "indovinello",
+    tema: "colazione",
+    instructions: "Indovinelli facili sulla colazione. L'adulto legge lentamente.",
+    lista_della_spesa: [
+      { id: "latte", nome: "latte", immagine: "🥛", descrizione: "Sono bianco e le mucche mi fanno. I bambini mi bevono!" },
+      { id: "pane", nome: "pane", immagine: "🍞", descrizione: "Sono morbido e profumato. Ci metti sopra la marmellata!" },
+    ],
+    oggetti_disponibili: [
+      { id: "latte", nome: "latte", immagine: "🥛" },
+      { id: "pane", nome: "pane", immagine: "🍞" },
+      { id: "cereali", nome: "cereali", immagine: "🥣" },
+      { id: "yogurt", nome: "yogurt", immagine: "🫐" },
+      { id: "marmellata", nome: "marmellata", immagine: "🍯" },
+    ],
+    success_message: "Bravo! Colazione indovinata!",
+    error_message: "Non è quello... riascolta!",
+  },
 
-  // --- MODALITÀ MEMORIA (1 scena) ---
+  // --- MODALITÀ MEMORIA (3 scene) ---
   {
     id: "t1-memoria-frutta",
     scene_type: "shopping_list_scene",
@@ -225,6 +248,54 @@ const tier1Scenes: ShoppingListScene[] = [
     ],
     success_message: "Ottima memoria! Hai ricordato tutto!",
     error_message: "Mmm, questo non era nella lista...",
+  },
+  {
+    id: "t1-memoria-colazione",
+    scene_type: "shopping_list_scene",
+    difficulty_tier: 1,
+    target_phonemes: ["memoria", "lessico"],
+    title: "Ricorda la colazione!",
+    modalita: "memoria",
+    tema: "colazione",
+    instructions: "Memorizza gli ingredienti della colazione! Hai 12 secondi.",
+    lista_della_spesa: [
+      { id: "latte", nome: "latte", immagine: "🥛" },
+      { id: "pane", nome: "pane", immagine: "🍞" },
+      { id: "marmellata", nome: "marmellata", immagine: "🍯" },
+    ],
+    oggetti_disponibili: [
+      { id: "latte", nome: "latte", immagine: "🥛" },
+      { id: "pane", nome: "pane", immagine: "🍞" },
+      { id: "marmellata", nome: "marmellata", immagine: "🍯" },
+      { id: "cereali", nome: "cereali", immagine: "🥣" },
+      { id: "yogurt", nome: "yogurt", immagine: "🫐" },
+    ],
+    success_message: "Super memoria! Colazione ricordata!",
+    error_message: "Questo non era nella lista...",
+  },
+  {
+    id: "t1-memoria-scuola",
+    scene_type: "shopping_list_scene",
+    difficulty_tier: 1,
+    target_phonemes: ["memoria", "lessico"],
+    title: "Ricorda lo zaino!",
+    modalita: "memoria",
+    tema: "scuola",
+    instructions: "Memorizza cosa mettere nello zaino! Hai 12 secondi.",
+    lista_della_spesa: [
+      { id: "matita", nome: "matita", immagine: "✏️" },
+      { id: "quaderno", nome: "quaderno", immagine: "📓" },
+      { id: "gomma", nome: "gomma", immagine: "🧽" },
+    ],
+    oggetti_disponibili: [
+      { id: "matita", nome: "matita", immagine: "✏️" },
+      { id: "quaderno", nome: "quaderno", immagine: "📓" },
+      { id: "gomma", nome: "gomma", immagine: "🧽" },
+      { id: "penna", nome: "penna", immagine: "🖊️" },
+      { id: "righello", nome: "righello", immagine: "📏" },
+    ],
+    success_message: "Bravo! Zaino pronto!",
+    error_message: "Questo non serviva...",
   },
 ];
 
@@ -405,7 +476,7 @@ const tier2Scenes: ShoppingListScene[] = [
     error_message: "Non è quello... dove si mette?",
   },
 
-  // --- MODALITÀ MEMORIA (2 scene) ---
+  // --- MODALITÀ MEMORIA (3 scene) ---
   {
     id: "t2-memoria-colazione",
     scene_type: "shopping_list_scene",
@@ -464,6 +535,34 @@ const tier2Scenes: ShoppingListScene[] = [
     success_message: "Zaino completo! Memoria da campione!",
     error_message: "Questo non serviva per la scuola...",
   },
+  {
+    id: "t2-memoria-bagno",
+    scene_type: "shopping_list_scene",
+    difficulty_tier: 2,
+    target_phonemes: ["memoria", "lessico"],
+    title: "Ricorda il bagno!",
+    modalita: "memoria",
+    tema: "bagno",
+    instructions: "Memorizza gli oggetti del bagno! Hai 10 secondi.",
+    lista_della_spesa: [
+      { id: "spazzolino", nome: "spazzolino", immagine: "🪥" },
+      { id: "dentifricio", nome: "dentifricio", immagine: "🦷" },
+      { id: "sapone", nome: "sapone", immagine: "🧼" },
+      { id: "asciugamano", nome: "asciugamano", immagine: "🛁" },
+    ],
+    oggetti_disponibili: [
+      { id: "spazzolino", nome: "spazzolino", immagine: "🪥" },
+      { id: "dentifricio", nome: "dentifricio", immagine: "🦷" },
+      { id: "sapone", nome: "sapone", immagine: "🧼" },
+      { id: "asciugamano", nome: "asciugamano", immagine: "🛁" },
+      { id: "shampoo", nome: "shampoo", immagine: "🧴" },
+      { id: "pettine", nome: "pettine", immagine: "🪮" },
+      { id: "spugna", nome: "spugna", immagine: "🧽" },
+      { id: "specchio", nome: "specchio", immagine: "🪞" },
+    ],
+    success_message: "Bravissimo! Tutto ricordato!",
+    error_message: "Questo non era nella lista...",
+  },
 ];
 
 // ====================================================================
@@ -471,7 +570,7 @@ const tier2Scenes: ShoppingListScene[] = [
 // Obiettivo: inferenze, memoria di lavoro, controllo inibitorio
 // ====================================================================
 const tier3Scenes: ShoppingListScene[] = [
-  // --- MODALITÀ SEMPLICE (2 scene) ---
+  // --- MODALITÀ SEMPLICE (3 scene) ---
   {
     id: "t3-verdure-grande",
     scene_type: "shopping_list_scene",
@@ -543,6 +642,40 @@ const tier3Scenes: ShoppingListScene[] = [
     ],
     success_message: "Che festa fantastica! Buon compleanno!",
     error_message: "Questo non serve per la festa!",
+  },
+  {
+    id: "t3-frutta-macedonia",
+    scene_type: "shopping_list_scene",
+    difficulty_tier: 3,
+    target_phonemes: ["lessico", "comprensione"],
+    title: "Super macedonia di frutta!",
+    modalita: "semplice",
+    tema: "frutta",
+    instructions: "Prepara una macedonia gigante! Tanta frutta da trovare!",
+    lista_della_spesa: [
+      { id: "mela", nome: "mela", immagine: "🍎" },
+      { id: "banana", nome: "banana", immagine: "🍌" },
+      { id: "fragola", nome: "fragola", immagine: "🍓" },
+      { id: "kiwi", nome: "kiwi", immagine: "🥝" },
+      { id: "pesca", nome: "pesca", immagine: "🍑" },
+      { id: "uva", nome: "uva", immagine: "🍇" },
+    ],
+    oggetti_disponibili: [
+      { id: "mela", nome: "mela", immagine: "🍎" },
+      { id: "banana", nome: "banana", immagine: "🍌" },
+      { id: "fragola", nome: "fragola", immagine: "🍓" },
+      { id: "kiwi", nome: "kiwi", immagine: "🥝" },
+      { id: "pesca", nome: "pesca", immagine: "🍑" },
+      { id: "uva", nome: "uva", immagine: "🍇" },
+      { id: "pera", nome: "pera", immagine: "🍐" },
+      { id: "arancia", nome: "arancia", immagine: "🍊" },
+      { id: "anguria", nome: "anguria", immagine: "🍉" },
+      { id: "ciliegia", nome: "ciliegia", immagine: "🍒" },
+      { id: "ananas", nome: "ananas", immagine: "🍍" },
+      { id: "limone", nome: "limone", immagine: "🍋" },
+    ],
+    success_message: "Macedonia pronta! Che bontà!",
+    error_message: "Questa frutta non era nella ricetta!",
   },
 
   // --- MODALITÀ INDOVINELLO (3 scene) ---
