@@ -182,21 +182,21 @@
 /* Game animations */
 @keyframes bounce-in {
   0% { transform: scale(0.3); opacity: 0; }
-  50% { transform: scale(1.05); }
-  70% { transform: scale(0.9); }
+  50% { transform: scale(1.1); }
+  70% { transform: scale(0.95); }
   100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0) rotate(0deg); }
-  10%, 50%, 90% { transform: translateX(-8px) rotate(-3deg); }
-  30%, 70% { transform: translateX(8px) rotate(3deg); }
+  10%, 50%, 90% { transform: translateX(-10px) rotate(-4deg); }
+  30%, 70% { transform: translateX(10px) rotate(4deg); }
 }
 
 @keyframes wiggle {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-10deg); }
-  75% { transform: rotate(10deg); }
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-12deg) scale(1.05); }
+  75% { transform: rotate(12deg) scale(1.05); }
 }
 
 @keyframes slide-out {
@@ -211,41 +211,51 @@
 
 @keyframes pop-in {
   0% { transform: scale(0); opacity: 0; }
-  50% { transform: scale(1.2); }
+  60% { transform: scale(1.3); }
   100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes pulse-success {
-  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--success) / 0.4); }
-  50% { box-shadow: 0 0 0 12px hsl(var(--success) / 0); }
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--success) / 0.5); }
+  50% { box-shadow: 0 0 0 16px hsl(var(--success) / 0); }
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes cart-bounce {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-5deg); }
-  75% { transform: rotate(5deg); }
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-8deg) scale(1.1); }
+  75% { transform: rotate(8deg) scale(1.1); }
 }
 
 @keyframes gentle-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-6px) scale(1.05); }
+}
+
+@keyframes rainbow-pulse {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(30deg); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
 }
 
 .animate-bounce-in {
-  animation: bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .animate-shake {
-  animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  animation: shake 0.7s cubic-bezier(0.36, 0.07, 0.19, 0.97);
 }
 
 .animate-wiggle {
-  animation: wiggle 0.5s ease-in-out;
+  animation: wiggle 0.6s ease-in-out;
 }
 
 .animate-slide-out {
@@ -253,15 +263,15 @@
 }
 
 .animate-confetti {
-  animation: confetti-fall 1s ease-out forwards;
+  animation: confetti-fall 1.2s ease-out forwards;
 }
 
 .animate-pop-in {
-  animation: pop-in 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  animation: pop-in 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .animate-pulse-success {
-  animation: pulse-success 1s ease-out;
+  animation: pulse-success 1.2s ease-out;
 }
 
 .animate-float {
@@ -269,9 +279,26 @@
 }
 
 .animate-cart-bounce {
-  animation: cart-bounce 0.4s ease-in-out;
+  animation: cart-bounce 0.5s ease-in-out;
 }
 
 .animate-gentle-bounce {
-  animation: gentle-bounce 0.4s ease-in-out;
+  animation: gentle-bounce 0.5s ease-in-out;
+}
+
+.animate-rainbow-pulse {
+  animation: rainbow-pulse 2s ease-in-out infinite;
+}
+
+/* Fun kid-friendly gradients */
+.bg-fun-gradient-warm {
+  background: linear-gradient(135deg, hsl(35 100% 95%) 0%, hsl(45 100% 92%) 50%, hsl(25 90% 90%) 100%);
+}
+
+.bg-fun-gradient-cool {
+  background: linear-gradient(135deg, hsl(200 80% 95%) 0%, hsl(180 70% 92%) 50%, hsl(220 70% 94%) 100%);
+}
+
+.bg-fun-gradient-rainbow {
+  background: linear-gradient(135deg, hsl(350 80% 95%) 0%, hsl(45 100% 92%) 25%, hsl(145 70% 92%) 50%, hsl(200 80% 94%) 75%, hsl(270 70% 94%) 100%);
 }
