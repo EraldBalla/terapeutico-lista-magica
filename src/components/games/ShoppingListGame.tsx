@@ -5,7 +5,7 @@ import { getRandomErrorMessage, getRandomSuccessMessage, getRandomCompletionMess
 import ItemCard from "./ItemCard";
 import FruitSliceGame from "./FruitSliceGame";
 import RewardUnlockedModal from "./RewardUnlockedModal";
-import FeedbackAvatar from "./FeedbackAvatar";
+import FeedbackBar from "./FeedbackBar";
 import { ShoppingCart, Check, ArrowRight, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -327,8 +327,8 @@ const ShoppingListGame = ({
           </div>
         </aside>
 
-        {/* Griglia oggetti - ora usa ItemCard con TTS */}
-        <main className="lg:col-span-2 order-1 lg:order-2">
+        {/* Griglia oggetti + FeedbackBar sotto */}
+        <main className="lg:col-span-2 order-1 lg:order-2 flex flex-col">
           <div className="grid grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
             {displayItems.map((item) => (
               <ItemCard
@@ -344,6 +344,15 @@ const ShoppingListGame = ({
               />
             ))}
           </div>
+          
+          {/* FeedbackBar - posizione stabile sotto il grid */}
+          {feedback && (
+            <FeedbackBar 
+              type={feedback.type} 
+              message={feedback.message}
+              emoji={feedback.emoji}
+            />
+          )}
         </main>
 
         {/* Carrello */}
@@ -378,14 +387,7 @@ const ShoppingListGame = ({
         </aside>
       </div>
 
-      {/* Feedback con Avatar Mascotte */}
-      {feedback && (
-        <FeedbackAvatar 
-          type={feedback.type} 
-          message={feedback.message}
-          emoji={feedback.emoji}
-        />
-      )}
+      {/* FeedbackBar now rendered inside the main grid area above */}
 
       {/* Modale premio sbloccato */}
       {showRewardModal && (
