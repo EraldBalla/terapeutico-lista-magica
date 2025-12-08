@@ -54,18 +54,18 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
     return "w-12 h-12 md:w-14 md:h-14";
   };
 
-  // Slot positions - calibrated for large potato filling container
+  // Slot positions - calibrated for potato at 70% width, 75% height, top 15%
   const getSlotPosition = (slotType: SlotType): React.CSSProperties => {
     const positions: Record<SlotType, React.CSSProperties> = {
-      occhio_sx: { top: "32%", left: "38%", transform: "translate(-50%, -50%)" },
-      occhio_dx: { top: "32%", left: "62%", transform: "translate(-50%, -50%)" },
-      naso: { top: "48%", left: "50%", transform: "translate(-50%, -50%)" },
-      bocca: { top: "62%", left: "50%", transform: "translate(-50%, -50%)" },
-      orecchio_sx: { top: "42%", left: "18%", transform: "translate(-50%, -50%)" },
-      orecchio_dx: { top: "42%", left: "82%", transform: "translate(-50%, -50%)" },
-      cappello: { top: "12%", left: "50%", transform: "translate(-50%, -50%)" },
-      braccio_sx: { top: "72%", left: "15%", transform: "translate(-50%, -50%)" },
-      braccio_dx: { top: "72%", left: "85%", transform: "translate(-50%, -50%)" },
+      occhio_sx: { top: "28%", left: "40%", transform: "translate(-50%, -50%)" },
+      occhio_dx: { top: "28%", left: "60%", transform: "translate(-50%, -50%)" },
+      naso: { top: "45%", left: "50%", transform: "translate(-50%, -50%)" },
+      bocca: { top: "63%", left: "50%", transform: "translate(-50%, -50%)" },
+      orecchio_sx: { top: "45%", left: "22%", transform: "translate(-50%, -50%)" },
+      orecchio_dx: { top: "45%", left: "78%", transform: "translate(-50%, -50%)" },
+      cappello: { top: "14%", left: "50%", transform: "translate(-50%, -50%)" },
+      braccio_sx: { top: "75%", left: "25%", transform: "translate(-50%, -50%)" },
+      braccio_dx: { top: "75%", left: "75%", transform: "translate(-50%, -50%)" },
     };
     return positions[slotType];
   };
@@ -87,20 +87,19 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
   };
 
   return (
-    <div className="relative w-full h-full mx-auto" style={{ minHeight: "400px", maxHeight: "500px" }}>
-      {/* Potato base - large and centered */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <img 
-          src={potatoBase} 
-          alt="Patata" 
-          className="object-contain"
-          style={{ 
-            width: "65%",
-            height: "80%",
-            marginTop: "8%"
-          }}
-        />
-      </div>
+    <div className="relative w-full h-full">
+      {/* Potato base - fills most of container */}
+      <img 
+        src={potatoBase} 
+        alt="Patata" 
+        className="absolute left-1/2 object-contain"
+        style={{ 
+          width: "70%",
+          height: "75%",
+          top: "15%",
+          transform: "translateX(-50%)"
+        }}
+      />
 
       {/* Slots */}
       {(Object.keys(SLOT_CONFIG) as SlotType[]).map((slotType) => {

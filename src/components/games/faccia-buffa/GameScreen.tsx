@@ -202,7 +202,7 @@ const GameScreen = ({ onBack }: GameScreenProps) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Character zone */}
           <div className="flex flex-col items-center">
-            <div className="bg-gradient-to-b from-sky-100 to-teal-50 rounded-3xl p-6 md:p-8 shadow-lg border-2 border-sky-100 w-full max-w-sm">
+            <div className="bg-gradient-to-b from-sky-100 to-teal-50 rounded-3xl p-4 shadow-lg border-2 border-sky-100 w-full max-w-md" style={{ height: "480px" }}>
               <PotatoCharacter
                 slots={slots}
                 onDropPiece={handleDropPiece}
