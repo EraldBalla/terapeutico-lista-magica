@@ -54,18 +54,18 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
     return "w-12 h-12 md:w-14 md:h-14";
   };
 
-  // Slot positions - calibrated for potato at 70% width, 75% height, top 15%
+  // Slot positions - calibrated for potato at 80% width, 85% height, top 10%
   const getSlotPosition = (slotType: SlotType): React.CSSProperties => {
     const positions: Record<SlotType, React.CSSProperties> = {
-      occhio_sx: { top: "28%", left: "40%", transform: "translate(-50%, -50%)" },
-      occhio_dx: { top: "28%", left: "60%", transform: "translate(-50%, -50%)" },
-      naso: { top: "45%", left: "50%", transform: "translate(-50%, -50%)" },
-      bocca: { top: "63%", left: "50%", transform: "translate(-50%, -50%)" },
-      orecchio_sx: { top: "45%", left: "22%", transform: "translate(-50%, -50%)" },
-      orecchio_dx: { top: "45%", left: "78%", transform: "translate(-50%, -50%)" },
-      cappello: { top: "14%", left: "50%", transform: "translate(-50%, -50%)" },
-      braccio_sx: { top: "75%", left: "25%", transform: "translate(-50%, -50%)" },
-      braccio_dx: { top: "75%", left: "75%", transform: "translate(-50%, -50%)" },
+      occhio_sx: { top: "30%", left: "38%", transform: "translate(-50%, -50%)" },
+      occhio_dx: { top: "30%", left: "62%", transform: "translate(-50%, -50%)" },
+      naso: { top: "48%", left: "50%", transform: "translate(-50%, -50%)" },
+      bocca: { top: "65%", left: "50%", transform: "translate(-50%, -50%)" },
+      orecchio_sx: { top: "48%", left: "18%", transform: "translate(-50%, -50%)" },
+      orecchio_dx: { top: "48%", left: "82%", transform: "translate(-50%, -50%)" },
+      cappello: { top: "12%", left: "50%", transform: "translate(-50%, -50%)" },
+      braccio_sx: { top: "78%", left: "28%", transform: "translate(-50%, -50%)" },
+      braccio_dx: { top: "78%", left: "72%", transform: "translate(-50%, -50%)" },
     };
     return positions[slotType];
   };
@@ -94,9 +94,9 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
         alt="Patata" 
         className="absolute left-1/2 object-contain"
         style={{ 
-          width: "70%",
-          height: "75%",
-          top: "15%",
+          width: "80%",
+          height: "85%",
+          top: "10%",
           transform: "translateX(-50%)"
         }}
       />
