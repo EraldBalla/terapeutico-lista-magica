@@ -48,16 +48,17 @@ export type Mission = {
 };
 
 // Slot configuration with accepted piece types
+// Positions are calibrated for potato that fills ~70% of container height
 export const SLOT_CONFIG: Record<SlotType, { acceptedTypes: PieceType[]; label: string; position: string }> = {
-  occhio_sx: { acceptedTypes: ["occhi"], label: "Occhio sinistro", position: "top-[22%] left-[25%]" },
-  occhio_dx: { acceptedTypes: ["occhi"], label: "Occhio destro", position: "top-[22%] right-[25%]" },
-  naso: { acceptedTypes: ["naso"], label: "Naso", position: "top-[40%] left-1/2 -translate-x-1/2" },
-  bocca: { acceptedTypes: ["bocca"], label: "Bocca", position: "top-[58%] left-1/2 -translate-x-1/2" },
-  orecchio_sx: { acceptedTypes: ["orecchio"], label: "Orecchio sinistro", position: "top-[35%] -left-[8%]" },
-  orecchio_dx: { acceptedTypes: ["orecchio"], label: "Orecchio destro", position: "top-[35%] -right-[8%]" },
-  cappello: { acceptedTypes: ["cappello"], label: "Cappello", position: "-top-[15%] left-1/2 -translate-x-1/2" },
-  braccio_sx: { acceptedTypes: ["braccio"], label: "Braccio sinistro", position: "top-[70%] -left-[20%]" },
-  braccio_dx: { acceptedTypes: ["braccio"], label: "Braccio destro", position: "top-[70%] -right-[20%]" },
+  occhio_sx: { acceptedTypes: ["occhi"], label: "Occhio sinistro", position: "top-[28%] left-[30%] -translate-x-1/2" },
+  occhio_dx: { acceptedTypes: ["occhi"], label: "Occhio destro", position: "top-[28%] left-[70%] -translate-x-1/2" },
+  naso: { acceptedTypes: ["naso"], label: "Naso", position: "top-[45%] left-1/2 -translate-x-1/2" },
+  bocca: { acceptedTypes: ["bocca"], label: "Bocca", position: "top-[62%] left-1/2 -translate-x-1/2" },
+  orecchio_sx: { acceptedTypes: ["orecchio"], label: "Orecchio sinistro", position: "top-[42%] left-[8%] -translate-x-1/2" },
+  orecchio_dx: { acceptedTypes: ["orecchio"], label: "Orecchio destro", position: "top-[42%] left-[92%] -translate-x-1/2" },
+  cappello: { acceptedTypes: ["cappello"], label: "Cappello", position: "top-[8%] left-1/2 -translate-x-1/2" },
+  braccio_sx: { acceptedTypes: ["braccio"], label: "Braccio sinistro", position: "top-[72%] left-[5%] -translate-x-1/2" },
+  braccio_dx: { acceptedTypes: ["braccio"], label: "Braccio destro", position: "top-[72%] left-[95%] -translate-x-1/2" },
 };
 
 // Pieces catalog
