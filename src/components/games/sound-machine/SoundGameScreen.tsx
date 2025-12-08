@@ -36,17 +36,20 @@ const SoundGameScreen = ({
   const [isPlayingRecording, setIsPlayingRecording] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
   const [micError, setMicError] = useState<string | null>(null);
-  const [remainingSeconds, setRemainingSeconds] = useState<number | null>(null);
+  const [recordingSecondsLeft, setRecordingSecondsLeft] = useState<number | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [audioError, setAudioError] = useState<string | null>(null);
+  
+  const MAX_RECORDING_SECONDS = 15;
   
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
   const modelAudioRef = useRef<HTMLAudioElement | null>(null);
   const recordingAudioRef = useRef<HTMLAudioElement | null>(null);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const recordingIntervalRef = useRef<number | null>(null);
   const startTimeRef = useRef<number>(0);
+  const streamRef = useRef<MediaStream | null>(null);
 
   const currentSound = sounds[currentIndex];
   const hasRecording = recordings.some((r) => r.soundId === currentSound.id);
@@ -56,9 +59,14 @@ const SoundGameScreen = ({
   // Cleanup on unmount
   useEffect(() => {
     return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-      if (mediaRecorderRef.current && isRecording) {
+      if (recordingIntervalRef.current) {
+        window.clearInterval(recordingIntervalRef.current);
+      }
+      if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
         mediaRecorderRef.current.stop();
+      }
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
       }
       if (modelAudioRef.current) {
         modelAudioRef.current.pause();
@@ -67,7 +75,7 @@ const SoundGameScreen = ({
         recordingAudioRef.current.pause();
       }
     };
-  }, [isRecording]);
+  }, []);
 
   // Play model sound using pre-recorded audio file
   const handlePlayModel = useCallback(() => {
@@ -158,6 +166,24 @@ const SoundGameScreen = ({
     }
   };
 
+  // Stop recording function - defined first so it can be used by startRecording
+  const stopRecording = useCallback(() => {
+    // 1. Stop MediaRecorder if recording
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
+      mediaRecorderRef.current.stop();
+    }
+    
+    // 2. Update state
+    setIsRecording(false);
+    setRecordingSecondsLeft(null);
+    
+    // 3. Clear the countdown timer
+    if (recordingIntervalRef.current) {
+      window.clearInterval(recordingIntervalRef.current);
+      recordingIntervalRef.current = null;
+    }
+  }, []);
+
   // Start recording
   const handleStartRecording = async () => {
     setMicError(null);
@@ -165,6 +191,7 @@ const SoundGameScreen = ({
     
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      streamRef.current = stream;
       
       const mediaRecorder = new MediaRecorder(stream, {
         mimeType: MediaRecorder.isTypeSupported("audio/webm") ? "audio/webm" : "audio/mp4",
@@ -202,6 +229,7 @@ const SoundGameScreen = ({
         
         // Stop all tracks
         stream.getTracks().forEach((track) => track.stop());
+        streamRef.current = null;
 
         // Try to upload to Supabase (async, don't block UI)
         if (sessionId) {
@@ -219,24 +247,34 @@ const SoundGameScreen = ({
         }
       };
       
+      // Start the recorder
       mediaRecorder.start();
       setIsRecording(true);
-      setRemainingSeconds(15);
+      setRecordingSecondsLeft(MAX_RECORDING_SECONDS);
       
       // Clear any existing timer
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
+      if (recordingIntervalRef.current) {
+        window.clearInterval(recordingIntervalRef.current);
       }
       
-      // Countdown timer from 15 to 0
-      timerRef.current = setInterval(() => {
-        setRemainingSeconds((prev) => {
+      // Countdown timer from 15 to 0 - use window.setInterval for proper typing
+      recordingIntervalRef.current = window.setInterval(() => {
+        setRecordingSecondsLeft((prev) => {
           if (prev === null) return null;
+          
           if (prev <= 1) {
-            // Time's up - auto stop
-            handleStopRecording();
+            // Time's up - auto stop: directly stop the recorder here
+            if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
+              mediaRecorderRef.current.stop();
+            }
+            setIsRecording(false);
+            if (recordingIntervalRef.current) {
+              window.clearInterval(recordingIntervalRef.current);
+              recordingIntervalRef.current = null;
+            }
             return 0;
           }
+          
           return prev - 1;
         });
       }, 1000);
@@ -247,21 +285,10 @@ const SoundGameScreen = ({
     }
   };
 
-  // Stop recording (manual or auto)
-  const handleStopRecording = useCallback(() => {
-    if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
-      mediaRecorderRef.current.stop();
-    }
-    
-    setIsRecording(false);
-    setRemainingSeconds(null);
-    
-    // Clear the countdown timer
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-    }
-  }, []);
+  // Manual stop - wraps stopRecording for button click
+  const handleStopRecording = () => {
+    stopRecording();
+  };
 
   // Play recording
   const handlePlayRecording = () => {
@@ -400,7 +427,7 @@ const SoundGameScreen = ({
             {isRecording ? (
               <>
                 <Square className="w-7 h-7 mr-3 fill-current" />
-                Ferma ({remainingSeconds !== null ? remainingSeconds : 0}s)
+                Ferma ({recordingSecondsLeft !== null ? recordingSecondsLeft : MAX_RECORDING_SECONDS}s)
               </>
             ) : isSaving ? (
               <>
