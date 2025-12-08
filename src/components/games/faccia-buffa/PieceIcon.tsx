@@ -9,6 +9,8 @@ import noseRed from "@/assets/pieces/nose-red.png";
 import noseSmall from "@/assets/pieces/nose-small.png";
 import mouthKiss from "@/assets/pieces/mouth-kiss.png";
 import mouthTeeth from "@/assets/pieces/mouth-teeth.png";
+import mouthSad from "@/assets/pieces/mouth-sad.png";
+import mouthAngry from "@/assets/pieces/mouth-angry.png";
 import earBig from "@/assets/pieces/ear-big.png";
 import earSmall from "@/assets/pieces/ear-small.png";
 import earElf from "@/assets/pieces/ear-elf.png";
@@ -253,13 +255,13 @@ const PIECE_COMPONENTS: Record<string, React.FC> = {
   naso_maiale: NosePigSVG,
   naso_carota: NoseCarrotSVG,
   
-  // Mouths - Mix of 3D images and SVG
+  // Mouths - 3D images
   bocca_sorriso: MouthSmileSVG,
-  bocca_triste: MouthSadSVG,
+  bocca_triste: () => <ImagePiece src={mouthSad} alt="Bocca triste" />,
   bocca_lingua: MouthTongueSVG,
   bocca_bacio: () => <ImagePiece src={mouthKiss} alt="Bocca bacio" />,
   bocca_sorpresa: MouthSurprisedSVG,
-  bocca_arrabbiata: MouthAngrySVG,
+  bocca_arrabbiata: () => <ImagePiece src={mouthAngry} alt="Bocca arrabbiata" />,
   
   // Ears - 3D images
   orecchie_normali: () => <ImagePiece src={earBig} alt="Orecchie normali" />,
