@@ -1,6 +1,6 @@
 import { SlotType, SlotState, SLOT_CONFIG, getPieceById, PieceType } from "@/data/facciaBuffa";
 import PieceIcon from "./PieceIcon";
-import potatoBase from "@/assets/potato-base.png";
+import NewPotatoBody from "./NewPotatoBody";
 
 interface PotatoCharacterProps {
   slots: SlotState[];
@@ -88,18 +88,18 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
 
   return (
     <div className="relative w-full h-full">
-      {/* Potato base - fills most of container */}
-      <img 
-        src={potatoBase} 
-        alt="Patata" 
-        className="absolute left-1/2 object-contain"
+      {/* New SVG potato body - sized to align with slots */}
+      <div 
+        className="absolute left-1/2 flex items-center justify-center"
         style={{ 
-          width: "80%",
-          height: "85%",
-          top: "10%",
+          width: "75%",
+          height: "88%",
+          top: "8%",
           transform: "translateX(-50%)"
         }}
-      />
+      >
+        <NewPotatoBody />
+      </div>
 
       {/* Slots */}
       {(Object.keys(SLOT_CONFIG) as SlotType[]).map((slotType) => {
