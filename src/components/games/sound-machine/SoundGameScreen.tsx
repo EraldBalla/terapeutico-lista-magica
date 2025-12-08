@@ -374,11 +374,24 @@ const SoundGameScreen = ({
       </header>
 
       {/* Main content */}
-      <div className="max-w-lg mx-auto">
+      <div className="max-w-lg mx-auto flex flex-col items-center gap-4">
+        {/* Feedback area - fixed height to prevent layout shift */}
+        <div className="w-full flex justify-center">
+          <div className="min-h-[64px] flex items-center justify-center">
+            {feedback && (
+              <div className="px-5 py-2.5 rounded-full bg-green-100 border-2 border-green-200 text-green-700 font-semibold text-base animate-fade-in flex items-center gap-2">
+                <span className="text-xl">✨</span>
+                {feedback}
+                <span className="text-xl">✨</span>
+              </div>
+            )}
+          </div>
+        </div>
+
         {/* Sound card */}
         <div
           className={cn(
-            "bg-gradient-to-br rounded-3xl p-8 md:p-12 shadow-xl mb-6 text-center",
+            "w-full bg-gradient-to-br rounded-3xl p-8 md:p-12 shadow-xl text-center",
             getCategoryColor(currentSound.category)
           )}
         >
@@ -392,7 +405,7 @@ const SoundGameScreen = ({
         </div>
 
         {/* Action buttons */}
-        <div className="grid gap-4 mb-6">
+        <div className="w-full grid gap-4">
           {/* Listen button */}
           <Button
             onClick={handlePlayModel}
@@ -474,17 +487,6 @@ const SoundGameScreen = ({
           </Button>
         </div>
 
-        {/* Feedback bar */}
-        {feedback && (
-          <div className="bg-green-100 border-2 border-green-200 rounded-2xl p-4 mb-6 text-center animate-bounce-in">
-            <p className="text-green-700 font-semibold text-lg flex items-center justify-center gap-2">
-              <span className="text-2xl">✨</span>
-              {feedback}
-              <span className="text-2xl">✨</span>
-            </p>
-          </div>
-        )}
-
         {/* Next button */}
         <Button
           onClick={handleNext}
@@ -511,7 +513,7 @@ const SoundGameScreen = ({
         </Button>
 
         {!hasRecording && (
-          <p className="text-center text-sm text-muted-foreground mt-3">
+          <p className="text-center text-sm text-muted-foreground">
             Devi registrare almeno una volta per andare avanti!
           </p>
         )}
