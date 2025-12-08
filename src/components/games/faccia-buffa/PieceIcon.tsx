@@ -192,134 +192,153 @@ const NoseCarrot = () => (
   </svg>
 );
 
-// ========== MOUTHS - Clean, expressive, flat style ==========
+// ========== MOUTHS - Child-friendly, clearly expressive ==========
 const MouthSmile = () => (
   <svg viewBox="0 0 56 28" className="w-full h-full">
-    {/* Wide smile shape */}
+    {/* Happy smile - wide curved line */}
     <path 
-      d="M4 8 Q28 4, 52 8 Q50 24, 28 26 Q6 24, 4 8" 
-      fill="#E57373" 
-      stroke="#B71C1C" 
-      strokeWidth="2"
+      d="M6 8 Q28 28, 50 8" 
+      fill="none"
+      stroke="#D32F2F" 
+      strokeWidth="5" 
+      strokeLinecap="round"
     />
-    {/* Inner mouth pink */}
-    <path d="M8 10 Q28 8, 48 10 Q46 20, 28 22 Q10 20, 8 10" fill="#FFCDD2"/>
-    {/* Teeth - simple white row */}
-    <rect x="14" y="10" width="28" height="6" rx="2" fill="white"/>
-    <line x1="21" y1="10" x2="21" y2="16" stroke="#E0E0E0" strokeWidth="0.8"/>
-    <line x1="28" y1="10" x2="28" y2="16" stroke="#E0E0E0" strokeWidth="0.8"/>
-    <line x1="35" y1="10" x2="35" y2="16" stroke="#E0E0E0" strokeWidth="0.8"/>
+    {/* Upper lip hint */}
+    <path d="M10 8 Q28 4, 46 8" fill="none" stroke="#E57373" strokeWidth="2" strokeLinecap="round"/>
+    {/* Simple teeth showing */}
+    <rect x="18" y="10" width="20" height="8" rx="3" fill="white" stroke="#E0E0E0" strokeWidth="1"/>
   </svg>
 );
 
 const MouthSad = () => (
   <svg viewBox="0 0 56 24" className="w-full h-full">
-    {/* Downward curve - clear sad expression */}
+    {/* Sad frown - clear downward curve */}
     <path 
-      d="M6 6 Q28 22, 50 6" 
+      d="M8 6 Q28 24, 48 6" 
       fill="none"
-      stroke="#C62828" 
+      stroke="#D32F2F" 
       strokeWidth="5" 
       strokeLinecap="round"
     />
-    {/* Lower lip volume */}
-    <path d="M10 8 Q28 20, 46 8" fill="#E57373" opacity="0.6"/>
+    {/* Slight upper line */}
+    <path d="M12 4 Q28 0, 44 4" fill="none" stroke="#E57373" strokeWidth="2" strokeLinecap="round" opacity="0.6"/>
   </svg>
 );
 
 const MouthTongue = () => (
-  <svg viewBox="0 0 56 36" className="w-full h-full">
-    {/* Open mouth */}
-    <ellipse cx="28" cy="12" rx="22" ry="10" fill="#5D4037" stroke="#C62828" strokeWidth="2"/>
-    {/* Teeth row */}
-    <rect x="12" y="6" width="32" height="5" rx="2" fill="white"/>
-    {/* Tongue sticking out */}
-    <ellipse cx="28" cy="26" rx="12" ry="10" fill="#E91E63" stroke="#C2185B" strokeWidth="2"/>
+  <svg viewBox="0 0 56 40" className="w-full h-full">
+    {/* Open happy mouth */}
+    <ellipse cx="28" cy="14" rx="20" ry="12" fill="#5D4037" stroke="#D32F2F" strokeWidth="2.5"/>
+    {/* Teeth at top */}
+    <rect x="14" y="6" width="28" height="7" rx="3" fill="white"/>
+    {/* Tongue sticking out - playful */}
+    <ellipse cx="28" cy="30" rx="10" ry="10" fill="#E91E63" stroke="#C2185B" strokeWidth="2"/>
     {/* Tongue center line */}
-    <line x1="28" y1="20" x2="28" y2="34" stroke="#AD1457" strokeWidth="2" strokeLinecap="round"/>
+    <line x1="28" y1="22" x2="28" y2="38" stroke="#AD1457" strokeWidth="2" strokeLinecap="round"/>
+    {/* Tongue highlight */}
+    <ellipse cx="24" cy="28" rx="3" ry="4" fill="#F48FB1" opacity="0.5"/>
   </svg>
 );
 
 const MouthKiss = () => (
-  <svg viewBox="0 0 36 40" className="w-full h-full">
-    {/* Puckered lips - O shape */}
-    <ellipse cx="18" cy="20" rx="14" ry="18" fill="#E91E63" stroke="#C2185B" strokeWidth="2"/>
-    {/* Inner dark */}
-    <ellipse cx="18" cy="20" rx="6" ry="10" fill="#880E4F"/>
+  <svg viewBox="0 0 40 36" className="w-full h-full">
+    {/* Puckered kiss lips - heart-like shape */}
+    <path 
+      d="M20 4 Q8 4, 6 16 Q4 28, 20 34 Q36 28, 34 16 Q32 4, 20 4" 
+      fill="#E91E63" 
+      stroke="#C2185B" 
+      strokeWidth="2"
+    />
     {/* Lip highlight */}
-    <ellipse cx="14" cy="14" rx="4" ry="3" fill="#F48FB1" opacity="0.5"/>
+    <ellipse cx="14" cy="12" rx="4" ry="3" fill="#F48FB1" opacity="0.6"/>
+    {/* Lip center dip */}
+    <path d="M16 6 Q20 10, 24 6" fill="none" stroke="#AD1457" strokeWidth="1.5"/>
   </svg>
 );
 
 const MouthOh = () => (
   <svg viewBox="0 0 44 44" className="w-full h-full">
-    {/* Surprised O - clear oval */}
-    <ellipse cx="22" cy="22" rx="18" ry="20" fill="#E57373" stroke="#C62828" strokeWidth="2"/>
-    {/* Inner dark mouth */}
-    <ellipse cx="22" cy="22" rx="10" ry="14" fill="#4E342E"/>
-    {/* Tongue hint */}
-    <ellipse cx="22" cy="30" rx="6" ry="5" fill="#E91E63" opacity="0.7"/>
+    {/* Surprised O - clear round shape */}
+    <ellipse cx="22" cy="22" rx="16" ry="18" fill="#E57373" stroke="#D32F2F" strokeWidth="2.5"/>
+    {/* Dark inside */}
+    <ellipse cx="22" cy="24" rx="8" ry="10" fill="#5D4037"/>
+    {/* Upper teeth hint */}
+    <rect x="16" y="10" width="12" height="5" rx="2" fill="white"/>
   </svg>
 );
 
 const MouthAngry = () => (
-  <svg viewBox="0 0 56 20" className="w-full h-full">
-    {/* Angry line with teeth */}
+  <svg viewBox="0 0 56 24" className="w-full h-full">
+    {/* Angry grimace - zigzag with teeth */}
     <path 
-      d="M4 14 L16 6 L28 14 L40 6 L52 14" 
-      fill="#FFCDD2"
-      stroke="#C62828" 
-      strokeWidth="3" 
+      d="M6 18 L18 8 L28 16 L38 8 L50 18" 
+      fill="none"
+      stroke="#D32F2F" 
+      strokeWidth="4" 
       strokeLinecap="round" 
       strokeLinejoin="round"
     />
-    {/* Teeth triangles */}
-    <polygon points="16,6 22,14 10,14" fill="white" stroke="#E0E0E0" strokeWidth="0.5"/>
-    <polygon points="40,6 46,14 34,14" fill="white" stroke="#E0E0E0" strokeWidth="0.5"/>
+    {/* Teeth showing through grimace */}
+    <rect x="16" y="10" width="8" height="6" rx="1" fill="white" transform="rotate(-15 20 13)"/>
+    <rect x="32" y="10" width="8" height="6" rx="1" fill="white" transform="rotate(15 36 13)"/>
   </svg>
 );
 
-// ========== EARS - Clean anatomical shapes ==========
+// ========== EARS - Child-friendly cartoon ears ==========
 const EarNormal = () => (
-  <svg viewBox="0 0 28 44" className="w-full h-full">
-    {/* Outer ear - simple C shape */}
+  <svg viewBox="0 0 32 44" className="w-full h-full">
+    {/* Simple cartoon ear - C shape with clear anatomy */}
     <path 
-      d="M14 2 Q26 6, 26 22 Q26 38, 14 42 Q4 38, 4 28 Q4 12, 14 2" 
+      d="M8 6 Q28 6, 28 22 Q28 38, 8 38 Q4 32, 4 22 Q4 12, 8 6" 
       fill="#FFCC80" 
-      stroke="#C68A4A" 
-      strokeWidth="2"
+      stroke="#8D6E63" 
+      strokeWidth="2.5"
     />
-    {/* Inner ridge */}
-    <path d="M12 10 Q18 14, 18 22 Q18 30, 12 34" fill="#FFE0B2" stroke="#C68A4A" strokeWidth="1"/>
-    {/* Ear canal hint */}
-    <ellipse cx="12" cy="22" rx="4" ry="5" fill="#BB8844" opacity="0.4"/>
+    {/* Inner ear fold - Y shape like real ear */}
+    <path 
+      d="M12 14 Q18 16, 18 22 Q18 28, 12 30" 
+      fill="none" 
+      stroke="#DEB887" 
+      strokeWidth="3" 
+      strokeLinecap="round"
+    />
+    {/* Earlobe highlight */}
+    <ellipse cx="10" cy="32" rx="4" ry="3" fill="#FFE0B2" opacity="0.6"/>
   </svg>
 );
 
 const EarElf = () => (
-  <svg viewBox="0 0 24 52" className="w-full h-full">
-    {/* Pointed elf ear */}
+  <svg viewBox="0 0 28 56" className="w-full h-full">
+    {/* Pointed elf ear - clearly fantasy */}
     <path 
-      d="M12 50 Q2 40, 2 26 Q2 10, 12 2 Q22 10, 22 26 Q22 40, 12 50" 
+      d="M6 52 Q2 40, 4 24 Q6 8, 14 2 L18 2 Q24 8, 24 24 Q24 40, 18 52 Q12 54, 6 52" 
       fill="#FFCC80" 
-      stroke="#C68A4A" 
-      strokeWidth="2"
+      stroke="#8D6E63" 
+      strokeWidth="2.5"
     />
-    {/* Inner detail */}
-    <path d="M12 44 Q6 36, 6 24 Q6 14, 12 8 Q18 14, 18 24 Q18 36, 12 44" fill="#FFE0B2"/>
-    {/* Point emphasis */}
-    <path d="M12 2 L10 12 M12 2 L14 12" stroke="#C68A4A" strokeWidth="1" fill="none"/>
+    {/* Inner ear detail */}
+    <path 
+      d="M10 44 Q8 32, 10 20 Q12 10, 16 6" 
+      fill="none" 
+      stroke="#DEB887" 
+      strokeWidth="2.5" 
+      strokeLinecap="round"
+    />
+    {/* Sparkle for magic effect */}
+    <circle cx="16" cy="8" r="2" fill="#FFD700" opacity="0.7"/>
   </svg>
 );
 
 const EarBunny = () => (
-  <svg viewBox="0 0 24 64" className="w-full h-full">
-    {/* Long bunny ear */}
-    <ellipse cx="12" cy="32" rx="10" ry="30" fill="white" stroke="#BDBDBD" strokeWidth="2"/>
-    {/* Inner pink */}
-    <ellipse cx="12" cy="32" rx="6" ry="24" fill="#F8BBD9"/>
-    {/* Highlight */}
-    <ellipse cx="8" cy="20" rx="2" ry="8" fill="white" opacity="0.6"/>
+  <svg viewBox="0 0 28 72" className="w-full h-full">
+    {/* Long bunny ear - clearly rabbit-like with rounded top */}
+    <ellipse cx="14" cy="36" rx="12" ry="34" fill="white" stroke="#E0E0E0" strokeWidth="2.5"/>
+    {/* Inner pink - clearly bunny */}
+    <ellipse cx="14" cy="38" rx="7" ry="26" fill="#FFCDD2"/>
+    {/* Cute fur texture at base */}
+    <path d="M4 64 Q14 60, 24 64" fill="white" stroke="#E0E0E0" strokeWidth="1.5"/>
+    {/* Highlight on ear */}
+    <ellipse cx="10" cy="20" rx="3" ry="8" fill="white" opacity="0.8"/>
   </svg>
 );
 
@@ -506,38 +525,41 @@ const ArmOpen = () => (
 );
 
 const ArmThumbsUp = () => (
-  <svg viewBox="0 0 40 52" className="w-full h-full">
+  <svg viewBox="0 0 48 56" className="w-full h-full">
     {/* Arm */}
-    <path d="M10 48 Q8 38, 16 30" stroke="#FFCC80" strokeWidth="12" fill="none" strokeLinecap="round"/>
-    {/* Fist base */}
-    <rect x="12" y="26" width="16" height="14" rx="4" fill="#FFCC80" stroke="#C68A4A" strokeWidth="2"/>
-    {/* Finger lines */}
-    <line x1="14" y1="31" x2="26" y2="31" stroke="#C68A4A" strokeWidth="1" opacity="0.4"/>
-    <line x1="14" y1="36" x2="26" y2="36" stroke="#C68A4A" strokeWidth="1" opacity="0.4"/>
-    {/* Thumb UP - prominent */}
-    <rect x="16" y="6" width="8" height="24" rx="4" fill="#FFCC80" stroke="#C68A4A" strokeWidth="2"/>
+    <path d="M12 52 Q10 42, 18 34" stroke="#FFCC80" strokeWidth="10" fill="none" strokeLinecap="round"/>
+    {/* Closed fist - horizontal, clearly visible */}
+    <rect x="14" y="28" width="22" height="16" rx="6" fill="#FFCC80" stroke="#DEB887" strokeWidth="2"/>
+    {/* Finger bumps on fist */}
+    <ellipse cx="18" cy="28" rx="4" ry="3" fill="#FFCC80" stroke="#DEB887" strokeWidth="1"/>
+    <ellipse cx="26" cy="28" rx="4" ry="3" fill="#FFCC80" stroke="#DEB887" strokeWidth="1"/>
+    <ellipse cx="34" cy="29" rx="3" ry="2.5" fill="#FFCC80" stroke="#DEB887" strokeWidth="1"/>
+    {/* THUMB pointing UP - large and clear, on the SIDE of fist */}
+    <ellipse cx="12" cy="24" rx="6" ry="10" fill="#FFCC80" stroke="#DEB887" strokeWidth="2"/>
+    {/* Thumb tip highlight */}
+    <ellipse cx="12" cy="16" rx="4" ry="3" fill="#FFE0B2"/>
     {/* Thumb nail */}
-    <ellipse cx="20" cy="8" rx="3" ry="2" fill="#FFECB3" stroke="#C68A4A" strokeWidth="1"/>
+    <ellipse cx="12" cy="16" rx="2.5" ry="1.5" fill="#FFECB3" stroke="#DEB887" strokeWidth="0.8"/>
   </svg>
 );
 
 const ArmVictory = () => (
-  <svg viewBox="0 0 44 52" className="w-full h-full">
+  <svg viewBox="0 0 48 56" className="w-full h-full">
     {/* Arm */}
-    <path d="M10 48 Q6 38, 14 30" stroke="#FFCC80" strokeWidth="12" fill="none" strokeLinecap="round"/>
+    <path d="M12 52 Q8 42, 16 34" stroke="#FFCC80" strokeWidth="10" fill="none" strokeLinecap="round"/>
     {/* Palm base */}
-    <rect x="10" y="28" width="14" height="12" rx="3" fill="#FFCC80" stroke="#C68A4A" strokeWidth="2"/>
-    {/* Index finger - V left */}
-    <rect x="10" y="4" width="5" height="26" rx="2.5" fill="#FFCC80" stroke="#C68A4A" strokeWidth="2" transform="rotate(-12 12 17)"/>
-    {/* Middle finger - V right */}
-    <rect x="22" y="4" width="5" height="26" rx="2.5" fill="#FFCC80" stroke="#C68A4A" strokeWidth="2" transform="rotate(12 24 17)"/>
-    {/* Nails */}
-    <ellipse cx="11" cy="6" rx="2" ry="1.5" fill="#FFECB3" stroke="#C68A4A" strokeWidth="0.5" transform="rotate(-12 11 6)"/>
-    <ellipse cx="26" cy="6" rx="2" ry="1.5" fill="#FFECB3" stroke="#C68A4A" strokeWidth="0.5" transform="rotate(12 26 6)"/>
-    {/* Folded fingers */}
-    <ellipse cx="20" cy="38" rx="6" ry="4" fill="#FFCC80" stroke="#C68A4A" strokeWidth="1.5"/>
-    {/* Thumb tucked */}
-    <ellipse cx="6" cy="32" rx="4" ry="5" fill="#FFCC80" stroke="#C68A4A" strokeWidth="1.5"/>
+    <ellipse cx="22" cy="36" rx="10" ry="8" fill="#FFCC80" stroke="#DEB887" strokeWidth="2"/>
+    {/* V fingers - index */}
+    <rect x="12" y="8" width="7" height="26" rx="3.5" fill="#FFCC80" stroke="#DEB887" strokeWidth="2" transform="rotate(-15 15 21)"/>
+    {/* V fingers - middle */}
+    <rect x="28" y="8" width="7" height="26" rx="3.5" fill="#FFCC80" stroke="#DEB887" strokeWidth="2" transform="rotate(15 31 21)"/>
+    {/* Finger nails */}
+    <ellipse cx="13" cy="10" rx="2" ry="1.5" fill="#FFECB3" stroke="#DEB887" strokeWidth="0.5" transform="rotate(-15 13 10)"/>
+    <ellipse cx="33" cy="10" rx="2" ry="1.5" fill="#FFECB3" stroke="#DEB887" strokeWidth="0.5" transform="rotate(15 33 10)"/>
+    {/* Folded ring/pinky fingers */}
+    <ellipse cx="26" cy="42" rx="8" ry="4" fill="#FFCC80" stroke="#DEB887" strokeWidth="1.5"/>
+    {/* Thumb on side */}
+    <ellipse cx="8" cy="36" rx="5" ry="6" fill="#FFCC80" stroke="#DEB887" strokeWidth="1.5"/>
   </svg>
 );
 
