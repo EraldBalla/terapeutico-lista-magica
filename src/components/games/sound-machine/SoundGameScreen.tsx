@@ -388,15 +388,18 @@ const SoundGameScreen = ({
           </div>
         </div>
 
-        {/* Sound card */}
+        {/* Sound card - with cartoon icon */}
         <div
           className={cn(
             "w-full bg-gradient-to-br rounded-3xl p-8 md:p-12 shadow-xl text-center",
             getCategoryColor(currentSound.category)
           )}
         >
-          <div className="text-8xl md:text-9xl mb-4 animate-float">
-            {currentSound.image}
+          <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 animate-float">
+            {(() => {
+              const CartoonIcon = require("@/components/games/shared/CartoonIcons").CARTOON_ICONS[currentSound.id];
+              return CartoonIcon ? <CartoonIcon /> : <span className="text-8xl md:text-9xl">{currentSound.image}</span>;
+            })()}
           </div>
           <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-2">
             {currentSound.label}

@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Play, Sparkles, Mic, Volume2, Eye, MessageCircle, Archive, Users, Target } from "lucide-react";
+import { GameCard, FeaturePill, AppleIcon, CowIcon, TrainIcon, BellIcon } from "@/components/games/shared";
+import PieceIcon from "@/components/games/faccia-buffa/PieceIcon";
 
 interface HomeSelezioneGiochiProps {
   onSelectMondoOggetti: () => void;
@@ -47,146 +49,74 @@ const HomeSelezioneGiochi = ({
         {/* Game cards - 3 columns on desktop */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto mb-12">
           {/* Card: Viaggio nel mondo degli oggetti */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-6 md:p-8 shadow-xl border-2 border-orange-100 hover:shadow-2xl hover:scale-[1.02] transition-all">
-            {/* Icons decoration */}
-            <div className="flex justify-center gap-2 mb-4">
-              {["🍎", "✏️", "🥛", "🧼", "👕"].map((emoji, i) => (
-                <span
-                  key={i}
-                  className="text-2xl md:text-3xl animate-float"
-                  style={{ animationDelay: `${i * 0.15}s` }}
-                >
-                  {emoji}
-                </span>
-              ))}
-            </div>
-
-            <h2 className="text-2xl md:text-3xl font-extrabold text-foreground text-center mb-3">
-              Viaggio nel mondo{" "}
-              <span className="text-primary">degli oggetti</span>
-            </h2>
-
-            <p className="text-muted-foreground text-center mb-6 leading-relaxed">
-              Giochi per allenare lessico, comprensione e attenzione con gli oggetti di tutti i giorni.
-            </p>
-
-            {/* Features mini */}
-            <div className="flex flex-wrap justify-center gap-2 mb-6">
-              <span className="inline-flex items-center gap-1 bg-orange-100 text-orange-700 px-3 py-1.5 rounded-full text-sm font-medium">
-                <MessageCircle className="w-4 h-4" /> Lessico
-              </span>
-              <span className="inline-flex items-center gap-1 bg-green-100 text-green-700 px-3 py-1.5 rounded-full text-sm font-medium">
-                <Eye className="w-4 h-4" /> Attenzione
-              </span>
-            </div>
-
-            <Button
-              onClick={onSelectMondoOggetti}
-              size="lg"
-              className="w-full gap-3 text-lg py-7 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all bg-gradient-to-r from-primary to-orange-500"
-            >
-              <Play className="w-6 h-6 fill-current" />
-              Gioca
-            </Button>
-          </div>
+          <GameCard
+            title="Viaggio nel mondo"
+            titleHighlight="degli oggetti"
+            description="Giochi per allenare lessico, comprensione e attenzione con gli oggetti di tutti i giorni."
+            icons={[
+              <AppleIcon key="apple" />,
+              <div key="pencil" className="w-full h-full flex items-center justify-center text-3xl">✏️</div>,
+              <div key="milk" className="w-full h-full flex items-center justify-center text-3xl">🥛</div>,
+              <div key="soap" className="w-full h-full flex items-center justify-center text-3xl">🧼</div>,
+              <div key="tshirt" className="w-full h-full flex items-center justify-center text-3xl">👕</div>,
+            ]}
+            features={[
+              <FeaturePill key="lessico" icon={MessageCircle} label="Lessico" variant="orange" />,
+              <FeaturePill key="attenzione" icon={Eye} label="Attenzione" variant="green" />,
+            ]}
+            onPlay={onSelectMondoOggetti}
+            variant="orange"
+          />
 
           {/* Card: La macchina dei suoni */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-6 md:p-8 shadow-xl border-2 border-purple-100 hover:shadow-2xl hover:scale-[1.02] transition-all">
-            {/* Icons decoration */}
-            <div className="flex justify-center gap-2 mb-4">
-              {["🎵", "🎤", "🔊", "🐄", "🚂"].map((emoji, i) => (
-                <span
-                  key={i}
-                  className="text-2xl md:text-3xl animate-float"
-                  style={{ animationDelay: `${i * 0.15}s` }}
-                >
-                  {emoji}
-                </span>
-              ))}
-            </div>
-
-            <h2 className="text-2xl md:text-3xl font-extrabold text-foreground text-center mb-3">
-              La macchina{" "}
-              <span className="text-purple-500">dei suoni</span>
-            </h2>
-
-            <p className="text-muted-foreground text-center mb-6 leading-relaxed">
-              Gioca con i versi degli animali, i rumori dei mezzi e i suoni della bocca. Ascolta, imita e registra la tua voce.
-            </p>
-
-            {/* Features mini */}
-            <div className="flex flex-wrap justify-center gap-2 mb-6">
-              <span className="inline-flex items-center gap-1 bg-purple-100 text-purple-700 px-3 py-1.5 rounded-full text-sm font-medium">
-                <Mic className="w-4 h-4" /> Registra
-              </span>
-              <span className="inline-flex items-center gap-1 bg-pink-100 text-pink-700 px-3 py-1.5 rounded-full text-sm font-medium">
-                <Volume2 className="w-4 h-4" /> Ascolta
-              </span>
-            </div>
-
-            <Button
-              onClick={onSelectMacchinaSuoni}
-              size="lg"
-              className="w-full gap-3 text-lg py-7 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all bg-gradient-to-r from-purple-500 to-pink-500"
-            >
-              <Play className="w-6 h-6 fill-current" />
-              Gioca
-            </Button>
-
-            {/* Archive link */}
-            <Button
-              onClick={onOpenSoundArchive}
-              variant="ghost"
-              className="w-full mt-3 text-purple-600 hover:text-purple-700 hover:bg-purple-50"
-            >
-              <Archive className="w-4 h-4 mr-2" />
-              Archivio registrazioni
-            </Button>
-          </div>
+          <GameCard
+            title="La macchina"
+            titleHighlight="dei suoni"
+            description="Gioca con i versi degli animali, i rumori dei mezzi e i suoni della bocca. Ascolta, imita e registra la tua voce."
+            icons={[
+              <div key="music" className="w-full h-full flex items-center justify-center text-3xl">🎵</div>,
+              <div key="mic" className="w-full h-full flex items-center justify-center text-3xl">🎤</div>,
+              <CowIcon key="cow" />,
+              <TrainIcon key="train" />,
+              <BellIcon key="bell" />,
+            ]}
+            features={[
+              <FeaturePill key="registra" icon={Mic} label="Registra" variant="purple" />,
+              <FeaturePill key="ascolta" icon={Volume2} label="Ascolta" variant="pink" />,
+            ]}
+            onPlay={onSelectMacchinaSuoni}
+            variant="purple"
+            extraActions={
+              <Button
+                onClick={onOpenSoundArchive}
+                variant="ghost"
+                className="w-full text-purple-600 hover:text-purple-700 hover:bg-purple-50"
+              >
+                <Archive className="w-4 h-4 mr-2" />
+                Archivio registrazioni
+              </Button>
+            }
+          />
 
           {/* Card: Faccia Buffa */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-6 md:p-8 shadow-xl border-2 border-amber-100 hover:shadow-2xl hover:scale-[1.02] transition-all md:col-span-2 lg:col-span-1">
-            {/* Icons decoration */}
-            <div className="flex justify-center gap-2 mb-4">
-              {["🥔", "👀", "👃", "👄", "🎩"].map((emoji, i) => (
-                <span
-                  key={i}
-                  className="text-2xl md:text-3xl animate-float"
-                  style={{ animationDelay: `${i * 0.15}s` }}
-                >
-                  {emoji}
-                </span>
-              ))}
-            </div>
-
-            <h2 className="text-2xl md:text-3xl font-extrabold text-foreground text-center mb-3">
-              Faccia{" "}
-              <span className="bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">Buffa</span>
-            </h2>
-
-            <p className="text-muted-foreground text-center mb-6 leading-relaxed">
-              Costruisci il tuo personaggio con occhi, naso, bocca e tanti accessori! Trascina i pezzi e crea facce divertenti.
-            </p>
-
-            {/* Features mini */}
-            <div className="flex flex-wrap justify-center gap-2 mb-6">
-              <span className="inline-flex items-center gap-1 bg-amber-100 text-amber-700 px-3 py-1.5 rounded-full text-sm font-medium">
-                <Users className="w-4 h-4" /> Genitore-bambino
-              </span>
-              <span className="inline-flex items-center gap-1 bg-teal-100 text-teal-700 px-3 py-1.5 rounded-full text-sm font-medium">
-                <Target className="w-4 h-4" /> Istruzioni
-              </span>
-            </div>
-
-            <Button
-              onClick={onSelectFacciaBuffa}
-              size="lg"
-              className="w-full gap-3 text-lg py-7 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all bg-gradient-to-r from-orange-500 to-pink-500"
-            >
-              <Play className="w-6 h-6 fill-current" />
-              Gioca
-            </Button>
-          </div>
+          <GameCard
+            title="Faccia"
+            titleHighlight="Buffa"
+            description="Costruisci il tuo personaggio con occhi, naso, bocca e tanti accessori! Trascina i pezzi e crea facce divertenti."
+            icons={[
+              <PieceIcon key="eyes" pieceId="occhi_grandi" size="md" />,
+              <PieceIcon key="nose" pieceId="naso_rosso" size="md" />,
+              <PieceIcon key="mouth" pieceId="bocca_sorriso" size="md" />,
+              <PieceIcon key="hat" pieceId="cappello_festa" size="md" />,
+            ]}
+            features={[
+              <FeaturePill key="parent" icon={Users} label="Genitore-bambino" variant="amber" />,
+              <FeaturePill key="target" icon={Target} label="Istruzioni" variant="teal" />,
+            ]}
+            onPlay={onSelectFacciaBuffa}
+            variant="amber"
+            className="md:col-span-2 lg:col-span-1"
+          />
         </div>
 
         {/* Footer note */}
