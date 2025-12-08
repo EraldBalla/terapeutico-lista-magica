@@ -4,6 +4,7 @@ import { SoundItem, getRandomPositiveFeedback } from "@/data/sounds";
 import { Volume2, Mic, Play, ArrowRight, Square, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
+import { CARTOON_ICONS } from "@/components/games/shared/CartoonIcons";
 
 export interface Recording {
   soundId: string;
@@ -397,7 +398,7 @@ const SoundGameScreen = ({
         >
           <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 animate-float">
             {(() => {
-              const CartoonIcon = require("@/components/games/shared/CartoonIcons").CARTOON_ICONS[currentSound.id];
+              const CartoonIcon = CARTOON_ICONS[currentSound.id];
               return CartoonIcon ? <CartoonIcon /> : <span className="text-8xl md:text-9xl">{currentSound.image}</span>;
             })()}
           </div>
