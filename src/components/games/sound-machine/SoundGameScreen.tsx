@@ -36,7 +36,7 @@ const SoundGameScreen = ({
   const [isPlayingRecording, setIsPlayingRecording] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
   const [micError, setMicError] = useState<string | null>(null);
-  const [recordingTime, setRecordingTime] = useState(0);
+  const [remainingSeconds, setRemainingSeconds] = useState<number | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [audioError, setAudioError] = useState<string | null>(null);
@@ -202,10 +202,6 @@ const SoundGameScreen = ({
         
         // Stop all tracks
         stream.getTracks().forEach((track) => track.stop());
-        
-        setIsRecording(false);
-        setRecordingTime(0);
-        if (timerRef.current) clearInterval(timerRef.current);
 
         // Try to upload to Supabase (async, don't block UI)
         if (sessionId) {
@@ -225,17 +221,24 @@ const SoundGameScreen = ({
       
       mediaRecorder.start();
       setIsRecording(true);
+      setRemainingSeconds(15);
       
-      // Timer for recording duration
-      let time = 0;
+      // Clear any existing timer
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+      
+      // Countdown timer from 15 to 0
       timerRef.current = setInterval(() => {
-        time++;
-        setRecordingTime(time);
-        
-        // Auto-stop after 10 seconds
-        if (time >= 10) {
-          handleStopRecording();
-        }
+        setRemainingSeconds((prev) => {
+          if (prev === null) return null;
+          if (prev <= 1) {
+            // Time's up - auto stop
+            handleStopRecording();
+            return 0;
+          }
+          return prev - 1;
+        });
       }, 1000);
       
     } catch (error) {
@@ -244,12 +247,21 @@ const SoundGameScreen = ({
     }
   };
 
-  // Stop recording
-  const handleStopRecording = () => {
-    if (mediaRecorderRef.current && isRecording) {
+  // Stop recording (manual or auto)
+  const handleStopRecording = useCallback(() => {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
       mediaRecorderRef.current.stop();
     }
-  };
+    
+    setIsRecording(false);
+    setRemainingSeconds(null);
+    
+    // Clear the countdown timer
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+  }, []);
 
   // Play recording
   const handlePlayRecording = () => {
@@ -388,7 +400,7 @@ const SoundGameScreen = ({
             {isRecording ? (
               <>
                 <Square className="w-7 h-7 mr-3 fill-current" />
-                Ferma ({10 - recordingTime}s)
+                Ferma ({remainingSeconds !== null ? remainingSeconds : 0}s)
               </>
             ) : isSaving ? (
               <>
