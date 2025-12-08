@@ -192,226 +192,134 @@ const NoseCarrot = () => (
   </svg>
 );
 
-// ========== MOUTHS ==========
+// ========== MOUTHS - Clean, expressive, flat style ==========
 const MouthSmile = () => (
-  <svg viewBox="0 0 64 36" className="w-full h-full">
-    {/* Lips outline - ampio sorriso */}
+  <svg viewBox="0 0 56 28" className="w-full h-full">
+    {/* Wide smile shape */}
     <path 
-      d="M4 12 Q32 4, 60 12 Q58 30, 32 34 Q6 30, 4 12" 
+      d="M4 8 Q28 4, 52 8 Q50 24, 28 26 Q6 24, 4 8" 
       fill="#E57373" 
-      stroke="#C62828" 
-      strokeWidth="2.5"
+      stroke="#B71C1C" 
+      strokeWidth="2"
     />
-    {/* Inner mouth */}
-    <path 
-      d="M10 15 Q32 10, 54 15 Q52 27, 32 30 Q12 27, 10 15" 
-      fill="#FFCDD2"
-    />
-    {/* Teeth row - clear and visible */}
-    <rect x="15" y="14" width="11" height="8" rx="2" fill="white" stroke="#E0E0E0" strokeWidth="0.8"/>
-    <rect x="28" y="14" width="11" height="8" rx="2" fill="white" stroke="#E0E0E0" strokeWidth="0.8"/>
-    <rect x="41" y="14" width="8" height="7" rx="2" fill="white" stroke="#E0E0E0" strokeWidth="0.6"/>
-    {/* Smile curve emphasis */}
-    <path d="M12 22 Q32 32, 52 22" stroke="#AD1457" strokeWidth="2" fill="none" opacity="0.5"/>
-    {/* Upper lip highlight */}
-    <path d="M18 10 Q32 7, 46 10" stroke="#EF9A9A" strokeWidth="2.5" fill="none" opacity="0.6"/>
+    {/* Inner mouth pink */}
+    <path d="M8 10 Q28 8, 48 10 Q46 20, 28 22 Q10 20, 8 10" fill="#FFCDD2"/>
+    {/* Teeth - simple white row */}
+    <rect x="14" y="10" width="28" height="6" rx="2" fill="white"/>
+    <line x1="21" y1="10" x2="21" y2="16" stroke="#E0E0E0" strokeWidth="0.8"/>
+    <line x1="28" y1="10" x2="28" y2="16" stroke="#E0E0E0" strokeWidth="0.8"/>
+    <line x1="35" y1="10" x2="35" y2="16" stroke="#E0E0E0" strokeWidth="0.8"/>
   </svg>
 );
 
 const MouthSad = () => (
-  <svg viewBox="0 0 64 32" className="w-full h-full">
-    {/* Lower lip - prominent sad curve */}
+  <svg viewBox="0 0 56 24" className="w-full h-full">
+    {/* Downward curve - clear sad expression */}
     <path 
-      d="M8 8 Q32 28, 56 8" 
+      d="M6 6 Q28 22, 50 6" 
       fill="none"
       stroke="#C62828" 
-      strokeWidth="4" 
+      strokeWidth="5" 
       strokeLinecap="round"
     />
-    {/* Upper lip area */}
-    <path 
-      d="M12 10 Q32 24, 52 10" 
-      fill="#FFCDD2"
-      stroke="none"
-    />
-    {/* Lip detail */}
-    <path 
-      d="M16 12 Q32 22, 48 12" 
-      stroke="#EF5350" 
-      strokeWidth="2" 
-      fill="none" 
-      opacity="0.5"
-    />
     {/* Lower lip volume */}
-    <ellipse cx="32" cy="20" rx="16" ry="6" fill="#E57373" opacity="0.5"/>
+    <path d="M10 8 Q28 20, 46 8" fill="#E57373" opacity="0.6"/>
   </svg>
 );
 
 const MouthTongue = () => (
-  <svg viewBox="0 0 64 44" className="w-full h-full">
-    {/* Open mouth shape */}
-    <path 
-      d="M8 10 Q32 6, 56 10 L56 20 Q32 26, 8 20 Z" 
-      fill="#FFCDD2" 
-      stroke="#C62828" 
-      strokeWidth="2.5"
-    />
-    {/* Upper teeth */}
-    <rect x="16" y="10" width="8" height="5" rx="1" fill="white" stroke="#E0E0E0" strokeWidth="0.5"/>
-    <rect x="26" y="10" width="8" height="5" rx="1" fill="white" stroke="#E0E0E0" strokeWidth="0.5"/>
-    <rect x="36" y="10" width="8" height="5" rx="1" fill="white" stroke="#E0E0E0" strokeWidth="0.5"/>
-    {/* Tongue - clearly separate */}
-    <ellipse cx="32" cy="30" rx="14" ry="12" fill="#E91E63" stroke="#C2185B" strokeWidth="2"/>
+  <svg viewBox="0 0 56 36" className="w-full h-full">
+    {/* Open mouth */}
+    <ellipse cx="28" cy="12" rx="22" ry="10" fill="#5D4037" stroke="#C62828" strokeWidth="2"/>
+    {/* Teeth row */}
+    <rect x="12" y="6" width="32" height="5" rx="2" fill="white"/>
+    {/* Tongue sticking out */}
+    <ellipse cx="28" cy="26" rx="12" ry="10" fill="#E91E63" stroke="#C2185B" strokeWidth="2"/>
     {/* Tongue center line */}
-    <path d="M32 22 L32 40" stroke="#AD1457" strokeWidth="2.5" strokeLinecap="round"/>
-    {/* Tongue highlight */}
-    <ellipse cx="26" cy="28" rx="5" ry="4" fill="#F48FB1" opacity="0.5"/>
+    <line x1="28" y1="20" x2="28" y2="34" stroke="#AD1457" strokeWidth="2" strokeLinecap="round"/>
   </svg>
 );
 
 const MouthKiss = () => (
-  <svg viewBox="0 0 44 48" className="w-full h-full">
-    {/* Lips puckered - heart shape */}
-    <path 
-      d="M22 8 Q14 4, 10 12 Q6 20, 22 40 Q38 20, 34 12 Q30 4, 22 8" 
-      fill="#E91E63" 
-      stroke="#C2185B" 
-      strokeWidth="2.5"
-    />
-    {/* Upper lip highlight */}
-    <path 
-      d="M16 12 Q22 10, 28 12" 
-      stroke="#F48FB1" 
-      strokeWidth="2" 
-      fill="none" 
-      opacity="0.7"
-    />
-    {/* Inner shadow */}
-    <ellipse cx="22" cy="22" rx="6" ry="10" fill="#AD1457" opacity="0.4"/>
-    {/* Shine */}
-    <ellipse cx="18" cy="16" rx="3" ry="2" fill="#FCE4EC" opacity="0.6"/>
+  <svg viewBox="0 0 36 40" className="w-full h-full">
+    {/* Puckered lips - O shape */}
+    <ellipse cx="18" cy="20" rx="14" ry="18" fill="#E91E63" stroke="#C2185B" strokeWidth="2"/>
+    {/* Inner dark */}
+    <ellipse cx="18" cy="20" rx="6" ry="10" fill="#880E4F"/>
+    {/* Lip highlight */}
+    <ellipse cx="14" cy="14" rx="4" ry="3" fill="#F48FB1" opacity="0.5"/>
   </svg>
 );
 
 const MouthOh = () => (
-  <svg viewBox="0 0 48 52" className="w-full h-full">
-    {/* Outer lips - clear O shape */}
-    <ellipse cx="24" cy="26" rx="18" ry="22" fill="#E57373" stroke="#C62828" strokeWidth="2.5"/>
-    {/* Inner mouth dark */}
-    <ellipse cx="24" cy="26" rx="11" ry="15" fill="#5D4037"/>
-    {/* Tongue hint inside */}
-    <ellipse cx="24" cy="34" rx="7" ry="6" fill="#E91E63" opacity="0.6"/>
-    {/* Upper teeth peek */}
-    <rect x="16" y="10" width="16" height="5" rx="2" fill="white" opacity="0.8"/>
-    {/* Lip highlight */}
-    <path d="M14 18 Q24 14, 34 18" stroke="#EF9A9A" strokeWidth="2" fill="none" opacity="0.5"/>
+  <svg viewBox="0 0 44 44" className="w-full h-full">
+    {/* Surprised O - clear oval */}
+    <ellipse cx="22" cy="22" rx="18" ry="20" fill="#E57373" stroke="#C62828" strokeWidth="2"/>
+    {/* Inner dark mouth */}
+    <ellipse cx="22" cy="22" rx="10" ry="14" fill="#4E342E"/>
+    {/* Tongue hint */}
+    <ellipse cx="22" cy="30" rx="6" ry="5" fill="#E91E63" opacity="0.7"/>
   </svg>
 );
 
 const MouthAngry = () => (
-  <svg viewBox="0 0 64 28" className="w-full h-full">
-    {/* Angry mouth - zigzag teeth showing */}
+  <svg viewBox="0 0 56 20" className="w-full h-full">
+    {/* Angry line with teeth */}
     <path 
-      d="M6 18 L12 8 L22 18 L32 6 L42 18 L52 8 L58 18" 
+      d="M4 14 L16 6 L28 14 L40 6 L52 14" 
       fill="#FFCDD2"
       stroke="#C62828" 
       strokeWidth="3" 
       strokeLinecap="round" 
       strokeLinejoin="round"
     />
-    {/* Teeth */}
-    <path d="M16 14 L22 8 L28 14" fill="white" stroke="#E0E0E0" strokeWidth="1"/>
-    <path d="M36 14 L42 8 L48 14" fill="white" stroke="#E0E0E0" strokeWidth="1"/>
-    {/* Lower lip */}
-    <path 
-      d="M10 20 Q32 26, 54 20" 
-      stroke="#EF5350" 
-      strokeWidth="3" 
-      fill="none" 
-      strokeLinecap="round"
-    />
+    {/* Teeth triangles */}
+    <polygon points="16,6 22,14 10,14" fill="white" stroke="#E0E0E0" strokeWidth="0.5"/>
+    <polygon points="40,6 46,14 34,14" fill="white" stroke="#E0E0E0" strokeWidth="0.5"/>
   </svg>
 );
 
-// ========== EARS ==========
+// ========== EARS - Clean anatomical shapes ==========
 const EarNormal = () => (
-  <svg viewBox="0 0 36 52" className="w-full h-full">
-    {/* Outer ear shape - anatomical but simple */}
+  <svg viewBox="0 0 28 44" className="w-full h-full">
+    {/* Outer ear - simple C shape */}
     <path 
-      d="M18 4 Q34 8, 34 26 Q34 44, 18 50 Q6 46, 4 32 Q2 18, 18 4" 
+      d="M14 2 Q26 6, 26 22 Q26 38, 14 42 Q4 38, 4 28 Q4 12, 14 2" 
       fill="#FFCC80" 
-      stroke="#D4894A" 
-      strokeWidth="2.5"
-    />
-    {/* Helix (outer rim) */}
-    <path 
-      d="M18 8 Q28 12, 28 26 Q28 40, 18 46" 
-      fill="none" 
-      stroke="#E6A05A" 
+      stroke="#C68A4A" 
       strokeWidth="2"
-      opacity="0.6"
     />
-    {/* Antihelix (inner ridge) */}
-    <path 
-      d="M14 14 Q22 18, 22 26 Q22 34, 14 38" 
-      fill="#FFE0B2" 
-      stroke="#D4894A" 
-      strokeWidth="1.5"
-    />
-    {/* Ear canal shadow */}
-    <ellipse cx="14" cy="26" rx="5" ry="7" fill="#CC8844" opacity="0.4"/>
-    {/* Earlobe */}
-    <ellipse cx="16" cy="46" rx="6" ry="5" fill="#FFD699" opacity="0.7"/>
+    {/* Inner ridge */}
+    <path d="M12 10 Q18 14, 18 22 Q18 30, 12 34" fill="#FFE0B2" stroke="#C68A4A" strokeWidth="1"/>
+    {/* Ear canal hint */}
+    <ellipse cx="12" cy="22" rx="4" ry="5" fill="#BB8844" opacity="0.4"/>
   </svg>
 );
 
 const EarElf = () => (
-  <svg viewBox="0 0 32 64" className="w-full h-full">
-    {/* Pointed elf ear - elegant shape */}
+  <svg viewBox="0 0 24 52" className="w-full h-full">
+    {/* Pointed elf ear */}
     <path 
-      d="M16 62 Q4 48, 4 30 Q4 12, 16 2 Q28 12, 28 30 Q28 48, 16 62" 
+      d="M12 50 Q2 40, 2 26 Q2 10, 12 2 Q22 10, 22 26 Q22 40, 12 50" 
       fill="#FFCC80" 
-      stroke="#D4894A" 
-      strokeWidth="2.5"
+      stroke="#C68A4A" 
+      strokeWidth="2"
     />
-    {/* Sharp point emphasis */}
-    <path 
-      d="M16 2 Q12 8, 12 16 M16 2 Q20 8, 20 16" 
-      fill="none" 
-      stroke="#E6A05A" 
-      strokeWidth="1.5"
-    />
-    {/* Inner ear detail */}
-    <path 
-      d="M16 54 Q10 42, 10 28 Q10 16, 16 10 Q22 16, 22 28 Q22 42, 16 54" 
-      fill="#FFE0B2"
-    />
-    {/* Ridge line */}
-    <path d="M14 18 Q10 32, 14 46" stroke="#D4894A" strokeWidth="1.5" fill="none"/>
-    {/* Inner shadow */}
-    <ellipse cx="14" cy="34" rx="4" ry="8" fill="#CC8844" opacity="0.3"/>
+    {/* Inner detail */}
+    <path d="M12 44 Q6 36, 6 24 Q6 14, 12 8 Q18 14, 18 24 Q18 36, 12 44" fill="#FFE0B2"/>
+    {/* Point emphasis */}
+    <path d="M12 2 L10 12 M12 2 L14 12" stroke="#C68A4A" strokeWidth="1" fill="none"/>
   </svg>
 );
 
 const EarBunny = () => (
-  <svg viewBox="0 0 32 80" className="w-full h-full">
-    {/* Long bunny ear - clear rabbit shape */}
-    <path 
-      d="M16 78 Q2 70, 2 40 Q2 10, 16 2 Q30 10, 30 40 Q30 70, 16 78" 
-      fill="white" 
-      stroke="#BDBDBD" 
-      strokeWidth="2.5"
-    />
-    {/* Inner pink - distinctive rabbit look */}
-    <path 
-      d="M16 70 Q8 62, 8 38 Q8 14, 16 8 Q24 14, 24 38 Q24 62, 16 70" 
-      fill="#FFCDD2"
-    />
-    {/* Pink gradient effect */}
-    <ellipse cx="16" cy="36" rx="6" ry="24" fill="#F48FB1" opacity="0.4"/>
-    {/* Fur texture highlights */}
-    <ellipse cx="10" cy="24" rx="2" ry="10" fill="white" opacity="0.6"/>
-    <ellipse cx="22" cy="50" rx="2" ry="8" fill="white" opacity="0.4"/>
+  <svg viewBox="0 0 24 64" className="w-full h-full">
+    {/* Long bunny ear */}
+    <ellipse cx="12" cy="32" rx="10" ry="30" fill="white" stroke="#BDBDBD" strokeWidth="2"/>
+    {/* Inner pink */}
+    <ellipse cx="12" cy="32" rx="6" ry="24" fill="#F8BBD9"/>
+    {/* Highlight */}
+    <ellipse cx="8" cy="20" rx="2" ry="8" fill="white" opacity="0.6"/>
   </svg>
 );
 
@@ -541,194 +449,95 @@ const HatBow = () => (
   </svg>
 );
 
-// ========== ARMS ==========
+// ========== ARMS - Clean, proportional, readable ==========
 const ArmWave = () => (
-  <svg viewBox="0 0 52 60" className="w-full h-full">
-    {/* Arm - curved waving position */}
+  <svg viewBox="0 0 48 52" className="w-full h-full">
+    {/* Arm - natural curve */}
     <path 
-      d="M10 56 Q6 42, 14 32 Q22 22, 30 18" 
+      d="M10 48 Q8 36, 16 28 Q24 20, 30 16" 
       stroke="#FFCC80" 
-      strokeWidth="14" 
+      strokeWidth="12" 
       fill="none" 
       strokeLinecap="round"
     />
-    {/* Arm highlight */}
-    <path 
-      d="M12 52 Q10 42, 16 34 Q22 26, 28 22" 
-      stroke="#FFE0B2" 
-      strokeWidth="6" 
-      fill="none" 
-      strokeLinecap="round"
-      opacity="0.4"
-    />
-    
     {/* Hand palm */}
-    <ellipse cx="34" cy="14" rx="12" ry="11" fill="#FFCC80" stroke="#D4894A" strokeWidth="2"/>
-    <ellipse cx="31" cy="12" rx="5" ry="4" fill="#FFE0B2" opacity="0.5"/>
-    
-    {/* Fingers spread - waving */}
+    <circle cx="34" cy="12" r="10" fill="#FFCC80" stroke="#C68A4A" strokeWidth="2"/>
+    {/* Fingers - spread wave gesture */}
+    <rect x="26" y="2" width="4" height="11" rx="2" fill="#FFCC80" stroke="#C68A4A" strokeWidth="1.5" transform="rotate(-25 28 7)"/>
+    <rect x="32" y="0" width="4" height="13" rx="2" fill="#FFCC80" stroke="#C68A4A" strokeWidth="1.5"/>
+    <rect x="38" y="2" width="4" height="11" rx="2" fill="#FFCC80" stroke="#C68A4A" strokeWidth="1.5" transform="rotate(20 40 7)"/>
+    <rect x="43" y="6" width="3" height="8" rx="1.5" fill="#FFCC80" stroke="#C68A4A" strokeWidth="1.5" transform="rotate(35 44 10)"/>
     {/* Thumb */}
-    <path d="M20 18 Q16 14, 18 10 Q20 8, 22 10" fill="#FFCC80" stroke="#D4894A" strokeWidth="1.5"/>
-    {/* Index */}
-    <rect x="26" y="2" width="5" height="13" rx="2.5" fill="#FFCC80" stroke="#D4894A" strokeWidth="1.5" transform="rotate(-20 28 8)"/>
-    {/* Middle */}
-    <rect x="33" y="0" width="5" height="15" rx="2.5" fill="#FFCC80" stroke="#D4894A" strokeWidth="1.5" transform="rotate(-5 35 7)"/>
-    {/* Ring */}
-    <rect x="40" y="2" width="5" height="13" rx="2.5" fill="#FFCC80" stroke="#D4894A" strokeWidth="1.5" transform="rotate(10 42 8)"/>
-    {/* Pinky */}
-    <rect x="46" y="6" width="4" height="10" rx="2" fill="#FFCC80" stroke="#D4894A" strokeWidth="1.5" transform="rotate(22 48 11)"/>
+    <ellipse cx="24" cy="14" rx="3" ry="5" fill="#FFCC80" stroke="#C68A4A" strokeWidth="1.5" transform="rotate(-40 24 14)"/>
   </svg>
 );
 
 const ArmStrong = () => (
-  <svg viewBox="0 0 60 52" className="w-full h-full">
+  <svg viewBox="0 0 52 44" className="w-full h-full">
     {/* Upper arm */}
-    <path 
-      d="M8 48 L20 34" 
-      stroke="#FFCC80" 
-      strokeWidth="14" 
-      fill="none" 
-      strokeLinecap="round"
-    />
-    
-    {/* Forearm bent up */}
-    <path 
-      d="M20 34 L28 16" 
-      stroke="#FFCC80" 
-      strokeWidth="14" 
-      fill="none" 
-      strokeLinecap="round"
-    />
-    
-    {/* Bicep muscle bulge */}
-    <ellipse cx="36" cy="24" rx="18" ry="14" fill="#FFCC80" stroke="#D4894A" strokeWidth="2"/>
-    {/* Muscle definition */}
-    <path d="M28 20 Q36 16, 44 20" stroke="#FFE0B2" strokeWidth="3" fill="none" opacity="0.6"/>
-    <ellipse cx="34" cy="22" rx="8" ry="6" fill="#FFE0B2" opacity="0.4"/>
-    
+    <path d="M8 40 L18 28" stroke="#FFCC80" strokeWidth="12" fill="none" strokeLinecap="round"/>
+    {/* Forearm bent */}
+    <path d="M18 28 L26 14" stroke="#FFCC80" strokeWidth="12" fill="none" strokeLinecap="round"/>
+    {/* Bicep bulge */}
+    <ellipse cx="34" cy="20" rx="14" ry="10" fill="#FFCC80" stroke="#C68A4A" strokeWidth="2"/>
+    {/* Muscle line */}
+    <path d="M28 18 Q34 14, 40 18" stroke="#E6B870" strokeWidth="2" fill="none"/>
     {/* Fist */}
-    <ellipse cx="30" cy="12" rx="10" ry="9" fill="#FFCC80" stroke="#D4894A" strokeWidth="2"/>
+    <ellipse cx="28" cy="10" rx="9" ry="8" fill="#FFCC80" stroke="#C68A4A" strokeWidth="2"/>
     {/* Knuckle lines */}
-    <path d="M22 10 L38 10" stroke="#D4894A" strokeWidth="1.5" opacity="0.6"/>
-    <path d="M24 14 L36 14" stroke="#D4894A" strokeWidth="1" opacity="0.4"/>
-    {/* Fist highlight */}
-    <ellipse cx="28" cy="9" rx="4" ry="3" fill="#FFE0B2" opacity="0.5"/>
+    <line x1="21" y1="9" x2="35" y2="9" stroke="#C68A4A" strokeWidth="1.5" opacity="0.5"/>
   </svg>
 );
 
 const ArmOpen = () => (
-  <svg viewBox="0 0 56 54" className="w-full h-full">
+  <svg viewBox="0 0 48 48" className="w-full h-full">
     {/* Arm */}
-    <path 
-      d="M6 50 Q12 36, 22 30" 
-      stroke="#FFCC80" 
-      strokeWidth="14" 
-      fill="none" 
-      strokeLinecap="round"
-    />
-    {/* Arm highlight */}
-    <path 
-      d="M8 46 Q14 36, 22 32" 
-      stroke="#FFE0B2" 
-      strokeWidth="6" 
-      fill="none" 
-      strokeLinecap="round"
-      opacity="0.4"
-    />
-    
-    {/* Hand palm - open and visible */}
-    <ellipse cx="32" cy="26" rx="14" ry="13" fill="#FFCC80" stroke="#D4894A" strokeWidth="2"/>
-    {/* Palm lines */}
-    <path d="M26 28 Q32 32, 38 28" stroke="#D4894A" strokeWidth="1" opacity="0.3"/>
-    <ellipse cx="30" cy="24" rx="5" ry="4" fill="#FFE0B2" opacity="0.4"/>
-    
-    {/* Fingers spread - clearly visible */}
+    <path d="M6 44 Q12 32, 20 26" stroke="#FFCC80" strokeWidth="12" fill="none" strokeLinecap="round"/>
+    {/* Palm */}
+    <circle cx="28" cy="22" r="11" fill="#FFCC80" stroke="#C68A4A" strokeWidth="2"/>
+    {/* Fingers - clearly spread */}
+    <rect x="20" y="6" width="4" height="14" rx="2" fill="#FFCC80" stroke="#C68A4A" strokeWidth="1.5" transform="rotate(-20 22 13)"/>
+    <rect x="27" y="4" width="4" height="16" rx="2" fill="#FFCC80" stroke="#C68A4A" strokeWidth="1.5"/>
+    <rect x="34" y="6" width="4" height="14" rx="2" fill="#FFCC80" stroke="#C68A4A" strokeWidth="1.5" transform="rotate(18 36 13)"/>
+    <rect x="40" y="10" width="3" height="10" rx="1.5" fill="#FFCC80" stroke="#C68A4A" strokeWidth="1.5" transform="rotate(30 41 15)"/>
     {/* Thumb */}
-    <path d="M18 28 Q14 24, 16 18 Q18 14, 22 16" fill="#FFCC80" stroke="#D4894A" strokeWidth="1.5"/>
-    {/* Index */}
-    <rect x="24" y="8" width="5" height="16" rx="2.5" fill="#FFCC80" stroke="#D4894A" strokeWidth="1.5" transform="rotate(-18 26 16)"/>
-    {/* Middle */}
-    <rect x="32" y="6" width="5" height="18" rx="2.5" fill="#FFCC80" stroke="#D4894A" strokeWidth="1.5"/>
-    {/* Ring */}
-    <rect x="40" y="8" width="5" height="16" rx="2.5" fill="#FFCC80" stroke="#D4894A" strokeWidth="1.5" transform="rotate(15 42 16)"/>
-    {/* Pinky */}
-    <rect x="47" y="12" width="4" height="12" rx="2" fill="#FFCC80" stroke="#D4894A" strokeWidth="1.5" transform="rotate(28 49 18)"/>
+    <ellipse cx="16" cy="22" rx="4" ry="6" fill="#FFCC80" stroke="#C68A4A" strokeWidth="1.5" transform="rotate(-50 16 22)"/>
   </svg>
 );
 
 const ArmThumbsUp = () => (
-  <svg viewBox="0 0 48 60" className="w-full h-full">
+  <svg viewBox="0 0 40 52" className="w-full h-full">
     {/* Arm */}
-    <path 
-      d="M12 56 Q8 42, 18 32" 
-      stroke="#FFCC80" 
-      strokeWidth="14" 
-      fill="none" 
-      strokeLinecap="round"
-    />
-    {/* Arm highlight */}
-    <path 
-      d="M14 52 Q12 42, 18 36" 
-      stroke="#FFE0B2" 
-      strokeWidth="5" 
-      fill="none" 
-      strokeLinecap="round"
-      opacity="0.4"
-    />
-    
+    <path d="M10 48 Q8 38, 16 30" stroke="#FFCC80" strokeWidth="12" fill="none" strokeLinecap="round"/>
     {/* Fist base */}
-    <rect x="14" y="28" width="18" height="16" rx="5" fill="#FFCC80" stroke="#D4894A" strokeWidth="2"/>
-    {/* Finger lines on fist */}
-    <path d="M16 33 L30 33" stroke="#D4894A" strokeWidth="1.5" opacity="0.4"/>
-    <path d="M16 38 L30 38" stroke="#D4894A" strokeWidth="1.5" opacity="0.4"/>
-    
-    {/* Thumb pointing up - prominent */}
-    <rect x="18" y="6" width="10" height="26" rx="5" fill="#FFCC80" stroke="#D4894A" strokeWidth="2"/>
-    {/* Thumb highlight */}
-    <ellipse cx="23" cy="14" rx="3" ry="6" fill="#FFE0B2" opacity="0.5"/>
+    <rect x="12" y="26" width="16" height="14" rx="4" fill="#FFCC80" stroke="#C68A4A" strokeWidth="2"/>
+    {/* Finger lines */}
+    <line x1="14" y1="31" x2="26" y2="31" stroke="#C68A4A" strokeWidth="1" opacity="0.4"/>
+    <line x1="14" y1="36" x2="26" y2="36" stroke="#C68A4A" strokeWidth="1" opacity="0.4"/>
+    {/* Thumb UP - prominent */}
+    <rect x="16" y="6" width="8" height="24" rx="4" fill="#FFCC80" stroke="#C68A4A" strokeWidth="2"/>
     {/* Thumb nail */}
-    <ellipse cx="23" cy="8" rx="4" ry="2.5" fill="#FFECB3" stroke="#D4894A" strokeWidth="1"/>
+    <ellipse cx="20" cy="8" rx="3" ry="2" fill="#FFECB3" stroke="#C68A4A" strokeWidth="1"/>
   </svg>
 );
 
 const ArmVictory = () => (
-  <svg viewBox="0 0 52 60" className="w-full h-full">
+  <svg viewBox="0 0 44 52" className="w-full h-full">
     {/* Arm */}
-    <path 
-      d="M10 56 Q6 42, 16 34" 
-      stroke="#FFCC80" 
-      strokeWidth="14" 
-      fill="none" 
-      strokeLinecap="round"
-    />
-    {/* Arm highlight */}
-    <path 
-      d="M12 52 Q10 42, 18 36" 
-      stroke="#FFE0B2" 
-      strokeWidth="5" 
-      fill="none" 
-      strokeLinecap="round"
-      opacity="0.4"
-    />
-    
-    {/* Palm/fist base */}
-    <rect x="12" y="30" width="16" height="14" rx="4" fill="#FFCC80" stroke="#D4894A" strokeWidth="2"/>
-    
-    {/* Index finger (V left) */}
-    <rect x="12" y="6" width="6" height="28" rx="3" fill="#FFCC80" stroke="#D4894A" strokeWidth="2" transform="rotate(-14 15 20)"/>
-    {/* Index nail */}
-    <ellipse cx="13" cy="8" rx="2.5" ry="2" fill="#FFECB3" stroke="#D4894A" strokeWidth="0.8" transform="rotate(-14 13 8)"/>
-    
-    {/* Middle finger (V right) */}
-    <rect x="26" y="6" width="6" height="28" rx="3" fill="#FFCC80" stroke="#D4894A" strokeWidth="2" transform="rotate(14 29 20)"/>
-    {/* Middle nail */}
-    <ellipse cx="31" cy="8" rx="2.5" ry="2" fill="#FFECB3" stroke="#D4894A" strokeWidth="0.8" transform="rotate(14 31 8)"/>
-    
-    {/* Folded fingers (ring, pinky) */}
-    <ellipse cx="24" cy="40" rx="8" ry="5" fill="#FFCC80" stroke="#D4894A" strokeWidth="1.5"/>
-    
-    {/* Thumb tucked to side */}
-    <ellipse cx="8" cy="36" rx="5" ry="7" fill="#FFCC80" stroke="#D4894A" strokeWidth="1.5"/>
+    <path d="M10 48 Q6 38, 14 30" stroke="#FFCC80" strokeWidth="12" fill="none" strokeLinecap="round"/>
+    {/* Palm base */}
+    <rect x="10" y="28" width="14" height="12" rx="3" fill="#FFCC80" stroke="#C68A4A" strokeWidth="2"/>
+    {/* Index finger - V left */}
+    <rect x="10" y="4" width="5" height="26" rx="2.5" fill="#FFCC80" stroke="#C68A4A" strokeWidth="2" transform="rotate(-12 12 17)"/>
+    {/* Middle finger - V right */}
+    <rect x="22" y="4" width="5" height="26" rx="2.5" fill="#FFCC80" stroke="#C68A4A" strokeWidth="2" transform="rotate(12 24 17)"/>
+    {/* Nails */}
+    <ellipse cx="11" cy="6" rx="2" ry="1.5" fill="#FFECB3" stroke="#C68A4A" strokeWidth="0.5" transform="rotate(-12 11 6)"/>
+    <ellipse cx="26" cy="6" rx="2" ry="1.5" fill="#FFECB3" stroke="#C68A4A" strokeWidth="0.5" transform="rotate(12 26 6)"/>
+    {/* Folded fingers */}
+    <ellipse cx="20" cy="38" rx="6" ry="4" fill="#FFCC80" stroke="#C68A4A" strokeWidth="1.5"/>
+    {/* Thumb tucked */}
+    <ellipse cx="6" cy="32" rx="4" ry="5" fill="#FFCC80" stroke="#C68A4A" strokeWidth="1.5"/>
   </svg>
 );
 
