@@ -71,10 +71,15 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
   };
 
   return (
-    <div className="relative w-full max-w-xs md:max-w-sm mx-auto aspect-[3/4]">
-      {/* Potato base */}
-      <div className="absolute inset-0">
-        <img src={potatoBase} alt="Patata" className="w-full h-full object-contain" />
+    <div className="relative w-full mx-auto aspect-[3/4]" style={{ maxWidth: "320px" }}>
+      {/* Potato base - centered and sized to fill container */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <img 
+          src={potatoBase} 
+          alt="Patata" 
+          className="w-[85%] h-[85%] object-contain"
+          style={{ marginTop: "5%" }}
+        />
       </div>
 
       {/* Slots */}
