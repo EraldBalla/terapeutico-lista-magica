@@ -12,57 +12,60 @@ const PotatoBase = () => (
   <svg 
     viewBox="0 0 200 280" 
     className="w-full h-full"
-    style={{ filter: "drop-shadow(0 8px 16px rgba(139, 90, 43, 0.3))" }}
+    style={{ filter: "drop-shadow(0 6px 12px rgba(101, 67, 33, 0.35))" }}
   >
-    {/* Main potato body with organic shape */}
     <defs>
-      <linearGradient id="potatoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#F4C07A" />
-        <stop offset="50%" stopColor="#E8B060" />
-        <stop offset="100%" stopColor="#D4944A" />
+      {/* Warm brown gradient - matte finish, no plastic look */}
+      <linearGradient id="potatoBody" x1="20%" y1="0%" x2="80%" y2="100%">
+        <stop offset="0%" stopColor="#C9A66B" />
+        <stop offset="45%" stopColor="#B8956A" />
+        <stop offset="100%" stopColor="#A07850" />
       </linearGradient>
-      <linearGradient id="potatoHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stopColor="#FDD998" stopOpacity="0.6" />
-        <stop offset="100%" stopColor="#F4C07A" stopOpacity="0" />
-      </linearGradient>
+      {/* Soft highlight */}
+      <radialGradient id="potatoHighlight" cx="35%" cy="25%" r="40%">
+        <stop offset="0%" stopColor="#DEC08A" stopOpacity="0.5" />
+        <stop offset="100%" stopColor="#C9A66B" stopOpacity="0" />
+      </radialGradient>
     </defs>
     
-    {/* Main body - irregular oval shape */}
+    {/* Main potato body - more irregular, wider at bottom */}
     <path 
-      d="M100 20
-         C 155 20, 185 60, 188 110
-         C 192 160, 180 210, 165 240
-         C 150 265, 120 275, 100 275
-         C 80 275, 50 265, 35 240
-         C 20 210, 8 160, 12 110
-         C 15 60, 45 20, 100 20"
-      fill="url(#potatoGradient)"
-      stroke="#C98B4A"
-      strokeWidth="3"
+      d="M100 22
+         C 145 18, 178 50, 184 95
+         C 190 140, 188 180, 178 215
+         C 168 250, 140 270, 100 272
+         C 60 270, 32 250, 22 215
+         C 12 180, 10 140, 16 95
+         C 22 50, 55 18, 100 22"
+      fill="url(#potatoBody)"
+      stroke="#8B6340"
+      strokeWidth="2.5"
     />
     
-    {/* Highlight on top left */}
+    {/* Soft highlight overlay */}
     <path 
-      d="M70 40
-         C 90 35, 120 35, 140 45
-         C 160 55, 170 80, 168 100
-         C 140 85, 100 75, 60 85
-         C 55 70, 55 50, 70 40"
+      d="M100 22
+         C 145 18, 178 50, 184 95
+         C 190 140, 188 180, 178 215
+         C 168 250, 140 270, 100 272
+         C 60 270, 32 250, 22 215
+         C 12 180, 10 140, 16 95
+         C 22 50, 55 18, 100 22"
       fill="url(#potatoHighlight)"
     />
     
-    {/* Potato spots/freckles */}
-    <ellipse cx="50" cy="100" rx="6" ry="4" fill="#C98B4A" opacity="0.4" transform="rotate(-15 50 100)" />
-    <ellipse cx="160" cy="130" rx="5" ry="3" fill="#C98B4A" opacity="0.35" transform="rotate(20 160 130)" />
-    <ellipse cx="140" cy="200" rx="7" ry="4" fill="#C98B4A" opacity="0.3" transform="rotate(-10 140 200)" />
-    <ellipse cx="55" cy="180" rx="4" ry="3" fill="#C98B4A" opacity="0.35" transform="rotate(25 55 180)" />
-    <ellipse cx="100" cy="240" rx="5" ry="3" fill="#C98B4A" opacity="0.25" />
+    {/* Potato skin spots - subtle, organic */}
+    <ellipse cx="55" cy="85" rx="8" ry="5" fill="#9E7B52" opacity="0.35" transform="rotate(-20 55 85)" />
+    <ellipse cx="155" cy="110" rx="6" ry="4" fill="#9E7B52" opacity="0.3" transform="rotate(15 155 110)" />
+    <ellipse cx="145" cy="195" rx="9" ry="5" fill="#9E7B52" opacity="0.28" transform="rotate(-8 145 195)" />
+    <ellipse cx="50" cy="170" rx="5" ry="4" fill="#9E7B52" opacity="0.32" transform="rotate(30 50 170)" />
+    <ellipse cx="90" cy="235" rx="6" ry="4" fill="#9E7B52" opacity="0.25" transform="rotate(-5 90 235)" />
     
-    {/* Simple feet at the bottom */}
-    <ellipse cx="70" cy="272" rx="22" ry="10" fill="#5D4037" />
-    <ellipse cx="130" cy="272" rx="22" ry="10" fill="#5D4037" />
-    <ellipse cx="70" cy="270" rx="20" ry="8" fill="#8D6E63" />
-    <ellipse cx="130" cy="270" rx="20" ry="8" fill="#8D6E63" />
+    {/* Simple cartoon feet */}
+    <ellipse cx="70" cy="270" rx="20" ry="8" fill="#6D4C41" />
+    <ellipse cx="130" cy="270" rx="20" ry="8" fill="#6D4C41" />
+    <ellipse cx="70" cy="268" rx="18" ry="6" fill="#8D6E63" />
+    <ellipse cx="130" cy="268" rx="18" ry="6" fill="#8D6E63" />
   </svg>
 );
 
