@@ -195,25 +195,26 @@ const NoseCarrot = () => (
 // ========== MOUTHS ==========
 const MouthSmile = () => (
   <svg viewBox="0 0 64 36" className="w-full h-full">
-    {/* Lips outline */}
+    {/* Lips outline - ampio sorriso */}
     <path 
-      d="M6 14 Q32 8, 58 14 Q58 28, 32 32 Q6 28, 6 14" 
+      d="M4 12 Q32 4, 60 12 Q58 30, 32 34 Q6 30, 4 12" 
       fill="#E57373" 
       stroke="#C62828" 
       strokeWidth="2.5"
     />
     {/* Inner mouth */}
     <path 
-      d="M10 16 Q32 12, 54 16 Q54 26, 32 28 Q10 26, 10 16" 
+      d="M10 15 Q32 10, 54 15 Q52 27, 32 30 Q12 27, 10 15" 
       fill="#FFCDD2"
     />
-    {/* Teeth row - clear and simple */}
-    <rect x="18" y="15" width="10" height="7" rx="1.5" fill="white" stroke="#E0E0E0" strokeWidth="0.5"/>
-    <rect x="30" y="15" width="10" height="7" rx="1.5" fill="white" stroke="#E0E0E0" strokeWidth="0.5"/>
+    {/* Teeth row - clear and visible */}
+    <rect x="15" y="14" width="11" height="8" rx="2" fill="white" stroke="#E0E0E0" strokeWidth="0.8"/>
+    <rect x="28" y="14" width="11" height="8" rx="2" fill="white" stroke="#E0E0E0" strokeWidth="0.8"/>
+    <rect x="41" y="14" width="8" height="7" rx="2" fill="white" stroke="#E0E0E0" strokeWidth="0.6"/>
     {/* Smile curve emphasis */}
-    <path d="M14 22 Q32 30, 50 22" stroke="#AD1457" strokeWidth="1.5" fill="none" opacity="0.4"/>
-    {/* Lip highlight */}
-    <path d="M20 12 Q32 10, 44 12" stroke="#EF9A9A" strokeWidth="2" fill="none" opacity="0.6"/>
+    <path d="M12 22 Q32 32, 52 22" stroke="#AD1457" strokeWidth="2" fill="none" opacity="0.5"/>
+    {/* Upper lip highlight */}
+    <path d="M18 10 Q32 7, 46 10" stroke="#EF9A9A" strokeWidth="2.5" fill="none" opacity="0.6"/>
   </svg>
 );
 
