@@ -89,16 +89,23 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
         const highlighted = isSlotHighlighted(slotType);
         const slotSize = getSlotSize(slotType);
 
+        // DEBUG TEST: Naso in alto a sinistra con bordo rosso
+        const debugStyle = slotType === "naso" 
+          ? { top: "10%", left: "10%", border: "3px solid red" } 
+          : {};
+        const debugPosition = slotType === "naso" ? "" : config.position;
+
         return (
           <div
             key={slotType}
-            className={`absolute flex items-center justify-center transition-all duration-200 ${config.position} ${slotSize} ${
+            className={`absolute flex items-center justify-center transition-all duration-200 ${debugPosition} ${slotSize} ${
               highlighted
                 ? "bg-green-200/70 border-2 border-dashed border-green-500 rounded-full scale-110"
                 : piece
                 ? ""
                 : "bg-white/40 border-2 border-dashed border-amber-400/60 rounded-full"
             }`}
+            style={debugStyle}
             onDragOver={(e) => handleDragOver(e, slotType)}
             onDrop={(e) => handleDrop(e, slotType)}
           >
