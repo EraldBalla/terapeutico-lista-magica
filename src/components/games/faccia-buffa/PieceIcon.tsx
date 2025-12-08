@@ -135,29 +135,91 @@ const NoseCarrot = () => (
   </svg>
 );
 
-// ========== MOUTHS - Using emojis ==========
+// ========== MOUTHS - Red lips cartoon style ==========
 const MouthSmile = () => (
-  <span className="text-4xl">😊</span>
+  <svg viewBox="0 0 60 32" className="w-full h-full">
+    {/* Upper lip */}
+    <path d="M4 16 Q15 8, 30 12 Q45 8, 56 16" fill="#C62828" stroke="#8B0000" strokeWidth="1"/>
+    {/* Lower lip */}
+    <path d="M4 16 Q30 36, 56 16" fill="#E53935"/>
+    {/* Teeth showing */}
+    <rect x="14" y="14" width="32" height="10" rx="2" fill="white"/>
+    <line x1="22" y1="14" x2="22" y2="24" stroke="#EEE" strokeWidth="1"/>
+    <line x1="30" y1="14" x2="30" y2="24" stroke="#EEE" strokeWidth="1"/>
+    <line x1="38" y1="14" x2="38" y2="24" stroke="#EEE" strokeWidth="1"/>
+    {/* Lip shine */}
+    <ellipse cx="20" cy="10" rx="6" ry="2" fill="#EF5350" opacity="0.6"/>
+  </svg>
 );
 
 const MouthSad = () => (
-  <span className="text-4xl">😢</span>
+  <svg viewBox="0 0 60 28" className="w-full h-full">
+    {/* Frowning lips - corners down */}
+    <path d="M6 8 Q30 8, 54 8 Q48 24, 30 20 Q12 24, 6 8" fill="#E53935"/>
+    {/* Upper lip definition */}
+    <path d="M6 8 Q18 4, 30 8 Q42 4, 54 8" fill="#C62828"/>
+    {/* Lip shine */}
+    <ellipse cx="20" cy="6" rx="8" ry="2" fill="#EF5350" opacity="0.5"/>
+  </svg>
 );
 
 const MouthTongue = () => (
-  <span className="text-4xl">😛</span>
+  <svg viewBox="0 0 60 48" className="w-full h-full">
+    {/* Open mouth with lips */}
+    <ellipse cx="30" cy="20" rx="24" ry="16" fill="#5D4037"/>
+    {/* Upper lip */}
+    <path d="M6 16 Q18 6, 30 10 Q42 6, 54 16" fill="#E53935"/>
+    {/* Teeth at top */}
+    <rect x="12" y="10" width="36" height="8" rx="2" fill="white"/>
+    {/* Tongue sticking out */}
+    <ellipse cx="30" cy="38" rx="14" ry="10" fill="#E53935"/>
+    <path d="M30 30 L30 46" stroke="#C62828" strokeWidth="2"/>
+    <ellipse cx="26" cy="36" rx="4" ry="5" fill="#EF5350" opacity="0.4"/>
+  </svg>
 );
 
 const MouthKiss = () => (
-  <span className="text-4xl">😘</span>
+  <svg viewBox="0 0 44 44" className="w-full h-full">
+    {/* Puckered kiss lips */}
+    <ellipse cx="22" cy="22" rx="18" ry="16" fill="#E53935"/>
+    {/* Lip opening - small */}
+    <ellipse cx="22" cy="24" rx="4" ry="3" fill="#8B0000"/>
+    {/* Upper lip cupid bow */}
+    <path d="M10 18 Q16 10, 22 14 Q28 10, 34 18" fill="#C62828"/>
+    {/* Lip highlights */}
+    <ellipse cx="14" cy="16" rx="5" ry="3" fill="#EF5350" opacity="0.5"/>
+    <ellipse cx="30" cy="16" rx="5" ry="3" fill="#EF5350" opacity="0.5"/>
+  </svg>
 );
 
 const MouthOh = () => (
-  <span className="text-4xl">😮</span>
+  <svg viewBox="0 0 52 52" className="w-full h-full">
+    {/* Surprised open mouth - O shape */}
+    <ellipse cx="26" cy="26" rx="22" ry="24" fill="#E53935"/>
+    {/* Dark inside */}
+    <ellipse cx="26" cy="28" rx="14" ry="16" fill="#5D4037"/>
+    {/* Upper lip definition */}
+    <path d="M8 20 Q18 8, 26 12 Q34 8, 44 20" fill="#C62828"/>
+    {/* Upper teeth */}
+    <rect x="16" y="14" width="20" height="8" rx="2" fill="white"/>
+    {/* Lip shine */}
+    <ellipse cx="16" cy="14" rx="6" ry="3" fill="#EF5350" opacity="0.4"/>
+  </svg>
 );
 
 const MouthAngry = () => (
-  <span className="text-4xl">😤</span>
+  <svg viewBox="0 0 60 28" className="w-full h-full">
+    {/* Angry gritting teeth with lips */}
+    <rect x="6" y="6" width="48" height="18" rx="6" fill="#E53935"/>
+    {/* Upper lip */}
+    <path d="M6 10 Q18 4, 30 8 Q42 4, 54 10" fill="#C62828"/>
+    {/* Teeth showing - gritted */}
+    <rect x="10" y="10" width="40" height="10" rx="2" fill="white"/>
+    <line x1="18" y1="10" x2="18" y2="20" stroke="#DDD" strokeWidth="1.5"/>
+    <line x1="26" y1="10" x2="26" y2="20" stroke="#DDD" strokeWidth="1.5"/>
+    <line x1="34" y1="10" x2="34" y2="20" stroke="#DDD" strokeWidth="1.5"/>
+    <line x1="42" y1="10" x2="42" y2="20" stroke="#DDD" strokeWidth="1.5"/>
+  </svg>
 );
 
 // ========== EARS ==========
