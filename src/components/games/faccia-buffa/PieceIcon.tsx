@@ -11,6 +11,10 @@ import mouthKiss from "@/assets/pieces/mouth-kiss.png";
 import mouthTeeth from "@/assets/pieces/mouth-teeth.png";
 import mouthSad from "@/assets/pieces/mouth-sad.png";
 import mouthAngry from "@/assets/pieces/mouth-angry.png";
+import mouthSmile from "@/assets/pieces/mouth-smile.png";
+import mouthTongue from "@/assets/pieces/mouth-tongue.png";
+import hatBaseball from "@/assets/pieces/hat-baseball.png";
+import glassesNerd from "@/assets/pieces/glasses-nerd.png";
 import earBig from "@/assets/pieces/ear-big.png";
 import earSmall from "@/assets/pieces/ear-small.png";
 import earElf from "@/assets/pieces/ear-elf.png";
@@ -256,9 +260,9 @@ const PIECE_COMPONENTS: Record<string, React.FC> = {
   naso_carota: NoseCarrotSVG,
   
   // Mouths - 3D images
-  bocca_sorriso: MouthSmileSVG,
+  bocca_sorriso: () => <ImagePiece src={mouthSmile} alt="Bocca sorridente" />,
   bocca_triste: () => <ImagePiece src={mouthSad} alt="Bocca triste" />,
-  bocca_lingua: MouthTongueSVG,
+  bocca_lingua: () => <ImagePiece src={mouthTongue} alt="Bocca con lingua" />,
   bocca_bacio: () => <ImagePiece src={mouthKiss} alt="Bocca bacio" />,
   bocca_sorpresa: MouthSurprisedSVG,
   bocca_arrabbiata: () => <ImagePiece src={mouthAngry} alt="Bocca arrabbiata" />,
@@ -272,7 +276,7 @@ const PIECE_COMPONENTS: Record<string, React.FC> = {
   cappello_mago: () => <ImagePiece src={hatMagic} alt="Cappello da mago" />,
   cappello_festa: () => <ImagePiece src={hatParty} alt="Cappello da festa" />,
   cappello_corona: () => <ImagePiece src={hatCrown} alt="Corona" />,
-  cappello_baseball: () => <ImagePiece src={hatChef} alt="Cappello baseball" />,
+  cappello_baseball: () => <ImagePiece src={hatBaseball} alt="Cappello baseball" />,
   cappello_cowboy: () => <ImagePiece src={hatCowboy} alt="Cappello cowboy" />,
   cappello_fiocco: () => <ImagePiece src={hatFlowers} alt="Fiocco" />,
   
@@ -286,7 +290,7 @@ const PIECE_COMPONENTS: Record<string, React.FC> = {
   // Extra - Mix of 3D images and SVG
   baffi_classici: () => <ImagePiece src={mustache} alt="Baffi classici" />,
   occhiali_sole: () => <ImagePiece src={glassesSun} alt="Occhiali da sole" />,
-  occhiali_nerd: () => <ImagePiece src={glassesRound} alt="Occhiali da nerd" />,
+  occhiali_nerd: () => <ImagePiece src={glassesNerd} alt="Occhiali da nerd" />,
   extra_fiore: FlowerSVG,
   extra_farfalla: ButterflySVG,
   extra_stella: StarSVG,
