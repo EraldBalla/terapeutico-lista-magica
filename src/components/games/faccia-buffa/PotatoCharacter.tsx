@@ -1,49 +1,12 @@
 import { SlotType, SlotState, SLOT_CONFIG, getPieceById, PieceType } from "@/data/facciaBuffa";
 import PieceIcon from "./PieceIcon";
+import potatoBase from "@/assets/potato-base.png";
 
 interface PotatoCharacterProps {
   slots: SlotState[];
   onDropPiece: (slotType: SlotType, pieceId: string) => void;
   draggedPiece: { id: string; type: PieceType } | null;
 }
-
-// SVG Potato base component - refined, clean cartoon style
-const PotatoBase = () => (
-  <svg 
-    viewBox="0 0 200 280" 
-    className="w-full h-full"
-    style={{ filter: "drop-shadow(0 4px 8px rgba(90, 60, 30, 0.25))" }}
-  >
-    {/* Main potato body - organic shape, wider at bottom */}
-    <path 
-      d="M100 18
-         C 150 16, 182 55, 186 100
-         C 190 145, 186 190, 174 225
-         C 162 258, 135 274, 100 276
-         C 65 274, 38 258, 26 225
-         C 14 190, 10 145, 14 100
-         C 18 55, 50 16, 100 18"
-      fill="#C4A265"
-      stroke="#8B6B3D"
-      strokeWidth="2"
-    />
-    
-    {/* Single soft highlight - top left */}
-    <ellipse cx="65" cy="70" rx="35" ry="28" fill="#D4B87A" opacity="0.45"/>
-    
-    {/* Potato skin spots - small, discrete */}
-    <ellipse cx="52" cy="95" rx="5" ry="3" fill="#A08050" opacity="0.35" transform="rotate(-15 52 95)" />
-    <ellipse cx="158" cy="120" rx="4" ry="3" fill="#A08050" opacity="0.3" transform="rotate(20 158 120)" />
-    <ellipse cx="148" cy="200" rx="6" ry="3" fill="#A08050" opacity="0.28" transform="rotate(-5 148 200)" />
-    <ellipse cx="45" cy="175" rx="4" ry="2.5" fill="#A08050" opacity="0.3" />
-    
-    {/* Simple cartoon feet - clean ovals */}
-    <ellipse cx="72" cy="274" rx="22" ry="7" fill="#6D4C41" />
-    <ellipse cx="128" cy="274" rx="22" ry="7" fill="#6D4C41" />
-    <ellipse cx="72" cy="272" rx="20" ry="5" fill="#8D6E63" />
-    <ellipse cx="128" cy="272" rx="20" ry="5" fill="#8D6E63" />
-  </svg>
-);
 
 const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterProps) => {
   
@@ -111,7 +74,7 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
     <div className="relative w-full max-w-xs md:max-w-sm mx-auto aspect-[3/4]">
       {/* Potato base */}
       <div className="absolute inset-0">
-        <PotatoBase />
+        <img src={potatoBase} alt="Patata" className="w-full h-full object-contain" />
       </div>
 
       {/* Slots */}
