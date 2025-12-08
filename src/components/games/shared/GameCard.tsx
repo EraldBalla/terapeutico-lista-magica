@@ -1,6 +1,6 @@
 /**
  * Shared GameCard component for game selection screens.
- * Cartoon-style card with gradient background.
+ * Clean cartoon-style card with single illustration.
  */
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -10,13 +10,15 @@ interface GameCardProps {
   title: string;
   titleHighlight?: string;
   description: string;
-  icons: React.ReactNode[];
+  illustration?: React.ReactNode;
   features?: React.ReactNode[];
   onPlay: () => void;
   playLabel?: string;
   extraActions?: React.ReactNode;
   variant?: "orange" | "purple" | "amber" | "teal" | "green";
   className?: string;
+  /** @deprecated Use illustration instead */
+  icons?: React.ReactNode[];
 }
 
 const VARIANTS = {
@@ -51,7 +53,7 @@ const GameCard = ({
   title,
   titleHighlight,
   description,
-  icons,
+  illustration,
   features,
   onPlay,
   playLabel = "Gioca",
@@ -64,27 +66,21 @@ const GameCard = ({
   return (
     <div
       className={cn(
-        "bg-white/90 backdrop-blur-sm rounded-3xl p-6 md:p-8",
-        "shadow-xl border-2 hover:shadow-2xl hover:scale-[1.02] transition-all",
+        "bg-white/95 backdrop-blur-sm rounded-3xl p-6 md:p-8",
+        "shadow-lg border hover:shadow-xl hover:scale-[1.01] transition-all duration-300",
         variantStyles.border,
         className
       )}
     >
-      {/* Animated icons */}
-      <div className="flex justify-center gap-2 mb-4">
-        {icons.map((icon, i) => (
-          <div
-            key={i}
-            className="w-10 h-10 md:w-12 md:h-12 animate-float"
-            style={{ animationDelay: `${i * 0.15}s` }}
-          >
-            {icon}
-          </div>
-        ))}
-      </div>
+      {/* Single illustration */}
+      {illustration && (
+        <div className="w-32 h-28 md:w-40 md:h-36 mx-auto mb-5">
+          {illustration}
+        </div>
+      )}
 
       {/* Title */}
-      <h2 className="text-2xl md:text-3xl font-extrabold text-foreground text-center mb-3">
+      <h2 className="text-xl md:text-2xl font-bold text-foreground text-center mb-2">
         {title}{" "}
         {titleHighlight && (
           <span className={variantStyles.titleColor}>{titleHighlight}</span>
@@ -92,13 +88,13 @@ const GameCard = ({
       </h2>
 
       {/* Description */}
-      <p className="text-muted-foreground text-center mb-6 leading-relaxed">
+      <p className="text-sm text-muted-foreground text-center mb-4 leading-relaxed line-clamp-3">
         {description}
       </p>
 
       {/* Feature pills */}
       {features && features.length > 0 && (
-        <div className="flex flex-wrap justify-center gap-2 mb-6">
+        <div className="flex flex-wrap justify-center gap-2 mb-5">
           {features}
         </div>
       )}
@@ -108,12 +104,12 @@ const GameCard = ({
         onClick={onPlay}
         size="lg"
         className={cn(
-          "w-full gap-3 text-lg py-7 rounded-2xl font-bold",
-          "shadow-lg hover:shadow-xl transition-all",
+          "w-full gap-2 text-base py-6 rounded-xl font-bold",
+          "shadow-md hover:shadow-lg transition-all",
           `bg-gradient-to-r ${variantStyles.gradient}`
         )}
       >
-        <Play className="w-6 h-6 fill-current" />
+        <Play className="w-5 h-5 fill-current" />
         {playLabel}
       </Button>
 

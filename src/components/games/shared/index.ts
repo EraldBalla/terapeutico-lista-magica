@@ -7,3 +7,4 @@ export { default as VolumeWarning } from "./VolumeWarning";
 export { default as FeaturePill } from "./FeaturePill";
 export { default as GameCard } from "./GameCard";
 export * from "./CartoonIcons";
+export * from "./GameIllustrations";
