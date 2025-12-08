@@ -17,9 +17,8 @@ export interface SoundItem {
   modelAudioUrl: string;   // URL del file audio pre-registrato (voce dolce o suono reale)
 }
 
-// Base URL per i file audio modello (da configurare con il bucket Supabase o CDN)
-// Per ora usiamo placeholder - questi andranno sostituiti con file audio reali
-const AUDIO_BASE_URL = "";
+// Base URL per i file audio modello nella cartella public
+const AUDIO_BASE_URL = "/audio/suoni";
 
 export const SOUND_ITEMS: SoundItem[] = [
   // ============ ANIMALI (18) ============
