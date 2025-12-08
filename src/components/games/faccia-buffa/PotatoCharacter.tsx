@@ -45,13 +45,29 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
 
   // Get slot dimensions based on type
   const getSlotSize = (slotType: SlotType) => {
-    if (slotType.includes("occhio")) return "w-10 h-10 md:w-14 md:h-14";
+    if (slotType.includes("occhio")) return "w-12 h-12 md:w-14 md:h-14";
     if (slotType === "naso") return "w-10 h-12 md:w-12 md:h-14";
-    if (slotType === "bocca") return "w-14 h-8 md:w-16 md:h-10";
-    if (slotType.includes("orecchio")) return "w-8 h-12 md:w-10 md:h-14";
-    if (slotType === "cappello") return "w-16 h-12 md:w-20 md:h-14";
-    if (slotType.includes("braccio")) return "w-10 h-14 md:w-12 md:h-16";
+    if (slotType === "bocca") return "w-16 h-10 md:w-18 md:h-12";
+    if (slotType.includes("orecchio")) return "w-10 h-14 md:w-12 md:h-16";
+    if (slotType === "cappello") return "w-20 h-14 md:w-24 md:h-16";
+    if (slotType.includes("braccio")) return "w-12 h-16 md:w-14 md:h-18";
     return "w-12 h-12 md:w-14 md:h-14";
+  };
+
+  // Slot positions - calibrated for potato centered in container
+  const getSlotPosition = (slotType: SlotType): React.CSSProperties => {
+    const positions: Record<SlotType, React.CSSProperties> = {
+      occhio_sx: { top: "30%", left: "35%", transform: "translate(-50%, -50%)" },
+      occhio_dx: { top: "30%", left: "65%", transform: "translate(-50%, -50%)" },
+      naso: { top: "48%", left: "50%", transform: "translate(-50%, -50%)" },
+      bocca: { top: "64%", left: "50%", transform: "translate(-50%, -50%)" },
+      orecchio_sx: { top: "45%", left: "12%", transform: "translate(-50%, -50%)" },
+      orecchio_dx: { top: "45%", left: "88%", transform: "translate(-50%, -50%)" },
+      cappello: { top: "10%", left: "50%", transform: "translate(-50%, -50%)" },
+      braccio_sx: { top: "75%", left: "8%", transform: "translate(-50%, -50%)" },
+      braccio_dx: { top: "75%", left: "92%", transform: "translate(-50%, -50%)" },
+    };
+    return positions[slotType];
   };
 
   // Get slot label for empty slots
@@ -88,24 +104,19 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
         const piece = getSlotPiece(slotType);
         const highlighted = isSlotHighlighted(slotType);
         const slotSize = getSlotSize(slotType);
-
-        // DEBUG TEST: Naso in alto a sinistra con bordo rosso
-        const debugStyle = slotType === "naso" 
-          ? { top: "10%", left: "10%", border: "3px solid red" } 
-          : {};
-        const debugPosition = slotType === "naso" ? "" : config.position;
+        const slotPosition = getSlotPosition(slotType);
 
         return (
           <div
             key={slotType}
-            className={`absolute flex items-center justify-center transition-all duration-200 ${debugPosition} ${slotSize} ${
+            className={`absolute flex items-center justify-center transition-all duration-200 ${slotSize} ${
               highlighted
                 ? "bg-green-200/70 border-2 border-dashed border-green-500 rounded-full scale-110"
                 : piece
                 ? ""
                 : "bg-white/40 border-2 border-dashed border-amber-400/60 rounded-full"
             }`}
-            style={debugStyle}
+            style={slotPosition}
             onDragOver={(e) => handleDragOver(e, slotType)}
             onDrop={(e) => handleDrop(e, slotType)}
           >
