@@ -135,101 +135,34 @@ const NoseCarrot = () => (
   </svg>
 );
 
-// ========== MOUTHS - Red lips Mr Potato Head style ==========
+// ========== MOUTHS - Using emojis ==========
 const MouthSmile = () => (
-  <svg viewBox="0 0 56 32" className="w-full h-full">
-    {/* Big red smiling lips with teeth */}
-    <path d="M4 8 Q28 8, 52 8 Q52 28, 28 28 Q4 28, 4 8" fill="#E53935"/>
-    {/* White teeth */}
-    <rect x="12" y="10" width="32" height="10" rx="2" fill="white"/>
-    {/* Tooth lines */}
-    <line x1="20" y1="10" x2="20" y2="20" stroke="#E0E0E0" strokeWidth="1"/>
-    <line x1="28" y1="10" x2="28" y2="20" stroke="#E0E0E0" strokeWidth="1"/>
-    <line x1="36" y1="10" x2="36" y2="20" stroke="#E0E0E0" strokeWidth="1"/>
-    {/* Bottom lip shine */}
-    <ellipse cx="28" cy="24" rx="12" ry="3" fill="#EF5350" opacity="0.5"/>
-  </svg>
+  <span className="text-4xl">😊</span>
 );
 
 const MouthSad = () => (
-  <svg viewBox="0 0 56 28" className="w-full h-full">
-    {/* Frowning red lips */}
-    <path d="M8 4 Q28 4, 48 4 Q48 24, 28 16 Q8 24, 8 4" fill="#E53935"/>
-    {/* Sad curve */}
-    <path d="M12 18 Q28 8, 44 18" stroke="#C62828" strokeWidth="2" fill="none"/>
-    {/* Lip highlight */}
-    <ellipse cx="28" cy="8" rx="14" ry="3" fill="#EF5350" opacity="0.4"/>
-  </svg>
+  <span className="text-4xl">😢</span>
 );
 
 const MouthTongue = () => (
-  <svg viewBox="0 0 56 44" className="w-full h-full">
-    {/* Open mouth with tongue out */}
-    <ellipse cx="28" cy="16" rx="22" ry="14" fill="#5D4037"/>
-    {/* White teeth at top */}
-    <rect x="12" y="6" width="32" height="8" rx="2" fill="white"/>
-    <line x1="20" y1="6" x2="20" y2="14" stroke="#E0E0E0" strokeWidth="1"/>
-    <line x1="28" y1="6" x2="28" y2="14" stroke="#E0E0E0" strokeWidth="1"/>
-    <line x1="36" y1="6" x2="36" y2="14" stroke="#E0E0E0" strokeWidth="1"/>
-    {/* Red tongue sticking out */}
-    <ellipse cx="28" cy="34" rx="12" ry="10" fill="#E53935"/>
-    <path d="M28 26 L28 42" stroke="#C62828" strokeWidth="2"/>
-    <ellipse cx="24" cy="32" rx="4" ry="5" fill="#EF5350" opacity="0.4"/>
-  </svg>
+  <span className="text-4xl">😛</span>
 );
 
 const MouthKiss = () => (
-  <svg viewBox="0 0 44 44" className="w-full h-full">
-    {/* Puckered kiss lips - like the reference image */}
-    <ellipse cx="22" cy="22" rx="18" ry="14" fill="#E53935"/>
-    {/* Lip opening */}
-    <ellipse cx="22" cy="22" rx="6" ry="4" fill="#C62828"/>
-    {/* Upper lip shape */}
-    <path d="M10 18 Q22 12, 34 18" stroke="#C62828" strokeWidth="2" fill="none"/>
-    {/* Lip highlights */}
-    <ellipse cx="16" cy="18" rx="5" ry="3" fill="#EF5350" opacity="0.5"/>
-    <ellipse cx="28" cy="18" rx="5" ry="3" fill="#EF5350" opacity="0.5"/>
-  </svg>
+  <span className="text-4xl">😘</span>
 );
 
 const MouthOh = () => (
-  <svg viewBox="0 0 44 44" className="w-full h-full">
-    {/* Surprised O mouth */}
-    <ellipse cx="22" cy="22" rx="16" ry="18" fill="#E53935"/>
-    <ellipse cx="22" cy="24" rx="10" ry="12" fill="#5D4037"/>
-    {/* Upper teeth */}
-    <rect x="16" y="14" width="12" height="6" rx="1" fill="white"/>
-    {/* Highlight */}
-    <ellipse cx="16" cy="18" rx="4" ry="3" fill="#EF5350" opacity="0.4"/>
-  </svg>
+  <span className="text-4xl">😮</span>
 );
 
 const MouthAngry = () => (
-  <svg viewBox="0 0 56 28" className="w-full h-full">
-    {/* Angry gritting teeth */}
-    <rect x="8" y="4" width="40" height="20" rx="4" fill="#E53935"/>
-    {/* Teeth showing - grimace */}
-    <rect x="12" y="8" width="32" height="12" rx="2" fill="white"/>
-    {/* Tooth gaps */}
-    <line x1="16" y1="8" x2="16" y2="20" stroke="#BDBDBD" strokeWidth="2"/>
-    <line x1="22" y1="8" x2="22" y2="20" stroke="#BDBDBD" strokeWidth="2"/>
-    <line x1="28" y1="8" x2="28" y2="20" stroke="#BDBDBD" strokeWidth="2"/>
-    <line x1="34" y1="8" x2="34" y2="20" stroke="#BDBDBD" strokeWidth="2"/>
-    <line x1="40" y1="8" x2="40" y2="20" stroke="#BDBDBD" strokeWidth="2"/>
-  </svg>
+  <span className="text-4xl">😤</span>
 );
 
-// ========== EARS - Pink plastic ears ==========
+// ========== EARS ==========
 const EarNormal = () => (
-  <svg viewBox="0 0 32 44" className="w-full h-full">
-    {/* Pink plastic ear like Mr Potato Head */}
-    <ellipse cx="16" cy="22" rx="14" ry="20" fill="#F8BBD9"/>
-    {/* Inner ear detail */}
-    <ellipse cx="16" cy="24" rx="8" ry="12" fill="#F48FB1"/>
-    <path d="M12 16 Q16 20, 12 32" stroke="#EC407A" strokeWidth="2" fill="none"/>
-    {/* Highlight */}
-    <ellipse cx="10" cy="14" rx="4" ry="5" fill="#FCE4EC" opacity="0.6"/>
-  </svg>
+  <span className="text-4xl">👂</span>
 );
 
 const EarElf = () => (
@@ -346,98 +279,25 @@ const HatBow = () => (
   </svg>
 );
 
-// ========== ARMS/HANDS - White gloves like Mr Potato Head ==========
+// ========== ARMS/HANDS - Using emojis ==========
 const ArmWave = () => (
-  <svg viewBox="0 0 56 60" className="w-full h-full">
-    {/* Blue arm/sleeve */}
-    <path d="M14 56 Q10 44, 18 34 Q26 24, 32 18" stroke="#1976D2" strokeWidth="12" fill="none" strokeLinecap="round"/>
-    
-    {/* White gloved hand - waving */}
-    <circle cx="36" cy="14" r="12" fill="white" stroke="#E0E0E0" strokeWidth="2"/>
-    
-    {/* White glove fingers - spread for wave */}
-    <ellipse cx="26" cy="6" rx="4" ry="8" fill="white" stroke="#E0E0E0" strokeWidth="1.5" transform="rotate(-30 26 6)"/>
-    <ellipse cx="34" cy="2" rx="4" ry="9" fill="white" stroke="#E0E0E0" strokeWidth="1.5"/>
-    <ellipse cx="42" cy="4" rx="4" ry="8" fill="white" stroke="#E0E0E0" strokeWidth="1.5" transform="rotate(25 42 4)"/>
-    <ellipse cx="48" cy="10" rx="3" ry="6" fill="white" stroke="#E0E0E0" strokeWidth="1.5" transform="rotate(45 48 10)"/>
-    
-    {/* Thumb */}
-    <ellipse cx="24" cy="18" rx="4" ry="6" fill="white" stroke="#E0E0E0" strokeWidth="1.5" transform="rotate(-50 24 18)"/>
-  </svg>
+  <span className="text-4xl">👋</span>
 );
 
 const ArmStrong = () => (
-  <svg viewBox="0 0 56 48" className="w-full h-full">
-    {/* Blue arm - flexed muscle pose */}
-    <path d="M8 44 L16 32 L28 20" stroke="#1976D2" strokeWidth="12" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-    
-    {/* Muscle bulge */}
-    <ellipse cx="36" cy="24" rx="12" ry="10" fill="#1976D2"/>
-    
-    {/* White glove fist */}
-    <ellipse cx="32" cy="12" rx="10" ry="9" fill="white" stroke="#E0E0E0" strokeWidth="2"/>
-    {/* Knuckle line */}
-    <path d="M24 10 Q32 8, 40 10" stroke="#E0E0E0" strokeWidth="2" fill="none"/>
-  </svg>
+  <span className="text-4xl">💪</span>
 );
 
 const ArmOpen = () => (
-  <svg viewBox="0 0 52 56" className="w-full h-full">
-    {/* Blue arm */}
-    <path d="M10 52 Q14 40, 22 32" stroke="#1976D2" strokeWidth="12" fill="none" strokeLinecap="round"/>
-    
-    {/* White gloved palm - open hand */}
-    <circle cx="28" cy="26" r="12" fill="white" stroke="#E0E0E0" strokeWidth="2"/>
-    
-    {/* Fingers spread open */}
-    <ellipse cx="18" cy="10" rx="4" ry="10" fill="white" stroke="#E0E0E0" strokeWidth="1.5" transform="rotate(-20 18 10)"/>
-    <ellipse cx="26" cy="6" rx="4" ry="12" fill="white" stroke="#E0E0E0" strokeWidth="1.5"/>
-    <ellipse cx="34" cy="8" rx="4" ry="11" fill="white" stroke="#E0E0E0" strokeWidth="1.5" transform="rotate(15 34 8)"/>
-    <ellipse cx="42" cy="14" rx="3" ry="8" fill="white" stroke="#E0E0E0" strokeWidth="1.5" transform="rotate(35 42 14)"/>
-    
-    {/* Thumb on side */}
-    <ellipse cx="12" cy="28" rx="4" ry="7" fill="white" stroke="#E0E0E0" strokeWidth="1.5" transform="rotate(-60 12 28)"/>
-  </svg>
+  <span className="text-4xl">✋</span>
 );
 
 const ArmThumbsUp = () => (
-  <svg viewBox="0 0 48 60" className="w-full h-full">
-    {/* Blue arm */}
-    <path d="M16 56 Q12 44, 20 36" stroke="#1976D2" strokeWidth="10" fill="none" strokeLinecap="round"/>
-    
-    {/* White glove - closed fist viewed from side */}
-    <rect x="12" y="30" width="24" height="18" rx="8" fill="white" stroke="#E0E0E0" strokeWidth="2"/>
-    
-    {/* Finger bumps on top of fist */}
-    <ellipse cx="16" cy="30" rx="4" ry="3" fill="white" stroke="#E0E0E0" strokeWidth="1"/>
-    <ellipse cx="24" cy="29" rx="4" ry="3" fill="white" stroke="#E0E0E0" strokeWidth="1"/>
-    <ellipse cx="32" cy="30" rx="4" ry="3" fill="white" stroke="#E0E0E0" strokeWidth="1"/>
-    
-    {/* THUMB pointing UP - clearly on the SIDE */}
-    <ellipse cx="8" cy="22" rx="6" ry="14" fill="white" stroke="#E0E0E0" strokeWidth="2"/>
-    {/* Thumb tip */}
-    <ellipse cx="8" cy="10" rx="5" ry="4" fill="white" stroke="#E0E0E0" strokeWidth="1"/>
-  </svg>
+  <span className="text-4xl">👍</span>
 );
 
 const ArmVictory = () => (
-  <svg viewBox="0 0 52 64" className="w-full h-full">
-    {/* Blue arm */}
-    <path d="M16 60 Q10 48, 20 38" stroke="#1976D2" strokeWidth="10" fill="none" strokeLinecap="round"/>
-    
-    {/* White glove palm */}
-    <ellipse cx="24" cy="42" rx="12" ry="10" fill="white" stroke="#E0E0E0" strokeWidth="2"/>
-    
-    {/* V fingers - index and middle pointing up in V shape */}
-    <ellipse cx="16" cy="16" rx="5" ry="18" fill="white" stroke="#E0E0E0" strokeWidth="2" transform="rotate(-15 16 16)"/>
-    <ellipse cx="34" cy="16" rx="5" ry="18" fill="white" stroke="#E0E0E0" strokeWidth="2" transform="rotate(15 34 16)"/>
-    
-    {/* Folded fingers at bottom */}
-    <ellipse cx="28" cy="50" rx="10" ry="5" fill="white" stroke="#E0E0E0" strokeWidth="1.5"/>
-    
-    {/* Thumb on side */}
-    <ellipse cx="8" cy="42" rx="5" ry="8" fill="white" stroke="#E0E0E0" strokeWidth="1.5"/>
-  </svg>
+  <span className="text-4xl">✌️</span>
 );
 
 // ========== EXTRAS ==========
