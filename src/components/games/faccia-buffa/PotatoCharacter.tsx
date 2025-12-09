@@ -96,8 +96,13 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
     return config.acceptedTypes.includes(draggedPiece.type);
   };
 
-  // Check if this is a right-side slot that should be mirrored
-  const shouldMirror = (slotType: SlotType) => {
+  // Check if piece should be mirrored - elf ears have inverted mirroring
+  const shouldMirror = (slotType: SlotType, pieceId?: string) => {
+    const isElfEar = pieceId === "orecchie_elfo";
+    if (isElfEar) {
+      // Elf ears: mirror LEFT side instead of right
+      return slotType === "orecchio_sx";
+    }
     return slotType === "braccio_dx" || slotType === "orecchio_dx";
   };
 
@@ -200,7 +205,7 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
         const highlighted = isSlotHighlighted(slotType);
         const slotSize = getSlotSize(slotType);
         const slotPosition = getSlotPosition(slotType);
-        const mirror = shouldMirror(slotType) && piece;
+        const mirror = piece && shouldMirror(slotType, piece.id);
 
         return (
           <div
