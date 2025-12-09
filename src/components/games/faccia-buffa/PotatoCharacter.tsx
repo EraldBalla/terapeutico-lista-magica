@@ -125,7 +125,7 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
     const positions: Record<SlotType, React.CSSProperties> = {
       occhio_sx: { top: "28%", left: "36%", transform: "translate(-50%, -50%)" },
       occhio_dx: { top: "28%", left: "64%", transform: "translate(-50%, -50%)" },
-      naso: { top: "45%", left: "50%", transform: "translate(-50%, -50%)" },
+      naso: { top: "42%", left: "50%", transform: "translate(-50%, -50%)" },
       bocca: { top: "68%", left: "50%", transform: "translate(-50%, -50%)" },
       orecchio_sx: { top: "30%", left: "18%", transform: "translate(-50%, -50%)" },
       orecchio_dx: { top: "30%", left: "82%", transform: "translate(-50%, -50%)" },
@@ -227,7 +227,7 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
           >
           {piece ? (
               <div 
-                className={`animate-scale-in flex items-center justify-center w-16 h-16 overflow-hidden rounded-full ${
+                className={`animate-scale-in flex items-center justify-center w-14 h-14 overflow-hidden rounded-full ${
                   isMouthSlot(slotType) && !isAngryMouth(piece.id) ? "scale-85" : ""
                 } ${isAngryMouth(piece.id) ? "scale-x-125" : ""}`}
                 style={mirror ? { transform: `scaleX(-1)` } : undefined}
