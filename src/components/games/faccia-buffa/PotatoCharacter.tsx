@@ -1,6 +1,7 @@
-import { SlotType, SlotState, SLOT_CONFIG, getPieceById, PieceType } from "@/data/facciaBuffa";
+import { SlotType, SlotState, SLOT_CONFIG, getPieceById, PieceType, SYMMETRIC_SLOTS } from "@/data/facciaBuffa";
 import PieceIcon from "./PieceIcon";
 import NewPotatoBody from "./NewPotatoBody";
+import { useRef, useCallback } from "react";
 
 interface PotatoCharacterProps {
   slots: SlotState[];
@@ -8,18 +9,70 @@ interface PotatoCharacterProps {
   draggedPiece: { id: string; type: PieceType } | null;
 }
 
+// Magnetic snap radius in pixels - how close you need to be for the drop to count
+const SNAP_RADIUS = 60;
+
 const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Find the best slot for drop based on position
+  const findNearestSlot = useCallback((x: number, y: number, pieceType: PieceType): SlotType | null => {
+    if (!containerRef.current) return null;
+    
+    const container = containerRef.current;
+    const rect = container.getBoundingClientRect();
+    
+    let nearestSlot: SlotType | null = null;
+    let nearestDistance = Infinity;
+    
+    const slotElements = container.querySelectorAll('[data-slot]');
+    slotElements.forEach((el) => {
+      const slotType = el.getAttribute('data-slot') as SlotType;
+      const config = SLOT_CONFIG[slotType];
+      
+      if (config.acceptedTypes.includes(pieceType)) {
+        const slotRect = el.getBoundingClientRect();
+        const slotCenterX = slotRect.left + slotRect.width / 2;
+        const slotCenterY = slotRect.top + slotRect.height / 2;
+        
+        const distance = Math.sqrt(
+          Math.pow(x - slotCenterX, 2) + Math.pow(y - slotCenterY, 2)
+        );
+        
+        if (distance < nearestDistance && distance < SNAP_RADIUS) {
+          nearestDistance = distance;
+          nearestSlot = slotType;
+        }
+      }
+    });
+    
+    return nearestSlot;
+  }, []);
   
-  const handleDragOver = (e: React.DragEvent, slotType: SlotType) => {
+  const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
-    const config = SLOT_CONFIG[slotType];
-    if (draggedPiece && config.acceptedTypes.includes(draggedPiece.type)) {
+    if (draggedPiece) {
       e.dataTransfer.dropEffect = "move";
     }
   };
 
-  const handleDrop = (e: React.DragEvent, slotType: SlotType) => {
+  const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
+    const pieceId = e.dataTransfer.getData("pieceId");
+    const pieceType = e.dataTransfer.getData("pieceType") as PieceType;
+    
+    // Use magnetic snap to find nearest valid slot
+    const nearestSlot = findNearestSlot(e.clientX, e.clientY, pieceType);
+    
+    if (nearestSlot) {
+      onDropPiece(nearestSlot, pieceId);
+    }
+  };
+
+  // Handle drop directly on a slot (more precise)
+  const handleSlotDrop = (e: React.DragEvent, slotType: SlotType) => {
+    e.preventDefault();
+    e.stopPropagation();
     const pieceId = e.dataTransfer.getData("pieceId");
     const pieceType = e.dataTransfer.getData("pieceType") as PieceType;
     
@@ -43,29 +96,38 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
     return config.acceptedTypes.includes(draggedPiece.type);
   };
 
-  // Get slot dimensions based on type
-  const getSlotSize = (slotType: SlotType) => {
-    if (slotType.includes("occhio")) return "w-12 h-12 md:w-14 md:h-14";
-    if (slotType === "naso") return "w-10 h-12 md:w-12 md:h-14";
-    if (slotType === "bocca") return "w-16 h-10 md:w-18 md:h-12";
-    if (slotType.includes("orecchio")) return "w-10 h-14 md:w-12 md:h-16";
-    if (slotType === "cappello") return "w-20 h-14 md:w-24 md:h-16";
-    if (slotType.includes("braccio")) return "w-12 h-16 md:w-14 md:h-18";
-    return "w-12 h-12 md:w-14 md:h-14";
+  // Check if this is a right-side slot that should be mirrored
+  const shouldMirror = (slotType: SlotType) => {
+    return slotType === "braccio_dx" || slotType === "orecchio_dx";
   };
 
-  // Slot positions - calibrated for potato at 80% width, 85% height, top 10%
+  // Get slot dimensions based on type - LARGER hitboxes for children
+  const getSlotSize = (slotType: SlotType) => {
+    if (slotType.includes("occhio")) return "w-16 h-16 md:w-18 md:h-18";
+    if (slotType === "naso") return "w-14 h-16 md:w-16 md:h-18";
+    if (slotType === "bocca") return "w-20 h-14 md:w-22 md:h-16";
+    if (slotType.includes("orecchio")) return "w-14 h-18 md:w-16 md:h-20";
+    if (slotType === "cappello") return "w-24 h-18 md:w-28 md:h-20";
+    if (slotType.includes("braccio")) return "w-16 h-20 md:w-18 md:h-22";
+    if (slotType === "extra_occhi") return "w-28 h-12 md:w-32 md:h-14";
+    if (slotType === "extra_bocca") return "w-16 h-10 md:w-18 md:h-12";
+    return "w-16 h-16 md:w-18 md:h-18";
+  };
+
+  // Slot positions - calibrated for Mr Potato shape (wide bottom, narrow top)
   const getSlotPosition = (slotType: SlotType): React.CSSProperties => {
     const positions: Record<SlotType, React.CSSProperties> = {
-      occhio_sx: { top: "30%", left: "38%", transform: "translate(-50%, -50%)" },
-      occhio_dx: { top: "30%", left: "62%", transform: "translate(-50%, -50%)" },
-      naso: { top: "48%", left: "50%", transform: "translate(-50%, -50%)" },
-      bocca: { top: "65%", left: "50%", transform: "translate(-50%, -50%)" },
-      orecchio_sx: { top: "48%", left: "18%", transform: "translate(-50%, -50%)" },
-      orecchio_dx: { top: "48%", left: "82%", transform: "translate(-50%, -50%)" },
-      cappello: { top: "12%", left: "50%", transform: "translate(-50%, -50%)" },
-      braccio_sx: { top: "78%", left: "28%", transform: "translate(-50%, -50%)" },
-      braccio_dx: { top: "78%", left: "72%", transform: "translate(-50%, -50%)" },
+      occhio_sx: { top: "28%", left: "36%", transform: "translate(-50%, -50%)" },
+      occhio_dx: { top: "28%", left: "64%", transform: "translate(-50%, -50%)" },
+      naso: { top: "45%", left: "50%", transform: "translate(-50%, -50%)" },
+      bocca: { top: "60%", left: "50%", transform: "translate(-50%, -50%)" },
+      orecchio_sx: { top: "42%", left: "12%", transform: "translate(-50%, -50%)" },
+      orecchio_dx: { top: "42%", left: "88%", transform: "translate(-50%, -50%)" },
+      cappello: { top: "6%", left: "50%", transform: "translate(-50%, -50%)" },
+      braccio_sx: { top: "75%", left: "10%", transform: "translate(-50%, -50%)" },
+      braccio_dx: { top: "75%", left: "90%", transform: "translate(-50%, -50%)" },
+      extra_occhi: { top: "26%", left: "50%", transform: "translate(-50%, -50%)" },
+      extra_bocca: { top: "52%", left: "50%", transform: "translate(-50%, -50%)" },
     };
     return positions[slotType];
   };
@@ -73,28 +135,38 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
   // Get slot label for empty slots
   const getSlotLabel = (slotType: SlotType) => {
     const labels: Record<SlotType, string> = {
-      occhio_sx: "Occhio",
-      occhio_dx: "Occhio",
-      naso: "Naso",
-      bocca: "Bocca",
-      orecchio_sx: "Orecchio",
-      orecchio_dx: "Orecchio",
-      cappello: "Cappello",
-      braccio_sx: "Braccio",
-      braccio_dx: "Braccio",
+      occhio_sx: "👁️",
+      occhio_dx: "👁️",
+      naso: "👃",
+      bocca: "👄",
+      orecchio_sx: "👂",
+      orecchio_dx: "👂",
+      cappello: "🎩",
+      braccio_sx: "💪",
+      braccio_dx: "💪",
+      extra_occhi: "🕶️",
+      extra_bocca: "🥸",
     };
     return labels[slotType];
   };
 
+  // Slots to render - filter out extras if we want to show only main slots initially
+  const visibleSlots = (Object.keys(SLOT_CONFIG) as SlotType[]);
+
   return (
-    <div className="relative w-full h-full">
+    <div 
+      ref={containerRef}
+      className="relative w-full h-full"
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+    >
       {/* New SVG potato body - sized to align with slots */}
       <div 
-        className="absolute left-1/2 flex items-center justify-center"
+        className="absolute left-1/2 flex items-center justify-center pointer-events-none"
         style={{ 
-          width: "75%",
-          height: "88%",
-          top: "8%",
+          width: "80%",
+          height: "90%",
+          top: "5%",
           transform: "translateX(-50%)"
         }}
       >
@@ -102,33 +174,41 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
       </div>
 
       {/* Slots */}
-      {(Object.keys(SLOT_CONFIG) as SlotType[]).map((slotType) => {
+      {visibleSlots.map((slotType) => {
         const config = SLOT_CONFIG[slotType];
         const piece = getSlotPiece(slotType);
         const highlighted = isSlotHighlighted(slotType);
         const slotSize = getSlotSize(slotType);
         const slotPosition = getSlotPosition(slotType);
+        const mirror = shouldMirror(slotType) && piece;
 
         return (
           <div
             key={slotType}
+            data-slot={slotType}
             className={`absolute flex items-center justify-center transition-all duration-200 ${slotSize} ${
               highlighted
-                ? "bg-green-200/70 border-2 border-dashed border-green-500 rounded-full scale-110"
+                ? "bg-green-300/60 border-4 border-dashed border-green-500 rounded-full scale-115 shadow-lg shadow-green-300/50 animate-pulse"
                 : piece
                 ? ""
-                : "bg-white/40 border-2 border-dashed border-amber-400/60 rounded-full"
+                : "bg-amber-100/30 border-2 border-dashed border-amber-400/40 rounded-full hover:bg-amber-100/50"
             }`}
             style={slotPosition}
-            onDragOver={(e) => handleDragOver(e, slotType)}
-            onDrop={(e) => handleDrop(e, slotType)}
+            onDragOver={(e) => {
+              e.preventDefault();
+              e.dataTransfer.dropEffect = "move";
+            }}
+            onDrop={(e) => handleSlotDrop(e, slotType)}
           >
             {piece ? (
-              <div className="w-full h-full animate-scale-in">
+              <div 
+                className="w-full h-full animate-scale-in"
+                style={mirror ? { transform: "scaleX(-1)" } : undefined}
+              >
                 <PieceIcon pieceId={piece.id} size="lg" className="w-full h-full" />
               </div>
             ) : (
-              <span className="text-[10px] text-amber-700/50 text-center font-medium hidden md:block">
+              <span className="text-lg opacity-40">
                 {getSlotLabel(slotType)}
               </span>
             )}

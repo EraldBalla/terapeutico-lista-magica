@@ -15,6 +15,7 @@ import {
   PieceType,
   INITIAL_SLOTS,
   SLOT_CONFIG,
+  SYMMETRIC_SLOTS,
   getRandomMission,
   getRandomSuccessMessage,
   getRandomMissionMessage,
@@ -85,24 +86,43 @@ const GameScreen = ({ onBack }: GameScreenProps) => {
     });
   }, []);
 
-  // Handle piece drop on slot
+  // Handle piece drop on slot - WITH SYMMETRIC AUTO-FILL
   const handleDropPiece = useCallback((slotType: SlotType, pieceId: string) => {
     setSlots((prev) => {
       // Remove piece from any other slot if it was there
-      const newSlots = prev.map((s) => ({
+      let newSlots = prev.map((s) => ({
         ...s,
         pieceId: s.pieceId === pieceId ? null : s.pieceId,
       }));
 
       // Place piece in new slot
-      const updatedSlots = newSlots.map((s) =>
+      newSlots = newSlots.map((s) =>
         s.slot === slotType ? { ...s, pieceId } : s
       );
+
+      // SYMMETRIC SLOTS LOGIC: If this slot has a symmetric pair, fill both
+      const symmetricSlot = SYMMETRIC_SLOTS[slotType];
+      if (symmetricSlot) {
+        // Clear any existing piece from the symmetric slot (remove old pair)
+        const existingPieceInSymmetric = newSlots.find(s => s.slot === symmetricSlot)?.pieceId;
+        if (existingPieceInSymmetric && existingPieceInSymmetric !== pieceId) {
+          // Also clear the old piece from the original slot if it was a pair
+          newSlots = newSlots.map((s) => ({
+            ...s,
+            pieceId: s.pieceId === existingPieceInSymmetric ? null : s.pieceId,
+          }));
+        }
+        
+        // Place the same piece in the symmetric slot
+        newSlots = newSlots.map((s) =>
+          s.slot === symmetricSlot ? { ...s, pieceId } : s
+        );
+      }
 
       // Check for feedback
       setTimeout(() => {
         if (mode === "istruzioni" && currentMission) {
-          if (checkMissionComplete(updatedSlots, currentMission)) {
+          if (checkMissionComplete(newSlots, currentMission)) {
             setFeedbackMessage(getRandomMissionMessage());
             // Load next mission after delay
             setTimeout(() => {
@@ -110,12 +130,12 @@ const GameScreen = ({ onBack }: GameScreenProps) => {
               handleResetFace();
             }, 3000);
           }
-        } else if (mode === "libero" && checkFaceComplete(updatedSlots)) {
+        } else if (mode === "libero" && checkFaceComplete(newSlots)) {
           setFeedbackMessage(getRandomSuccessMessage());
         }
       }, 100);
 
-      return updatedSlots;
+      return newSlots;
     });
     setDraggedPiece(null);
   }, [mode, currentMission, checkMissionComplete, checkFaceComplete]);
@@ -202,7 +222,7 @@ const GameScreen = ({ onBack }: GameScreenProps) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Character zone */}
           <div className="flex flex-col items-center">
-            <div className="bg-gradient-to-b from-sky-100 to-teal-50 rounded-3xl shadow-lg border-2 border-sky-100 w-full max-w-md" style={{ height: "480px" }}>
+            <div className="bg-gradient-to-b from-sky-100 to-teal-50 rounded-3xl shadow-lg border-2 border-sky-100 w-full max-w-md" style={{ height: "500px" }}>
               <PotatoCharacter
                 slots={slots}
                 onDropPiece={handleDropPiece}
