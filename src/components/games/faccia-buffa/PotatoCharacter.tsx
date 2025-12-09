@@ -9,8 +9,8 @@ interface PotatoCharacterProps {
   draggedPiece: { id: string; type: PieceType } | null;
 }
 
-// Magnetic snap radius in pixels - how close you need to be for the drop to count
-const SNAP_RADIUS = 60;
+// Magnetic snap radius in pixels - LARGE for easy child use
+const SNAP_RADIUS = 100;
 
 const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -101,33 +101,34 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
     return slotType === "braccio_dx" || slotType === "orecchio_dx";
   };
 
-  // Get slot dimensions based on type - LARGER hitboxes for children
+  // Get slot dimensions based on type - VERY LARGE hitboxes for easy child use (OBJECTIVE 2)
   const getSlotSize = (slotType: SlotType) => {
-    if (slotType.includes("occhio")) return "w-16 h-16 md:w-18 md:h-18";
-    if (slotType === "naso") return "w-14 h-16 md:w-16 md:h-18";
-    if (slotType === "bocca") return "w-20 h-14 md:w-22 md:h-16";
-    if (slotType.includes("orecchio")) return "w-14 h-18 md:w-16 md:h-20";
-    if (slotType === "cappello") return "w-24 h-18 md:w-28 md:h-20";
-    if (slotType.includes("braccio")) return "w-16 h-20 md:w-18 md:h-22";
-    if (slotType === "extra_occhi") return "w-28 h-12 md:w-32 md:h-14";
-    if (slotType === "extra_bocca") return "w-16 h-10 md:w-18 md:h-12";
-    return "w-16 h-16 md:w-18 md:h-18";
+    if (slotType.includes("occhio")) return "w-20 h-20 md:w-24 md:h-24";
+    if (slotType === "naso") return "w-18 h-20 md:w-20 md:h-24";
+    if (slotType === "bocca") return "w-24 h-18 md:w-28 md:h-20";
+    if (slotType.includes("orecchio")) return "w-18 h-22 md:w-20 md:h-24";
+    if (slotType === "cappello") return "w-28 h-20 md:w-32 md:h-24";
+    if (slotType.includes("braccio")) return "w-20 h-24 md:w-24 md:h-28";
+    if (slotType === "extra_occhi") return "w-32 h-16 md:w-36 md:h-18";
+    if (slotType === "extra_bocca") return "w-20 h-14 md:w-24 md:h-16";
+    return "w-20 h-20 md:w-24 md:h-24";
   };
 
   // Slot positions - calibrated for Mr Potato shape (wide bottom, narrow top)
+  // OBJECTIVE 1: Mouth lower (68% instead of 60%), space between nose/mustache and mouth
   const getSlotPosition = (slotType: SlotType): React.CSSProperties => {
     const positions: Record<SlotType, React.CSSProperties> = {
       occhio_sx: { top: "28%", left: "36%", transform: "translate(-50%, -50%)" },
       occhio_dx: { top: "28%", left: "64%", transform: "translate(-50%, -50%)" },
       naso: { top: "45%", left: "50%", transform: "translate(-50%, -50%)" },
-      bocca: { top: "60%", left: "50%", transform: "translate(-50%, -50%)" },
+      bocca: { top: "68%", left: "50%", transform: "translate(-50%, -50%)" },
       orecchio_sx: { top: "42%", left: "12%", transform: "translate(-50%, -50%)" },
       orecchio_dx: { top: "42%", left: "88%", transform: "translate(-50%, -50%)" },
       cappello: { top: "6%", left: "50%", transform: "translate(-50%, -50%)" },
       braccio_sx: { top: "75%", left: "10%", transform: "translate(-50%, -50%)" },
       braccio_dx: { top: "75%", left: "90%", transform: "translate(-50%, -50%)" },
       extra_occhi: { top: "26%", left: "50%", transform: "translate(-50%, -50%)" },
-      extra_bocca: { top: "52%", left: "50%", transform: "translate(-50%, -50%)" },
+      extra_bocca: { top: "55%", left: "50%", transform: "translate(-50%, -50%)" },
     };
     return positions[slotType];
   };
