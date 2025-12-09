@@ -114,7 +114,7 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
     if (slotType.includes("orecchio")) return "w-18 h-22 md:w-20 md:h-24";
     if (slotType === "cappello") return "w-28 h-20 md:w-32 md:h-24";
     if (slotType.includes("braccio")) return "w-20 h-24 md:w-24 md:h-28";
-    if (slotType === "extra_occhi") return "w-32 h-16 md:w-36 md:h-18";
+    if (slotType === "extra_occhi") return "w-24 h-12 md:w-28 md:h-14";
     if (slotType === "extra_bocca") return "w-20 h-14 md:w-24 md:h-16";
     return "w-20 h-20 md:w-24 md:h-24";
   };
@@ -123,8 +123,8 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
   // Ears higher and closer to body, arms higher on flanks
   const getSlotPosition = (slotType: SlotType): React.CSSProperties => {
     const positions: Record<SlotType, React.CSSProperties> = {
-      occhio_sx: { top: "28%", left: "36%", transform: "translate(-50%, -50%)" },
-      occhio_dx: { top: "28%", left: "64%", transform: "translate(-50%, -50%)" },
+      occhio_sx: { top: "32%", left: "36%", transform: "translate(-50%, -50%)" },
+      occhio_dx: { top: "32%", left: "64%", transform: "translate(-50%, -50%)" },
       naso: { top: "42%", left: "50%", transform: "translate(-50%, -50%)" },
       bocca: { top: "68%", left: "50%", transform: "translate(-50%, -50%)" },
       orecchio_sx: { top: "30%", left: "18%", transform: "translate(-50%, -50%)" },
@@ -132,7 +132,7 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
       cappello: { top: "6%", left: "50%", transform: "translate(-50%, -50%)" },
       braccio_sx: { top: "52%", left: "12%", transform: "translate(-50%, -50%)" },
       braccio_dx: { top: "52%", left: "88%", transform: "translate(-50%, -50%)" },
-      extra_occhi: { top: "26%", left: "50%", transform: "translate(-50%, -50%)" },
+      extra_occhi: { top: "22%", left: "50%", transform: "translate(-50%, -50%)" },
       extra_bocca: { top: "55%", left: "50%", transform: "translate(-50%, -50%)" },
     };
     return positions[slotType];
