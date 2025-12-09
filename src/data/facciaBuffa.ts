@@ -70,14 +70,14 @@ export const SLOT_CONFIG: Record<SlotType, { acceptedTypes: PieceType[]; label: 
   occhio_sx: { acceptedTypes: ["occhi"], label: "Occhio sinistro", position: "top-[28%] left-[30%] -translate-x-1/2" },
   occhio_dx: { acceptedTypes: ["occhi"], label: "Occhio destro", position: "top-[28%] left-[70%] -translate-x-1/2" },
   naso: { acceptedTypes: ["naso"], label: "Naso", position: "top-[45%] left-1/2 -translate-x-1/2" },
-  bocca: { acceptedTypes: ["bocca"], label: "Bocca", position: "top-[62%] left-1/2 -translate-x-1/2" },
+  bocca: { acceptedTypes: ["bocca"], label: "Bocca", position: "top-[68%] left-1/2 -translate-x-1/2" },
   orecchio_sx: { acceptedTypes: ["orecchio"], label: "Orecchio sinistro", position: "top-[42%] left-[8%] -translate-x-1/2" },
   orecchio_dx: { acceptedTypes: ["orecchio"], label: "Orecchio destro", position: "top-[42%] left-[92%] -translate-x-1/2" },
   cappello: { acceptedTypes: ["cappello"], label: "Cappello", position: "top-[8%] left-1/2 -translate-x-1/2" },
   braccio_sx: { acceptedTypes: ["braccio"], label: "Braccio sinistro", position: "top-[75%] left-[8%] -translate-x-1/2" },
   braccio_dx: { acceptedTypes: ["braccio"], label: "Braccio destro", position: "top-[75%] left-[92%] -translate-x-1/2" },
   extra_occhi: { acceptedTypes: ["occhiali"], label: "Occhiali", position: "top-[26%] left-1/2 -translate-x-1/2" },
-  extra_bocca: { acceptedTypes: ["baffi"], label: "Baffi", position: "top-[54%] left-1/2 -translate-x-1/2" },
+  extra_bocca: { acceptedTypes: ["baffi"], label: "Baffi", position: "top-[55%] left-1/2 -translate-x-1/2" },
 };
 
 // Pieces catalog
