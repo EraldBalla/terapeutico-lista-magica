@@ -11,7 +11,7 @@ import mouthKiss from "@/assets/pieces/mouth-kiss.png";
 import mouthTeeth from "@/assets/pieces/mouth-teeth.png";
 import mouthSad from "@/assets/pieces/mouth-sad.png";
 import mouthAngry from "@/assets/pieces/mouth-angry.png";
-import mouthSmile from "@/assets/pieces/mouth-smile.png";
+import mouthSmile from "@/assets/pieces/mouth-smile-new.png"; // New child-friendly smile
 import mouthTongue from "@/assets/pieces/mouth-tongue.png";
 import hatBaseball from "@/assets/pieces/hat-baseball.png";
 import glassesNerd from "@/assets/pieces/glasses-nerd.png";
