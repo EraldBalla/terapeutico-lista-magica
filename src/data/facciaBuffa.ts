@@ -8,7 +8,9 @@ export type SlotType =
   | "orecchio_dx"
   | "cappello"
   | "braccio_sx"
-  | "braccio_dx";
+  | "braccio_dx"
+  | "extra_occhi"    // Slot for glasses (over eyes)
+  | "extra_bocca";   // Slot for mustache (over mouth)
 
 export type PieceCategory = "faccia" | "corpo" | "extra";
 
@@ -47,8 +49,23 @@ export type Mission = {
   conditions: { type: PieceType; pieceId?: string }[];
 };
 
+// Define symmetric slot pairs - when you place on one, both get filled
+export const SYMMETRIC_SLOTS: Record<SlotType, SlotType | null> = {
+  occhio_sx: "occhio_dx",
+  occhio_dx: "occhio_sx",
+  orecchio_sx: "orecchio_dx",
+  orecchio_dx: "orecchio_sx",
+  braccio_sx: "braccio_dx",
+  braccio_dx: "braccio_sx",
+  naso: null,
+  bocca: null,
+  cappello: null,
+  extra_occhi: null,
+  extra_bocca: null,
+};
+
 // Slot configuration with accepted piece types
-// Positions are calibrated for potato that fills ~70% of container height
+// Positions are calibrated for potato that fills ~75% of container
 export const SLOT_CONFIG: Record<SlotType, { acceptedTypes: PieceType[]; label: string; position: string }> = {
   occhio_sx: { acceptedTypes: ["occhi"], label: "Occhio sinistro", position: "top-[28%] left-[30%] -translate-x-1/2" },
   occhio_dx: { acceptedTypes: ["occhi"], label: "Occhio destro", position: "top-[28%] left-[70%] -translate-x-1/2" },
@@ -57,8 +74,10 @@ export const SLOT_CONFIG: Record<SlotType, { acceptedTypes: PieceType[]; label: 
   orecchio_sx: { acceptedTypes: ["orecchio"], label: "Orecchio sinistro", position: "top-[42%] left-[8%] -translate-x-1/2" },
   orecchio_dx: { acceptedTypes: ["orecchio"], label: "Orecchio destro", position: "top-[42%] left-[92%] -translate-x-1/2" },
   cappello: { acceptedTypes: ["cappello"], label: "Cappello", position: "top-[8%] left-1/2 -translate-x-1/2" },
-  braccio_sx: { acceptedTypes: ["braccio"], label: "Braccio sinistro", position: "top-[72%] left-[5%] -translate-x-1/2" },
-  braccio_dx: { acceptedTypes: ["braccio"], label: "Braccio destro", position: "top-[72%] left-[95%] -translate-x-1/2" },
+  braccio_sx: { acceptedTypes: ["braccio"], label: "Braccio sinistro", position: "top-[75%] left-[8%] -translate-x-1/2" },
+  braccio_dx: { acceptedTypes: ["braccio"], label: "Braccio destro", position: "top-[75%] left-[92%] -translate-x-1/2" },
+  extra_occhi: { acceptedTypes: ["occhiali"], label: "Occhiali", position: "top-[26%] left-1/2 -translate-x-1/2" },
+  extra_bocca: { acceptedTypes: ["baffi"], label: "Baffi", position: "top-[54%] left-1/2 -translate-x-1/2" },
 };
 
 // Pieces catalog
@@ -109,9 +128,9 @@ export const PIECES: Piece[] = [
   { id: "baffi_classici", label: "Baffi classici", category: "extra", type: "baffi", image: "🥸" },
   { id: "occhiali_sole", label: "Occhiali da sole", category: "extra", type: "occhiali", image: "🕶️" },
   { id: "occhiali_nerd", label: "Occhiali da nerd", category: "extra", type: "occhiali", image: "🤓" },
-  { id: "extra_fiore", label: "Fiore", category: "extra", type: "extra", image: "🌸" },
-  { id: "extra_farfalla", label: "Farfalla", category: "extra", type: "extra", image: "🦋" },
-  { id: "extra_stella", label: "Stella", category: "extra", type: "extra", image: "⭐" },
+  { id: "extra_fiore", label: "Fiore", category: "extra", type: "cappello", image: "🌸" },
+  { id: "extra_farfalla", label: "Farfalla", category: "extra", type: "cappello", image: "🦋" },
+  { id: "extra_stella", label: "Stella", category: "extra", type: "cappello", image: "⭐" },
 ];
 
 // Initial empty slots
@@ -125,6 +144,8 @@ export const INITIAL_SLOTS: SlotState[] = [
   { slot: "cappello", pieceId: null },
   { slot: "braccio_sx", pieceId: null },
   { slot: "braccio_dx", pieceId: null },
+  { slot: "extra_occhi", pieceId: null },
+  { slot: "extra_bocca", pieceId: null },
 ];
 
 // Missions for "Segui le istruzioni" mode
