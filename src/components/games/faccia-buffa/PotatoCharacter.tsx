@@ -116,17 +116,20 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
 
   // Slot positions - calibrated for Mr Potato shape (wide bottom, narrow top)
   // OBJECTIVE 1: Mouth lower (68% instead of 60%), space between nose/mustache and mouth
+  // Slot positions - calibrated for Mr Potato shape
+  // OBJECTIVE 2: Ears higher (32% instead of 42%) and closer to potato (15%/85%)
+  // OBJECTIVE 3: Arms higher (58% instead of 75%) on the body flanks
   const getSlotPosition = (slotType: SlotType): React.CSSProperties => {
     const positions: Record<SlotType, React.CSSProperties> = {
       occhio_sx: { top: "28%", left: "36%", transform: "translate(-50%, -50%)" },
       occhio_dx: { top: "28%", left: "64%", transform: "translate(-50%, -50%)" },
       naso: { top: "45%", left: "50%", transform: "translate(-50%, -50%)" },
       bocca: { top: "68%", left: "50%", transform: "translate(-50%, -50%)" },
-      orecchio_sx: { top: "42%", left: "12%", transform: "translate(-50%, -50%)" },
-      orecchio_dx: { top: "42%", left: "88%", transform: "translate(-50%, -50%)" },
+      orecchio_sx: { top: "32%", left: "15%", transform: "translate(-50%, -50%)" },
+      orecchio_dx: { top: "32%", left: "85%", transform: "translate(-50%, -50%)" },
       cappello: { top: "6%", left: "50%", transform: "translate(-50%, -50%)" },
-      braccio_sx: { top: "75%", left: "10%", transform: "translate(-50%, -50%)" },
-      braccio_dx: { top: "75%", left: "90%", transform: "translate(-50%, -50%)" },
+      braccio_sx: { top: "58%", left: "10%", transform: "translate(-50%, -50%)" },
+      braccio_dx: { top: "58%", left: "90%", transform: "translate(-50%, -50%)" },
       extra_occhi: { top: "26%", left: "50%", transform: "translate(-50%, -50%)" },
       extra_bocca: { top: "55%", left: "50%", transform: "translate(-50%, -50%)" },
     };
