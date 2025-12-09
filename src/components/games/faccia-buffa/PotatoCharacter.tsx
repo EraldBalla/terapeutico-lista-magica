@@ -133,23 +133,23 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
     return positions[slotType];
   };
 
-  // Determine if piece should use circular mask (hides white backgrounds)
-  const shouldUseMask = (slotType: SlotType) => {
-    return slotType.includes("orecchio") || 
-           slotType.includes("braccio") || 
-           slotType === "bocca" || 
-           slotType === "cappello" ||
-           slotType === "extra_bocca";
-  };
+  // ALL pieces on potato use circular mask (hides white backgrounds)
+  // Applies to: ears, arms, mouth, hat, nose, eyes, glasses, extras - everything
+  const shouldUseMask = () => true;
 
   // Check if this is an eye slot needing CSS crop (shows only half of the double-eye image)
   const isEyeSlot = (slotType: SlotType) => {
     return slotType === "occhio_sx" || slotType === "occhio_dx";
   };
 
-  // Check if this is the mouth slot (apply scale reduction)
+  // Check if this is the mouth slot (apply scale reduction for smile)
   const isMouthSlot = (slotType: SlotType) => {
     return slotType === "bocca";
+  };
+
+  // Check if this is the angry mouth (wider horizontal stretch)
+  const isAngryMouth = (pieceId: string) => {
+    return pieceId === "bocca_arrabbiata";
   };
 
   // Get slot label for empty slots
@@ -222,10 +222,10 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
           >
           {piece ? (
               <div 
-                className={`animate-scale-in flex items-center justify-center ${
-                  shouldUseMask(slotType) ? "w-14 h-14 overflow-hidden rounded-full" : "w-full h-full"
-                } ${isMouthSlot(slotType) ? "scale-85" : ""}`}
-                style={mirror ? { transform: `scaleX(-1)${isMouthSlot(slotType) ? " scale(0.85)" : ""}` } : undefined}
+                className={`animate-scale-in flex items-center justify-center w-12 h-12 overflow-hidden rounded-full ${
+                  isMouthSlot(slotType) && !isAngryMouth(piece.id) ? "scale-85" : ""
+                } ${isAngryMouth(piece.id) ? "scale-x-125" : ""}`}
+                style={mirror ? { transform: `scaleX(-1)` } : undefined}
               >
                 {isEyeSlot(slotType) ? (
                   /* Eye slots: CSS crop to show only left or right half of double-eye image */
