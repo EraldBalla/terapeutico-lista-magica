@@ -114,26 +114,42 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
     return "w-20 h-20 md:w-24 md:h-24";
   };
 
-  // Slot positions - calibrated for Mr Potato shape (wide bottom, narrow top)
-  // OBJECTIVE 1: Mouth lower (68% instead of 60%), space between nose/mustache and mouth
   // Slot positions - calibrated for Mr Potato shape
-  // OBJECTIVE 2: Ears higher (32% instead of 42%) and closer to potato (15%/85%)
-  // OBJECTIVE 3: Arms higher (58% instead of 75%) on the body flanks
+  // Ears higher and closer to body, arms higher on flanks
   const getSlotPosition = (slotType: SlotType): React.CSSProperties => {
     const positions: Record<SlotType, React.CSSProperties> = {
       occhio_sx: { top: "28%", left: "36%", transform: "translate(-50%, -50%)" },
       occhio_dx: { top: "28%", left: "64%", transform: "translate(-50%, -50%)" },
       naso: { top: "45%", left: "50%", transform: "translate(-50%, -50%)" },
       bocca: { top: "68%", left: "50%", transform: "translate(-50%, -50%)" },
-      orecchio_sx: { top: "32%", left: "15%", transform: "translate(-50%, -50%)" },
-      orecchio_dx: { top: "32%", left: "85%", transform: "translate(-50%, -50%)" },
+      orecchio_sx: { top: "30%", left: "18%", transform: "translate(-50%, -50%)" },
+      orecchio_dx: { top: "30%", left: "82%", transform: "translate(-50%, -50%)" },
       cappello: { top: "6%", left: "50%", transform: "translate(-50%, -50%)" },
-      braccio_sx: { top: "58%", left: "10%", transform: "translate(-50%, -50%)" },
-      braccio_dx: { top: "58%", left: "90%", transform: "translate(-50%, -50%)" },
+      braccio_sx: { top: "52%", left: "12%", transform: "translate(-50%, -50%)" },
+      braccio_dx: { top: "52%", left: "88%", transform: "translate(-50%, -50%)" },
       extra_occhi: { top: "26%", left: "50%", transform: "translate(-50%, -50%)" },
       extra_bocca: { top: "55%", left: "50%", transform: "translate(-50%, -50%)" },
     };
     return positions[slotType];
+  };
+
+  // Determine if piece should use circular mask (hides white backgrounds)
+  const shouldUseMask = (slotType: SlotType) => {
+    return slotType.includes("orecchio") || 
+           slotType.includes("braccio") || 
+           slotType === "bocca" || 
+           slotType === "cappello" ||
+           slotType === "extra_bocca";
+  };
+
+  // Check if this is an eye slot needing CSS crop (shows only half of the double-eye image)
+  const isEyeSlot = (slotType: SlotType) => {
+    return slotType === "occhio_sx" || slotType === "occhio_dx";
+  };
+
+  // Check if this is the mouth slot (apply scale reduction)
+  const isMouthSlot = (slotType: SlotType) => {
+    return slotType === "bocca";
   };
 
   // Get slot label for empty slots
@@ -204,12 +220,28 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
             }}
             onDrop={(e) => handleSlotDrop(e, slotType)}
           >
-            {piece ? (
+          {piece ? (
               <div 
-                className="w-full h-full animate-scale-in"
-                style={mirror ? { transform: "scaleX(-1)" } : undefined}
+                className={`animate-scale-in flex items-center justify-center ${
+                  shouldUseMask(slotType) ? "w-14 h-14 overflow-hidden rounded-full" : "w-full h-full"
+                } ${isMouthSlot(slotType) ? "scale-85" : ""}`}
+                style={mirror ? { transform: `scaleX(-1)${isMouthSlot(slotType) ? " scale(0.85)" : ""}` } : undefined}
               >
-                <PieceIcon pieceId={piece.id} size="lg" className="w-full h-full" />
+                {isEyeSlot(slotType) ? (
+                  /* Eye slots: CSS crop to show only left or right half of double-eye image */
+                  <div className="w-10 h-10 overflow-hidden flex items-center justify-center">
+                    <div 
+                      className="w-[200%] h-full flex-shrink-0"
+                      style={{ 
+                        transform: slotType === "occhio_sx" ? "translateX(25%)" : "translateX(-25%)"
+                      }}
+                    >
+                      <PieceIcon pieceId={piece.id} size="lg" className="w-full h-full object-contain" />
+                    </div>
+                  </div>
+                ) : (
+                  <PieceIcon pieceId={piece.id} size="lg" className="w-full h-full object-contain" />
+                )}
               </div>
             ) : (
               <span className="text-lg opacity-40">
