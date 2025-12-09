@@ -227,7 +227,7 @@ const PotatoCharacter = ({ slots, onDropPiece, draggedPiece }: PotatoCharacterPr
           >
           {piece ? (
               <div 
-                className={`animate-scale-in flex items-center justify-center w-12 h-12 overflow-hidden rounded-full ${
+                className={`animate-scale-in flex items-center justify-center w-16 h-16 overflow-hidden rounded-full ${
                   isMouthSlot(slotType) && !isAngryMouth(piece.id) ? "scale-85" : ""
                 } ${isAngryMouth(piece.id) ? "scale-x-125" : ""}`}
                 style={mirror ? { transform: `scaleX(-1)` } : undefined}
